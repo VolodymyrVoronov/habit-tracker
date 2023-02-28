@@ -28,7 +28,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    ".eslintrc.cjs",
   ],
   "exclude": [
     "node_modules"
