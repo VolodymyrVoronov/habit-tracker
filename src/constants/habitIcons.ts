@@ -597,3 +597,5 @@ const habitIcons = [
 ];
 
 export default habitIcons;
+
+export type HabitIcons = typeof habitIcons;

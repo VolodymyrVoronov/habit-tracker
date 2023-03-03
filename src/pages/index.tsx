@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
+
+import MainScreen from "@/components/MainScreen/MainScreen";
 
 const Home: NextPage = (): JSX.Element => {
   return (
@@ -11,7 +12,7 @@ const Home: NextPage = (): JSX.Element => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>Test</main>
+      <MainScreen />
     </>
   );
 };

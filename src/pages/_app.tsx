@@ -1,4 +1,5 @@
 import { withTRPC } from "@trpc/next";
+import "@fontsource/poppins";
 
 import {
   AppType,
@@ -7,6 +8,12 @@ import {
 } from "next/dist/shared/lib/utils";
 
 import type { ServerRouter } from "@/server/router";
+
+import Dock from "@/components/Dock/Dock";
+
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 
 import "../styles/globals.css";
 
@@ -17,7 +24,12 @@ const App: AppType = ({
   Component: NextComponentType<NextPageContext, any, object>;
   pageProps: any;
 }) => {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Component {...pageProps} />
+      <Dock />
+    </>
+  );
 };
 
 export default withTRPC<ServerRouter>({
