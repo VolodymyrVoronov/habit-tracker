@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 import Logo from "../Logo/Logo";
+import AddHabitButton from "../AddHabitButton/AddHabitButton";
 
 import styles from "./SideBar.module.css";
 
@@ -19,6 +20,8 @@ const SideBar = (): JSX.Element => {
       }}
     >
       <Logo />
+
+      <AddHabitButton onClick={() => console.log("Add habit button clicked")} />
     </motion.div>
   );
 };

@@ -1,0 +1,11 @@
+.root {
+  width: 100% !important;
+
+  border-radius: 25px !important;
+
+  opacity: 0.9;
+}
+
+.root span {
+  font-size: 20px;
+}
