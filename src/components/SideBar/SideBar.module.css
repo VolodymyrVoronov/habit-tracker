@@ -1,0 +1,21 @@
+.root {
+  position: absolute;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+
+  width: 150px;
+  height: 100vh;
+
+  padding: 10px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.85) 25%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.5) 75%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/advent-pro": "^4.5.11",
     "@fontsource/poppins": "^4.5.10",
     "@prisma/client": "^3.14.0",
     "@trpc/client": "^9.24.0",

@@ -1,5 +1,6 @@
 import { withTRPC } from "@trpc/next";
 import "@fontsource/poppins";
+import "@fontsource/advent-pro";
 
 import {
   AppType,
