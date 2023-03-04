@@ -21,6 +21,10 @@ const SideBar = (): JSX.Element => {
       animate={{
         x: 0,
         opacity: 1,
+        transition: {
+          delay: 0.25,
+          duration: 0.5,
+        },
       }}
     >
       <Logo />
@@ -40,7 +44,7 @@ const SideBar = (): JSX.Element => {
                 opacity: 1,
                 transition: {
                   duration: 0.5,
-                  delay: i * 0.1,
+                  delay: i * 0.2,
                 },
               }}
             >
