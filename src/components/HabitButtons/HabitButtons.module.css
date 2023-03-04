@@ -1,0 +1,20 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow: auto;
+
+  height: 100%;
+
+  margin: 10px 0;
+  padding: 10px;
+
+  border: 1px solid #6270f0c9;
+  border-radius: 25px;
+}
+
+.root:hover {
+  border: 1px solid #6270f0;
+  background-color: rgba(255, 255, 255, 0.35);
+}
