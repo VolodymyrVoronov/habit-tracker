@@ -1,9 +1,13 @@
 import React from "react";
-import { NextPage } from "next";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { Dock as D } from "primereact/dock";
 
+import Path from "@/constants/paths";
+
 import styles from "./Dock.module.css";
+
+let onIconButtonClick: (href: string) => void;
 
 const dockItems = [
   {
@@ -17,7 +21,7 @@ const dockItems = [
       />
     ),
     command: () => {
-      console.log("Main");
+      onIconButtonClick(Path.MAIN);
     },
   },
   {
@@ -27,11 +31,11 @@ const dockItems = [
         src="/images/dock-icons/habits.png"
         width="100%"
         height="100%"
-        alt="Icon main"
+        alt="Icon habits"
       />
     ),
     command: () => {
-      console.log("Habits");
+      onIconButtonClick(Path.HABITS);
     },
   },
   {
@@ -41,11 +45,11 @@ const dockItems = [
         src="/images/dock-icons/weather.png"
         width="100%"
         height="100%"
-        alt="Icon main"
+        alt="Icon weather"
       />
     ),
     command: () => {
-      console.log("Weather");
+      onIconButtonClick(Path.WEATHER);
     },
   },
   {
@@ -55,16 +59,22 @@ const dockItems = [
         src="/images/dock-icons/radio.png"
         width="100%"
         height="100%"
-        alt="Icon main"
+        alt="Icon radio"
       />
     ),
     command: () => {
-      console.log("Radio");
+      onIconButtonClick(Path.RADIO);
     },
   },
 ];
 
-const Dock: NextPage = (): JSX.Element => {
+const Dock = (): JSX.Element => {
+  const router = useRouter();
+
+  onIconButtonClick = (href: string): void => {
+    router.push(href);
+  };
+
   return <D className={styles.dock} model={dockItems} position="bottom" />;
 };
 
