@@ -1,14 +1,18 @@
 import React from "react";
-import { Button } from "primereact/button";
+import { Button, ButtonProps } from "primereact/button";
 import { motion } from "framer-motion";
 
 import styles from "./AddHabitButton.module.css";
 
-interface IAddHabitButtonProps {
+interface IAddHabitButtonProps extends ButtonProps {
   onClick: () => void;
 }
 
-const AddHabitButton = ({ onClick }: IAddHabitButtonProps): JSX.Element => {
+const AddHabitButton = ({
+  onClick,
+
+  ...props
+}: IAddHabitButtonProps): JSX.Element => {
   return (
     <motion.div
       className={styles.root}
@@ -31,6 +35,7 @@ const AddHabitButton = ({ onClick }: IAddHabitButtonProps): JSX.Element => {
         type="button"
         aria-label="Add new habit"
         title="Add new habit"
+        {...props}
       />
     </motion.div>
   );

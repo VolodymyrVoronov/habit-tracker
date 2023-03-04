@@ -1,4 +1,5 @@
 import { withTRPC } from "@trpc/next";
+import { motion } from "framer-motion";
 import "@fontsource/poppins";
 import "@fontsource/advent-pro";
 
@@ -28,7 +29,21 @@ const App: AppType = ({
   return (
     <>
       <Component {...pageProps} />
-      <Dock />
+
+      <motion.div
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+          transition: {
+            duration: 1,
+            delay: 1,
+          },
+        }}
+      >
+        <Dock />
+      </motion.div>
     </>
   );
 };
