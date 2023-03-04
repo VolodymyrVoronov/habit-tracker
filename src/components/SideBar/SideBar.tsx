@@ -27,7 +27,7 @@ const SideBar = (): JSX.Element => {
 
       <HabitButtons>
         <LayoutGroup>
-          {habitIcons.map(({ id, iconUrl, codeName }, i) => (
+          {habitIcons.map(({ id, codeName }, i) => (
             <motion.div
               layout
               key={id}
@@ -47,8 +47,8 @@ const SideBar = (): JSX.Element => {
               <HabitButton
                 key={id}
                 id={id}
-                habitIcon={iconUrl}
-                habit={codeName}
+                codeName={codeName}
+                habit=""
                 onClick={() => {}}
               />
             </motion.div>

@@ -6,14 +6,14 @@ import styles from "./HabitButton.module.css";
 export interface IHabitButtonProps {
   id: number;
   habit: string;
-  habitIcon: string;
+  codeName: string;
   onClick: (id: number) => void;
 }
 
 const HabitButton = ({
   id,
   habit,
-  habitIcon,
+  codeName,
   onClick,
 }: IHabitButtonProps): JSX.Element => {
   const onHabitButtonClick = () => {
@@ -26,9 +26,10 @@ const HabitButton = ({
       className={styles.root}
       type="button"
       title={habit}
+      aria-label={habit}
     >
       <Image
-        src={`/images/habit-icons/${habitIcon}`}
+        src={`/images/habit-icons/${codeName}.png`}
         width="100%"
         height="100%"
       />
