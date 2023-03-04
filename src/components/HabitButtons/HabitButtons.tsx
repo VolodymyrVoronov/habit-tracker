@@ -23,7 +23,7 @@ const HabitButtons = ({ children }: IHabitButtonsProps): JSX.Element => {
         },
       }}
     >
-      {children}
+      <div className={styles.buttons}>{children}</div>
     </motion.div>
   );
 };

@@ -14,6 +14,9 @@
 }
 
 .root:hover {
+  position: relative;
+  z-index: 2;
+
   transform: scale(1.05);
   background-color: #6270f08a;
 }
