@@ -1,11 +1,25 @@
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 import styles from "./Logo.module.css";
 
 const Logo = (): JSX.Element => {
   return (
-    <div className={styles.root}>
+    <motion.div
+      className={styles.root}
+      initial={{
+        x: -150,
+        opacity: 0,
+      }}
+      animate={{
+        x: 0,
+        opacity: 1,
+        transition: {
+          delay: 0.25,
+        },
+      }}
+    >
       <Image
         className={styles.logo}
         src="/images/logo.png"
@@ -13,7 +27,7 @@ const Logo = (): JSX.Element => {
         height="100%"
       />
       <h1 className={styles.title}>Habit Tracker</h1>
-    </div>
+    </motion.div>
   );
 };
 
