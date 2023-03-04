@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 import styles from "./HabitButtons.module.css";
 
@@ -23,7 +23,7 @@ const HabitButtons = ({ children }: IHabitButtonsProps): JSX.Element => {
         },
       }}
     >
-      <AnimatePresence>{children}</AnimatePresence>
+      {children}
     </motion.div>
   );
 };

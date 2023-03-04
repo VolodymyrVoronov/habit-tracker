@@ -16,5 +16,13 @@
 
 .root:hover {
   border: 1px solid #6270f0;
-  background-color: rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.root::-webkit-scrollbar {
+  display: none;
+}
+
+.root div:last-of-type button {
+  margin-bottom: 0;
 }

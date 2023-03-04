@@ -50,8 +50,8 @@ const habitIcons = [
   },
   {
     id: 18,
-    codeName: "ccollaborate",
-    iconUrl: "ccollaborate.png",
+    codeName: "collaborate",
+    iconUrl: "collaborate.png",
     iconAlt: "Collaborate",
     iconName: "Collaborate",
   },
