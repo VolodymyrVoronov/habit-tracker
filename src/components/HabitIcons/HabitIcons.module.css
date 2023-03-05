@@ -1,5 +1,20 @@
 .root {
+  overflow: hidden;
+
+  height: 100%;
+}
+
+.search {
+  width: 100%;
+
+  margin-bottom: 19px;
+  padding: 5px;
+}
+
+.icons {
+  position: relative;
   display: grid;
+  align-content: flex-start;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 25px;
   overflow: auto;
@@ -9,18 +24,18 @@
   padding: 10px 24px 10px 2px;
 }
 
-.root::-webkit-scrollbar {
+.icons::-webkit-scrollbar {
   width: 10px;
 }
 
-.root::-webkit-scrollbar-track {
+.icons::-webkit-scrollbar-track {
   background-color: var(--surface-border);
 }
 
-.root::-webkit-scrollbar-thumb {
+.icons::-webkit-scrollbar-thumb {
   background-color: var(--primary-300);
 }
 
-.root::-webkit-scrollbar-thumb:hover {
+.icons::-webkit-scrollbar-thumb:hover {
   background-color: var(--primary-400);
 }
