@@ -28,6 +28,7 @@ const Dialog = ({
       header={headerTitle}
       headerClassName={styles.header}
       draggable={false}
+      // dismissableMask
       visible={isVisible}
       onHide={onHideButtonClick}
       footer={footerContent}

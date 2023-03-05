@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Variants, motion } from "framer-motion";
 import { Button } from "primereact/button";
+import { ScrollPanel } from "primereact/scrollpanel";
 import cn from "classnames";
 
 import SideBar from "../SideBar/SideBar";
 import Dialog from "../Dialog/Dialog";
 
 import styles from "./MainScreen.module.css";
+import HabitIcons from "../HabitIcons/HabitIcons";
 
 const boxAnimation: Variants = {
   initial: {
@@ -39,6 +41,10 @@ const MainScreen = (): JSX.Element => {
     setDialogOpen(flag);
   };
 
+  const onHabitIconClick = (codeName: string, iconName: string) => {
+    console.log(codeName, iconName);
+  };
+
   return (
     <div className={styles.root}>
       <SideBar
@@ -68,7 +74,13 @@ const MainScreen = (): JSX.Element => {
           </>
         }
       >
-        Test
+        <HabitIcons onHabitIconClick={onHabitIconClick} />
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
+          maiores magni molestias sunt voluptas non veritatis dolorum unde, ipsa
+          quos iure exercitationem, veniam aut? Quam ullam dolore corrupti
+          consequatur voluptatibus!
+        </div>
       </Dialog>
 
       <div className={styles.content}>

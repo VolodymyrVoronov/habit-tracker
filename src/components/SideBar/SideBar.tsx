@@ -1,8 +1,6 @@
 import React from "react";
 import { motion, LayoutGroup } from "framer-motion";
 
-import habitIcons from "@/constants/habitIcons";
-
 import Logo from "../Logo/Logo";
 import AddHabitButton from "../AddHabitButton/AddHabitButton";
 import UserHabitButtons from "../UserHabitButtons/UserHabitButtons";
@@ -39,7 +37,7 @@ const SideBar = ({
 
       <UserHabitButtons>
         <LayoutGroup>
-          {habitIcons.map(({ id, codeName }, i) => (
+          {[].map(({ id, codeName }, i) => (
             <motion.div
               layout
               key={id}
