@@ -8,7 +8,7 @@ interface IAddHabitButtonProps extends ButtonProps {
   onClick: () => void;
 }
 
-const AddHabitButton = ({
+const AddUserHabitButton = ({
   onClick,
 
   ...props
@@ -42,4 +42,4 @@ const AddHabitButton = ({
   );
 };
 
-export default AddHabitButton;
+export default AddUserHabitButton;

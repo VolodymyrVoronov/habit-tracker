@@ -5,18 +5,18 @@ import habitIcons from "@/constants/habitIcons";
 
 import Logo from "../Logo/Logo";
 import AddHabitButton from "../AddHabitButton/AddHabitButton";
-import HabitButtons from "../HabitButtons/HabitButtons";
-import HabitButton from "../HabitButton/HabitButton";
+import UserHabitButtons from "../UserHabitButtons/UserHabitButtons";
+import UserHabitButton from "../UserHabitButton/UserHabitButton";
 
 import styles from "./SideBar.module.css";
 
 interface ISideBarProps {
-  onHabitButtonClick: (id: number) => void;
+  onUserHabitButtonClick: (id: number) => void;
   onAddHabitButtonClick: () => void;
 }
 
 const SideBar = ({
-  onHabitButtonClick,
+  onUserHabitButtonClick,
   onAddHabitButtonClick,
 }: ISideBarProps): JSX.Element => {
   return (
@@ -37,7 +37,7 @@ const SideBar = ({
     >
       <Logo />
 
-      <HabitButtons>
+      <UserHabitButtons>
         <LayoutGroup>
           {habitIcons.map(({ id, codeName }, i) => (
             <motion.div
@@ -56,17 +56,17 @@ const SideBar = ({
                 },
               }}
             >
-              <HabitButton
+              <UserHabitButton
                 key={id}
                 id={id}
                 codeName={codeName}
                 habit=""
-                onClick={() => onHabitButtonClick(id)}
+                onClick={() => onUserHabitButtonClick(id)}
               />
             </motion.div>
           ))}
         </LayoutGroup>
-      </HabitButtons>
+      </UserHabitButtons>
 
       <AddHabitButton onClick={onAddHabitButtonClick} />
     </motion.div>

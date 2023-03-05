@@ -1,13 +1,15 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
 
-import styles from "./HabitButtons.module.css";
+import styles from "./UserHabitButtons.module.css";
 
-interface IHabitButtonsProps {
+interface IUserHabitButtonsProps {
   children: ReactNode;
 }
 
-const HabitButtons = ({ children }: IHabitButtonsProps): JSX.Element => {
+const UserHabitButtons = ({
+  children,
+}: IUserHabitButtonsProps): JSX.Element => {
   return (
     <motion.div
       className={styles.root}
@@ -29,4 +31,4 @@ const HabitButtons = ({ children }: IHabitButtonsProps): JSX.Element => {
   );
 };
 
-export default HabitButtons;
+export default UserHabitButtons;

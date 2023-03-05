@@ -1,28 +1,28 @@
 import React from "react";
 import Image from "next/image";
 
-import styles from "./HabitButton.module.css";
+import styles from "./UserHabitButton.module.css";
 
-export interface IHabitButtonProps {
+export interface IUserHabitButtonProps {
   id: number;
   habit: string;
   codeName: string;
   onClick: (id: number) => void;
 }
 
-const HabitButton = ({
+const UserHabitButton = ({
   id,
   habit,
   codeName,
   onClick,
-}: IHabitButtonProps): JSX.Element => {
-  const onHabitButtonClick = () => {
+}: IUserHabitButtonProps): JSX.Element => {
+  const onUserHabitButtonClick = () => {
     onClick(id);
   };
 
   return (
     <button
-      onClick={onHabitButtonClick}
+      onClick={onUserHabitButtonClick}
       className={styles.root}
       type="button"
       title={habit}
@@ -37,4 +37,4 @@ const HabitButton = ({
   );
 };
 
-export default HabitButton;
+export default UserHabitButton;

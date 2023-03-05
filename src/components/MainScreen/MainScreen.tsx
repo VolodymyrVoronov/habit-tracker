@@ -27,7 +27,7 @@ const boxAnimation: Variants = {
 const MainScreen = (): JSX.Element => {
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const onHabitButtonClick = (id: number): void => {
+  const onUserHabitButtonClick = (id: number): void => {
     console.log(id);
   };
 
@@ -42,7 +42,7 @@ const MainScreen = (): JSX.Element => {
   return (
     <div className={styles.root}>
       <SideBar
-        onHabitButtonClick={onHabitButtonClick}
+        onUserHabitButtonClick={onUserHabitButtonClick}
         onAddHabitButtonClick={onAddHabitButtonClick}
       />
 
