@@ -22,7 +22,9 @@ const boxAnimation: Variants = {
 };
 
 const MainScreen = (): JSX.Element => {
-  const onHabitButtonClick = (id: number): void => {};
+  const onHabitButtonClick = (id: number): void => {
+    console.log(id);
+  };
 
   const onAddHabitButtonClick = (): void => {
     console.log("onAddHabitButtonClick");
