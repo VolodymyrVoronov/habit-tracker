@@ -36,7 +36,8 @@ const HabitIcons = ({ onHabitIconClick }: IHabitIconsProps): JSX.Element => {
         <InputText
           value={searchText}
           onChange={onSearchInputChange}
-          placeholder="Search..."
+          placeholder="Search icons..."
+          type="text"
         />
 
         <Button
@@ -67,7 +68,7 @@ const HabitIcons = ({ onHabitIconClick }: IHabitIconsProps): JSX.Element => {
                     opacity: 1,
                     transition: {
                       duration: 0.5,
-                      delay: i * 0.1,
+                      delay: i * 0.01,
                     },
                   }}
                   style={{ display: "flex" }}

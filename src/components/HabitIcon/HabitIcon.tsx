@@ -36,10 +36,9 @@ const HabitIcon = ({
       title={iconName}
     >
       <Image
-        className={styles.logo}
         src={`/images/habit-icons/${iconUrl}`}
-        width="100%"
-        height="100%"
+        width="75%"
+        height="75%"
         alt={iconAlt}
       />
       <span className={styles.name}>{iconName}</span>
