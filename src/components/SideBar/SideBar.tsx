@@ -11,10 +11,14 @@ import HabitButton from "../HabitButton/HabitButton";
 import styles from "./SideBar.module.css";
 
 interface ISideBarProps {
+  onHabitButtonClick: (id: number) => void;
   onAddHabitButtonClick: () => void;
 }
 
-const SideBar = ({ onAddHabitButtonClick }: ISideBarProps): JSX.Element => {
+const SideBar = ({
+  onHabitButtonClick,
+  onAddHabitButtonClick,
+}: ISideBarProps): JSX.Element => {
   return (
     <motion.div
       className={styles.root}
@@ -57,7 +61,7 @@ const SideBar = ({ onAddHabitButtonClick }: ISideBarProps): JSX.Element => {
                 id={id}
                 codeName={codeName}
                 habit=""
-                onClick={() => {}}
+                onClick={() => onHabitButtonClick(id)}
               />
             </motion.div>
           ))}

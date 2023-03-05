@@ -32,7 +32,10 @@ const MainScreen = (): JSX.Element => {
 
   return (
     <div className={styles.root}>
-      <SideBar onAddHabitButtonClick={onAddHabitButtonClick} />
+      <SideBar
+        onHabitButtonClick={onHabitButtonClick}
+        onAddHabitButtonClick={onAddHabitButtonClick}
+      />
 
       <div className={styles.content}>
         <motion.div
@@ -41,8 +44,9 @@ const MainScreen = (): JSX.Element => {
           initial="initial"
           animate="animate"
         >
-          Habits
+          Habit
         </motion.div>
+
         <motion.div
           className={cn(styles.weather, styles["content-box"])}
           variants={boxAnimation}
@@ -51,6 +55,7 @@ const MainScreen = (): JSX.Element => {
         >
           Weather
         </motion.div>
+
         <motion.div
           className={cn(styles.radio, styles["content-box"])}
           variants={boxAnimation}
