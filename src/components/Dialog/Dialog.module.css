@@ -1,0 +1,23 @@
+.root {
+  width: 1028px;
+
+  margin: 0 5px;
+
+  border-radius: 25px;
+}
+
+div.header div {
+  font-family: "Poppins", sans-serif;
+  font-size: 32px !important;
+  line-height: 32px !important;
+  font-weight: 500 !important;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+div.root button {
+  border-radius: 25px;
+}
