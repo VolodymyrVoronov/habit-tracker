@@ -10,7 +10,11 @@ import HabitButton from "../HabitButton/HabitButton";
 
 import styles from "./SideBar.module.css";
 
-const SideBar = (): JSX.Element => {
+interface ISideBarProps {
+  onAddHabitButtonClick: () => void;
+}
+
+const SideBar = ({ onAddHabitButtonClick }: ISideBarProps): JSX.Element => {
   return (
     <motion.div
       className={styles.root}
@@ -60,7 +64,7 @@ const SideBar = (): JSX.Element => {
         </LayoutGroup>
       </HabitButtons>
 
-      <AddHabitButton onClick={() => console.log("Add habit button clicked")} />
+      <AddHabitButton onClick={onAddHabitButtonClick} />
     </motion.div>
   );
 };
