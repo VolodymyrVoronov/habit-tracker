@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, memo, useState } from "react";
 import { motion, LayoutGroup } from "framer-motion";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
@@ -90,4 +90,4 @@ const HabitIcons = ({ onHabitIconClick }: IHabitIconsProps): JSX.Element => {
   );
 };
 
-export default HabitIcons;
+export default memo(HabitIcons);

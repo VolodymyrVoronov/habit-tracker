@@ -58,9 +58,12 @@ const MainScreen = (): JSX.Element => {
     setDialogOpen(flag);
   };
 
-  const onHabitIconClick = (codeName: string, iconName: string) => {
-    setSelectedIcon({ codeName, iconName });
-  };
+  const onHabitIconClick = useMemo(
+    () => (codeName: string, iconName: string) => {
+      setSelectedIcon({ codeName, iconName });
+    },
+    []
+  );
 
   const onFormChange = useMemo(
     () =>
