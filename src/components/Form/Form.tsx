@@ -172,7 +172,6 @@ const Form = ({
           <Button
             onClick={onDeleteIconButtonClick}
             className={styles.button}
-            label="Delete"
             rounded
             text
             icon="pi pi-trash"

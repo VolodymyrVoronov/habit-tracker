@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Variants, motion } from "framer-motion";
 import { Button } from "primereact/button";
-import { ScrollPanel } from "primereact/scrollpanel";
 import cn from "classnames";
 
 import SideBar from "../SideBar/SideBar";
