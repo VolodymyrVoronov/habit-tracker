@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Dock as D } from "primereact/dock";
@@ -78,4 +78,4 @@ const Dock = (): JSX.Element => {
   return <D className={styles.dock} model={dockItems} position="bottom" />;
 };
 
-export default Dock;
+export default memo(Dock);

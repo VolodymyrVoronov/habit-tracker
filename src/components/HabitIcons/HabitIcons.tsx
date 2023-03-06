@@ -36,7 +36,7 @@ const HabitIcons = ({ onHabitIconClick }: IHabitIconsProps): JSX.Element => {
         <InputText
           value={searchText}
           onChange={onSearchInputChange}
-          placeholder="Search icons..."
+          placeholder="Search icon..."
           type="text"
         />
 

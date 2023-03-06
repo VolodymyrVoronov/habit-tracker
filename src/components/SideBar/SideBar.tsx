@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { motion, LayoutGroup } from "framer-motion";
 
 import Logo from "../Logo/Logo";
@@ -71,4 +71,4 @@ const SideBar = ({
   );
 };
 
-export default SideBar;
+export default memo(SideBar);
