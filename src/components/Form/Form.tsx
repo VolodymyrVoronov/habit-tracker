@@ -131,9 +131,11 @@ const Form = ({
                 key={codeName}
                 className={styles.icon}
                 initial={{
+                  y: -10,
                   opacity: 0,
                 }}
                 animate={{
+                  y: 0,
                   opacity: 1,
                   transition: {
                     duration: 0.5,
@@ -148,7 +150,22 @@ const Form = ({
                 />
               </motion.div>
             ) : (
-              <Avatar className={styles.icon} icon="pi pi-image" />
+              <motion.div
+                className={styles.icon}
+                initial={{
+                  y: -10,
+                  opacity: 0,
+                }}
+                animate={{
+                  y: 0,
+                  opacity: 1,
+                  transition: {
+                    duration: 0.5,
+                  },
+                }}
+              >
+                <Avatar className={styles.icon} icon="pi pi-image" />
+              </motion.div>
             )}
           </AnimatePresence>
 
