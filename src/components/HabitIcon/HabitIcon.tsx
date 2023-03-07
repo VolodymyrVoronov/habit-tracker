@@ -6,24 +6,24 @@ import styles from "./HabitIcon.module.css";
 
 interface IHabitIconProps {
   iconUrl: string;
-  codeName: string;
+  iconCode: string;
   iconAlt: string;
   iconName: string;
   selected: boolean;
 
-  onClick: (codeName: string, iconName: string) => void;
+  onClick: (iconCode: string, iconName: string) => void;
 }
 
 const HabitIcon = ({
   iconUrl,
-  codeName,
+  iconCode,
   iconAlt,
   iconName,
   selected,
   onClick,
 }: IHabitIconProps): JSX.Element => {
   const onIconButtonClick = (): void => {
-    onClick(codeName, iconName);
+    onClick(iconCode, iconName);
   };
 
   return (

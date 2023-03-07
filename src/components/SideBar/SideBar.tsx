@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { motion, LayoutGroup } from "framer-motion";
 
 import Logo from "../Logo/Logo";
@@ -9,14 +9,27 @@ import UserHabitButton from "../UserHabitButton/UserHabitButton";
 import styles from "./SideBar.module.css";
 
 interface ISideBarProps {
-  onUserHabitButtonClick: (id: number) => void;
-  onAddHabitButtonClick: () => void;
+  habits: {
+    id: number;
+    habit: string;
+    iconCode: string;
+  }[];
+  onUserHabitClick: (id: number) => void;
+  onAddHabitClick: () => void;
 }
 
 const SideBar = ({
-  onUserHabitButtonClick,
-  onAddHabitButtonClick,
+  habits,
+  onUserHabitClick,
+  onAddHabitClick,
 }: ISideBarProps): JSX.Element => {
+  const [selectedIcon, setSelectedIcon] = useState(0);
+
+  const onAddHabitButtonClick = (id: number): void => {
+    onUserHabitClick(id);
+    setSelectedIcon(id);
+  };
+
   return (
     <motion.div
       className={styles.root}
@@ -36,37 +49,42 @@ const SideBar = ({
       <Logo />
 
       <UserHabitButtons>
-        <LayoutGroup>
-          {[].map(({ id, codeName }, i) => (
-            <motion.div
-              layout
-              key={id}
-              initial={{
-                x: -100,
-                opacity: 0,
-              }}
-              animate={{
-                x: 0,
-                opacity: 1,
-                transition: {
-                  duration: 0.5,
-                  delay: i * 0.2,
-                },
-              }}
-            >
-              <UserHabitButton
+        {habits && habits.length > 0 ? (
+          <LayoutGroup>
+            {habits.map(({ id, habit, iconCode }, i) => (
+              <motion.div
+                layout
                 key={id}
-                id={id}
-                codeName={codeName}
-                habit=""
-                onClick={() => onUserHabitButtonClick(id)}
-              />
-            </motion.div>
-          ))}
-        </LayoutGroup>
+                initial={{
+                  x: -100,
+                  opacity: 0,
+                }}
+                animate={{
+                  x: 0,
+                  opacity: 1,
+                  transition: {
+                    duration: 0.5,
+                    delay: i * 0.2,
+                  },
+                }}
+              >
+                <UserHabitButton
+                  key={id}
+                  id={id}
+                  iconCode={iconCode}
+                  habit={habit}
+                  onClick={() => onAddHabitButtonClick(id)}
+                  selected={selectedIcon === id}
+                />
+              </motion.div>
+            ))}
+          </LayoutGroup>
+        ) : (
+          "Nothing yet!"
+        )}
       </UserHabitButtons>
 
-      <AddHabitButton onClick={onAddHabitButtonClick} />
+      <AddHabitButton onClick={onAddHabitClick} />
     </motion.div>
   );
 };

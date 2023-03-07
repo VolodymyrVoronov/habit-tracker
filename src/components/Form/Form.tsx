@@ -12,7 +12,7 @@ import cn from "classnames";
 import styles from "./Form.module.css";
 
 interface IFormProps {
-  codeName?: string;
+  iconCode?: string;
   iconName?: string;
 
   onFormChange: (habitData: {
@@ -25,7 +25,7 @@ interface IFormProps {
 }
 
 const Form = ({
-  codeName = undefined,
+  iconCode = undefined,
   iconName,
   onFormChange,
   onDeleteIconClick,
@@ -87,6 +87,7 @@ const Form = ({
           placeholder="Quit smoking"
           name="habit"
         />
+        <small className={styles.help}>Required</small>
       </div>
 
       <Divider style={{ margin: "30px 0" }} />
@@ -118,6 +119,7 @@ const Form = ({
             placeholder="10"
             name="target"
           />
+          <small className={styles.help}>Required</small>
         </div>
 
         <Divider layout="vertical" style={{ margin: "0 50px" }} />
@@ -126,9 +128,9 @@ const Form = ({
           <p className={styles.label}>Habit icon</p>
 
           <AnimatePresence mode="wait">
-            {codeName ? (
+            {iconCode ? (
               <motion.div
-                key={codeName}
+                key={iconCode}
                 className={styles.icon}
                 initial={{
                   y: -10,
@@ -143,7 +145,7 @@ const Form = ({
                 }}
               >
                 <Image
-                  src={`/images/habit-icons/${codeName}.png`}
+                  src={`/images/habit-icons/${iconCode}.png`}
                   width="100%"
                   height="100%"
                   alt={iconName}
@@ -176,7 +178,7 @@ const Form = ({
             text
             icon="pi pi-trash"
             severity="danger"
-            disabled={!codeName}
+            disabled={!iconCode}
           />
         </div>
       </div>

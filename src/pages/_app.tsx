@@ -9,7 +9,7 @@ import {
   NextPageContext,
 } from "next/dist/shared/lib/utils";
 
-import type { ServerRouter } from "@/server/router";
+import type { ServerRouter } from "@/server/habitRouter";
 
 import Dock from "@/components/Dock/Dock";
 

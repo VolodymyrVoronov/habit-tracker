@@ -45,6 +45,12 @@
   flex-direction: column;
 }
 
+.help {
+  align-self: flex-start;
+
+  color: var(--red-300);
+}
+
 .container {
   display: flex;
   justify-content: flex-start;

@@ -20,3 +20,21 @@
   transform: scale(1.05);
   background-color: #6270f08a;
 }
+
+.root-selected {
+  transform: scale(1.05);
+  background-color: #6270f0b7;
+
+  text-decoration: underline;
+}
+
+.root-selected:hover {
+  background-color: #6270f0b7;
+}
+
+.icon {
+  width: 90px;
+  height: 90px;
+
+  margin: 0 auto;
+}

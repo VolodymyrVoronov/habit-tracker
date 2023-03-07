@@ -11,15 +11,15 @@ import HabitIcon from "../HabitIcon/HabitIcon";
 import styles from "./HabitIcons.module.css";
 
 interface IHabitIconsProps {
-  onHabitIconClick: (codeName: string, iconName: string) => void;
+  onHabitIconClick: (iconCode: string, iconName: string) => void;
 }
 
 const HabitIcons = ({ onHabitIconClick }: IHabitIconsProps): JSX.Element => {
   const [selectedHabitIcon, setSelectedHabitIcon] = useState("");
   const [searchText, setSearchText] = useState("");
 
-  const onHabitIconButtonClick = (codeName: string): void => {
-    setSelectedHabitIcon(codeName);
+  const onHabitIconButtonClick = (iconCode: string): void => {
+    setSelectedHabitIcon(iconCode);
   };
 
   const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -51,10 +51,10 @@ const HabitIcons = ({ onHabitIconClick }: IHabitIconsProps): JSX.Element => {
         <LayoutGroup>
           {habitIcons
             .filter((hi) => hi.iconName.toLowerCase().includes(searchText))
-            .map(({ id, iconUrl, codeName, iconAlt, iconName }, i) => {
+            .map(({ id, iconUrl, iconCode, iconAlt, iconName }, i) => {
               return (
                 <motion.div
-                  onClick={() => onHabitIconButtonClick(codeName)}
+                  onClick={() => onHabitIconButtonClick(iconCode)}
                   layout
                   key={id}
                   initial={{
@@ -75,10 +75,10 @@ const HabitIcons = ({ onHabitIconClick }: IHabitIconsProps): JSX.Element => {
                 >
                   <HabitIcon
                     iconUrl={iconUrl}
-                    codeName={codeName}
+                    iconCode={iconCode}
                     iconAlt={iconAlt}
                     iconName={iconName}
-                    selected={selectedHabitIcon === codeName}
+                    selected={selectedHabitIcon === iconCode}
                     onClick={onHabitIconClick}
                   />
                 </motion.div>

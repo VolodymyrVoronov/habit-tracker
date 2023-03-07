@@ -1,7 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Variants, motion } from "framer-motion";
 import { Button } from "primereact/button";
 import cn from "classnames";
+
+import trpc from "@/utils/trpc";
 
 import SideBar from "../SideBar/SideBar";
 import Dialog from "../Dialog/Dialog";
@@ -32,13 +34,37 @@ const MainScreen = (): JSX.Element => {
     habitInformation: "",
     target: 0,
   });
+
   const [selectedIcon, setSelectedIcon] = useState({
-    codeName: "",
+    iconCode: "",
     iconName: "",
   });
+
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const onUserHabitButtonClick = useMemo(
+  const {
+    data: habits,
+    refetch: refetchHabits,
+    isLoading: isLoadingFetchHabits,
+    isSuccess: isSuccessFetchHabits,
+    isError: isErrorFetchHabits,
+    error: errorFetchHabits,
+  } = trpc.useQuery(["findAllHabits"]);
+
+  const {
+    mutate: mutateCreateHabit,
+    isLoading: isLoadingCreateHabit,
+    isSuccess: isSuccessCreateHabit,
+    isError: isErrorCreateHabit,
+    error: errorCreateHabit,
+  } = trpc.useMutation(["crateHabit"], {
+    onSuccess: () => {
+      refetchHabits();
+      setDialogOpen(false);
+    },
+  });
+
+  const onUserHabitClick = useMemo(
     () =>
       (id: number): void => {
         console.log(id);
@@ -46,7 +72,7 @@ const MainScreen = (): JSX.Element => {
     []
   );
 
-  const onAddHabitButtonClick = useMemo(
+  const onAddHabitClick = useMemo(
     () => (): void => {
       setDialogOpen(true);
     },
@@ -58,8 +84,8 @@ const MainScreen = (): JSX.Element => {
   };
 
   const onHabitIconClick = useMemo(
-    () => (codeName: string, iconName: string) => {
-      setSelectedIcon({ codeName, iconName });
+    () => (iconCode: string, iconName: string) => {
+      setSelectedIcon({ iconCode, iconName });
     },
     []
   );
@@ -77,16 +103,26 @@ const MainScreen = (): JSX.Element => {
   );
 
   const onDeleteIconClick = (): void => {
-    setSelectedIcon({ codeName: "", iconName: "" });
+    setSelectedIcon({ iconCode: "", iconName: "" });
   };
 
-  console.log(habitData);
+  const onSaveNewHabitButtonClick = (): void => {
+    mutateCreateHabit({
+      habit: habitData.habit,
+      habitInformation: habitData.habitInformation,
+      target: habitData.target,
+      iconCode: selectedIcon.iconCode,
+      iconName: selectedIcon.iconName,
+      comments: "",
+    });
+  };
 
   return (
     <div className={styles.root}>
       <SideBar
-        onUserHabitButtonClick={onUserHabitButtonClick}
-        onAddHabitButtonClick={onAddHabitButtonClick}
+        habits={habits}
+        onUserHabitClick={onUserHabitClick}
+        onAddHabitClick={onAddHabitClick}
       />
 
       <Dialog
@@ -100,7 +136,7 @@ const MainScreen = (): JSX.Element => {
               severity="secondary"
               icon="pi pi-times"
               onClick={() => {
-                setSelectedIcon({ codeName: "", iconName: "" });
+                setSelectedIcon({ iconCode: "", iconName: "" });
                 setDialogOpen(false);
               }}
               outlined
@@ -108,8 +144,9 @@ const MainScreen = (): JSX.Element => {
             <Button
               label="Save"
               icon="pi pi-save"
-              onClick={() => {}}
+              onClick={onSaveNewHabitButtonClick}
               autoFocus
+              disabled={!habitData.habit || !habitData.target}
             />
           </>
         }
@@ -117,7 +154,7 @@ const MainScreen = (): JSX.Element => {
         <HabitIcons onHabitIconClick={onHabitIconClick} />
 
         <Form
-          codeName={selectedIcon.codeName}
+          iconCode={selectedIcon.iconCode}
           iconName={selectedIcon.iconName}
           onFormChange={onFormChange}
           onDeleteIconClick={onDeleteIconClick}
