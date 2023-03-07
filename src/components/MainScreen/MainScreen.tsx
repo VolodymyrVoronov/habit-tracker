@@ -29,6 +29,10 @@ const boxAnimation: Variants = {
 };
 
 const MainScreen = (): JSX.Element => {
+  const [selectedHabit, setSelectedHabit] = useState<number | undefined>(
+    undefined
+  );
+
   const [habitData, setHabitData] = useState({
     habit: "",
     habitInformation: "",
@@ -52,6 +56,20 @@ const MainScreen = (): JSX.Element => {
   } = trpc.useQuery(["findAllHabits"]);
 
   const {
+    data: habit,
+    // refetch: refetchHabit,
+    isLoading: isLoadingFetchHabit,
+    isSuccess: isSuccessFetchHabit,
+    isError: isErrorFetchHabit,
+    error: errorFetchHabit,
+  } = trpc.useQuery(
+    ["findHabitById", { id: selectedHabit } as unknown as null | undefined],
+    {
+      enabled: !!selectedHabit,
+    }
+  );
+
+  const {
     mutate: mutateCreateHabit,
     isLoading: isLoadingCreateHabit,
     isSuccess: isSuccessCreateHabit,
@@ -67,7 +85,7 @@ const MainScreen = (): JSX.Element => {
   const onUserHabitClick = useMemo(
     () =>
       (id: number): void => {
-        console.log(id);
+        setSelectedHabit(id);
       },
     []
   );
@@ -116,6 +134,9 @@ const MainScreen = (): JSX.Element => {
       comments: "",
     });
   };
+
+  console.log("habit", habit);
+  console.log("selectedHabit", selectedHabit);
 
   return (
     <div className={styles.root}>

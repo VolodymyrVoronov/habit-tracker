@@ -23,6 +23,7 @@ export const habitRouter = trpc
       return ctx.prisma.habit.findMany();
     },
   })
+
   .query("findHabitById", {
     input: z.object({
       id: z.number(),
@@ -36,6 +37,7 @@ export const habitRouter = trpc
       });
     },
   })
+
   .mutation("crateHabit", {
     input: Habit,
 
@@ -52,6 +54,7 @@ export const habitRouter = trpc
       });
     },
   })
+
   .mutation("updateHabit", {
     input: HabitWithId,
 
@@ -64,10 +67,12 @@ export const habitRouter = trpc
       });
     },
   })
+
   .mutation("deleteHabit", {
     input: z.object({
       id: z.number(),
     }),
+
     resolve: async ({ input, ctx }) => {
       const { id } = input;
 
