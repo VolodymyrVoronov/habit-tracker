@@ -1,0 +1,67 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  border-radius: 25px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+
+  font-family: "Advent Pro", sans-serif;
+  font-size: 36px;
+  line-height: 36px;
+}
+
+.title-icon {
+  display: flex;
+  margin-left: 10px;
+}
+
+.progress {
+  display: flex;
+
+  margin-left: 10px;
+}
+
+.progress-text {
+  margin-right: 5px;
+
+  font-family: "Advent Pro", sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.progress-percent {
+  font-family: "Advent Pro", sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.progress-bar {
+  height: 20px;
+
+  margin-bottom: 26px;
+}
+
+.information {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+
+}

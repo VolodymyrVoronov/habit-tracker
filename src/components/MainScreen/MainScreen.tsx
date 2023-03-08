@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Variants, motion } from "framer-motion";
 import { Button } from "primereact/button";
 import cn from "classnames";
@@ -9,6 +9,7 @@ import SideBar from "../SideBar/SideBar";
 import Dialog from "../Dialog/Dialog";
 import HabitIcons from "../HabitIcons/HabitIcons";
 import Form from "../Form/Form";
+import Habit from "../Habit/Habit";
 
 import styles from "./MainScreen.module.css";
 
@@ -51,11 +52,11 @@ const MainScreen = (): JSX.Element => {
     isSuccess: isSuccessFetchHabits,
     isError: isErrorFetchHabits,
     error: errorFetchHabits,
-  } = trpc.useQuery(["findAllHabits"]);
+  } = trpc.useQuery(["findAllHabits"], { enabled: false });
 
   const {
     data: habit,
-    // refetch: refetchHabit,
+    refetch: refetchHabit,
     isLoading: isLoadingFetchHabit,
     isSuccess: isSuccessFetchHabit,
     isError: isErrorFetchHabit,
@@ -74,6 +75,19 @@ const MainScreen = (): JSX.Element => {
     onSuccess: () => {
       refetchHabits();
       setDialogOpen(false);
+    },
+  });
+
+  const {
+    mutate: mutateDeleteHabit,
+    isLoading: isLoadingDeleteHabit,
+    isSuccess: isSuccessDeleteHabit,
+    isError: isErrorDeleteHabit,
+    error: errorDeleteHabit,
+  } = trpc.useMutation(["deleteHabit"], {
+    onSuccess: () => {
+      refetchHabits();
+      refetchHabit();
     },
   });
 
@@ -130,8 +144,13 @@ const MainScreen = (): JSX.Element => {
     });
   };
 
-  console.log("habit", habit);
-  console.log("selectedHabit", selectedHabit);
+  const onDeleteClick = (id: number): void => {
+    mutateDeleteHabit({ id });
+  };
+
+  useEffect(() => {
+    refetchHabits();
+  }, [refetchHabits]);
 
   return (
     <div className={styles.root}>
@@ -184,7 +203,9 @@ const MainScreen = (): JSX.Element => {
           initial="initial"
           animate="animate"
         >
-          Habit
+          {isSuccessFetchHabit && habit && (
+            <Habit habitData={habit} onDeleteClick={onDeleteClick} />
+          )}
         </motion.div>
 
         <motion.div
