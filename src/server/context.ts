@@ -2,9 +2,9 @@ import * as trpc from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
 import { PrismaClient } from "@prisma/client";
 
-export const createContext = (opts?: trpcNext.CreateNextContextOptions) => {
-  const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
+export const createContext = (opts?: trpcNext.CreateNextContextOptions) => {
   return { ...opts, prisma };
 };
 

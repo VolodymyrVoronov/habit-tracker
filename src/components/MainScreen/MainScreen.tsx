@@ -29,9 +29,7 @@ const boxAnimation: Variants = {
 };
 
 const MainScreen = (): JSX.Element => {
-  const [selectedHabit, setSelectedHabit] = useState<number | undefined>(
-    undefined
-  );
+  const [selectedHabit, setSelectedHabit] = useState<number>(0);
 
   const [habitData, setHabitData] = useState({
     habit: "",
@@ -62,12 +60,9 @@ const MainScreen = (): JSX.Element => {
     isSuccess: isSuccessFetchHabit,
     isError: isErrorFetchHabit,
     error: errorFetchHabit,
-  } = trpc.useQuery(
-    ["findHabitById", { id: selectedHabit } as unknown as null | undefined],
-    {
-      enabled: !!selectedHabit,
-    }
-  );
+  } = trpc.useQuery(["findHabitById", { id: selectedHabit }], {
+    enabled: !!selectedHabit,
+  });
 
   const {
     mutate: mutateCreateHabit,

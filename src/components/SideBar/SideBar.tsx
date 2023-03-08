@@ -1,6 +1,8 @@
 import React, { memo, useState } from "react";
 import { motion, LayoutGroup } from "framer-motion";
 
+import { Habit } from "@prisma/client";
+
 import Logo from "../Logo/Logo";
 import AddHabitButton from "../AddHabitButton/AddHabitButton";
 import UserHabitButtons from "../UserHabitButtons/UserHabitButtons";
@@ -9,11 +11,7 @@ import UserHabitButton from "../UserHabitButton/UserHabitButton";
 import styles from "./SideBar.module.css";
 
 interface ISideBarProps {
-  habits: {
-    id: number;
-    habit: string;
-    iconCode: string;
-  }[];
+  habits: Habit[] | undefined;
   onUserHabitClick: (id: number) => void;
   onAddHabitClick: () => void;
 }

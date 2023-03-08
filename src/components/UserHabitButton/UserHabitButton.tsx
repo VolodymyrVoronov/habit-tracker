@@ -8,7 +8,7 @@ import styles from "./UserHabitButton.module.css";
 export interface IUserHabitButtonProps {
   id: number;
   habit: string;
-  iconCode: string;
+  iconCode: string | null;
   onClick: (id: number) => void;
   selected: boolean;
 }
