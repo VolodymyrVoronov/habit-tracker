@@ -144,9 +144,13 @@ const MainScreen = (): JSX.Element => {
     });
   };
 
-  const onDeleteClick = (id: number): void => {
-    mutateDeleteHabit({ id });
-  };
+  const onDeleteClick = useMemo(
+    () =>
+      (id: number): void => {
+        mutateDeleteHabit({ id });
+      },
+    [mutateDeleteHabit]
+  );
 
   useEffect(() => {
     refetchHabits();

@@ -1,9 +1,11 @@
-import React, { useMemo } from "react";
+import React, { ChangeEvent, memo, useMemo, useState } from "react";
 import Image from "next/image";
 import { Card } from "primereact/card";
 import { ProgressBar } from "primereact/progressbar";
 import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
 import { motion, AnimatePresence } from "framer-motion";
+import cn from "classnames";
 
 import { Habit as HTypes } from "@prisma/client";
 
@@ -25,8 +27,16 @@ const Habit = ({ habitData, onDeleteClick }: IHabitProps): JSX.Element => {
     [commentsArray, target]
   );
 
+  const [comment, setComment] = useState("");
+
   const onDeleteButtonClick = (): void => {
     onDeleteClick(id);
+  };
+
+  const onCommentInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    if (e.target) {
+      setComment(e.target.value);
+    }
   };
 
   return (
@@ -47,7 +57,7 @@ const Habit = ({ habitData, onDeleteClick }: IHabitProps): JSX.Element => {
         }}
       >
         <Card
-          className={styles.card}
+          className={cn(styles.card)}
           title={
             <div className={styles.header}>
               <h2 className={styles.title}>
@@ -92,9 +102,38 @@ const Habit = ({ habitData, onDeleteClick }: IHabitProps): JSX.Element => {
             <p className={styles.information}>{habitInformation}</p>
           )}
         </Card>
+
+        <Card
+          title={
+            <span className={styles["card-comments-title"]}>
+              Daily comments:
+            </span>
+          }
+          className={cn(styles.card, styles["card-comments"])}
+        >
+          {/* {comments &&
+            comments !== "" &&
+            comments.split(",").map((comment, i) => {
+              return <div>{comment}</div>;
+            })} */}
+
+          <div className={styles.input}>
+            <InputText
+              onChange={onCommentInputChange}
+              className={styles["input-field"]}
+              value={comment}
+              aria-describedby="Comment"
+              placeholder="Comment"
+              name="comment"
+            />
+            <Button disabled={!comment} className={styles["input-button"]}>
+              Add
+            </Button>
+          </div>
+        </Card>
       </motion.div>
     </AnimatePresence>
   );
 };
 
-export default Habit;
+export default memo(Habit);

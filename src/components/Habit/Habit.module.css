@@ -7,6 +7,16 @@
   border-radius: 25px;
 }
 
+.card-comments {
+  margin-top: 10px;
+}
+
+.card-comments-title {
+  font-family: "Advent Pro", sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+}
+
 .header {
   display: flex;
   flex-direction: row;
@@ -63,5 +73,32 @@
 .footer {
   display: flex;
   justify-content: flex-end;
+}
 
+.card div div:nth-of-type(3) {
+  padding-top: 0;
+}
+
+.input {
+  display: flex;
+
+  width: 100%;
+
+  padding: 10px;
+
+  background-color: #c7d2fe75;
+
+  border-radius: 5px;
+}
+
+.input-field {
+  width: 100%;
+
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
