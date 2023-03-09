@@ -1,5 +1,5 @@
 const checkLimit = (initialValue: string, target: number): boolean => {
-  if (initialValue.length > target) {
+  if (initialValue.length >= target) {
     return true;
   }
 

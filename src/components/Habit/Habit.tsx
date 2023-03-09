@@ -9,6 +9,7 @@ import cn from "classnames";
 
 import { Habit as HTypes } from "@prisma/client";
 
+import checkLimit from "@/helpers/checkLimit";
 import countProgress from "@/helpers/countProgress";
 
 import styles from "./Habit.module.css";
@@ -29,6 +30,10 @@ const Habit = ({
   const commentsArray = comments === "" ? 0 : JSON.parse(comments as string);
   const habitProgress = useMemo(
     () => countProgress(commentsArray, target),
+    [commentsArray, target]
+  );
+  const habitDone = useMemo(
+    () => checkLimit(commentsArray, target),
     [commentsArray, target]
   );
 
@@ -137,7 +142,7 @@ const Habit = ({
             />
             <Button
               onClick={onAddCommentButtonClick}
-              disabled={!comment}
+              disabled={!comment || habitDone}
               className={styles["input-button"]}
             >
               Add

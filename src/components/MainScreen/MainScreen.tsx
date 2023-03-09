@@ -166,30 +166,34 @@ const MainScreen = (): JSX.Element => {
     [mutateDeleteHabit]
   );
 
-  const onAddCommentClick = (comment: string): void => {
-    const newComment = {
-      id: uniqid(),
-      comment,
-    };
+  const onAddCommentClick = useMemo(
+    () =>
+      (comment: string): void => {
+        const newComment = {
+          id: uniqid(),
+          comment,
+        };
 
-    if (habit?.comments === "") {
-      mutateUpdateCommentsHabit({
-        id: selectedHabit,
-        comments: JSON.stringify([newComment]),
-      });
-    }
+        if (habit?.comments === "") {
+          mutateUpdateCommentsHabit({
+            id: selectedHabit,
+            comments: JSON.stringify([newComment]),
+          });
+        }
 
-    if (habit?.comments !== "") {
-      const comments = JSON.parse(habit?.comments as string);
+        if (habit?.comments !== "") {
+          const comments = JSON.parse(habit?.comments as string);
 
-      comments.push(newComment);
+          comments.push(newComment);
 
-      mutateUpdateCommentsHabit({
-        id: selectedHabit,
-        comments: JSON.stringify(comments),
-      });
-    }
-  };
+          mutateUpdateCommentsHabit({
+            id: selectedHabit,
+            comments: JSON.stringify(comments),
+          });
+        }
+      },
+    [habit?.comments, mutateUpdateCommentsHabit, selectedHabit]
+  );
 
   useEffect(() => {
     refetchHabits();
