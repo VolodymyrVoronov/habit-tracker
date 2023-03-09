@@ -55,15 +55,20 @@ export const habitRouter = trpc
     },
   })
 
-  .mutation("updateHabit", {
-    input: HabitWithId,
+  .mutation("updateComments", {
+    input: z.object({
+      id: z.number(),
+      comments: z.string(),
+    }),
 
     async resolve({ input, ctx }) {
-      const { id, ...rest } = input;
-
       return ctx.prisma.habit.update({
-        where: { id },
-        data: { ...rest },
+        where: {
+          id: input.id,
+        },
+        data: {
+          comments: input.comments,
+        },
       });
     },
   })

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Variants, motion } from "framer-motion";
 import { Button } from "primereact/button";
 import cn from "classnames";
+import uniqid from "uniqid";
 
 import trpc from "@/utils/trpc";
 
@@ -91,6 +92,19 @@ const MainScreen = (): JSX.Element => {
     },
   });
 
+  const {
+    mutate: mutateUpdateCommentsHabit,
+    isLoading: isLoadingUpdateCommentsHabit,
+    isSuccess: isSuccessUpdateCommentsHabit,
+    isError: isErrorUpdateCommentsHabit,
+    error: errorUpdateCommentsHabit,
+  } = trpc.useMutation(["updateComments"], {
+    onSuccess: () => {
+      refetchHabits();
+      refetchHabit();
+    },
+  });
+
   const onUserHabitClick = useMemo(
     () =>
       (id: number): void => {
@@ -152,6 +166,31 @@ const MainScreen = (): JSX.Element => {
     [mutateDeleteHabit]
   );
 
+  const onAddCommentClick = (comment: string): void => {
+    const newComment = {
+      id: uniqid(),
+      comment,
+    };
+
+    if (habit?.comments === "") {
+      mutateUpdateCommentsHabit({
+        id: selectedHabit,
+        comments: JSON.stringify([newComment]),
+      });
+    }
+
+    if (habit?.comments !== "") {
+      const comments = JSON.parse(habit?.comments as string);
+
+      comments.push(newComment);
+
+      mutateUpdateCommentsHabit({
+        id: selectedHabit,
+        comments: JSON.stringify(comments),
+      });
+    }
+  };
+
   useEffect(() => {
     refetchHabits();
   }, [refetchHabits]);
@@ -208,7 +247,11 @@ const MainScreen = (): JSX.Element => {
           animate="animate"
         >
           {isSuccessFetchHabit && habit && (
-            <Habit habitData={habit} onDeleteClick={onDeleteClick} />
+            <Habit
+              habitData={habit}
+              onDeleteClick={onDeleteClick}
+              onAddCommentClick={onAddCommentClick}
+            />
           )}
         </motion.div>
 

@@ -16,12 +16,17 @@ import styles from "./Habit.module.css";
 interface IHabitProps {
   habitData: HTypes;
   onDeleteClick: (id: number) => void;
+  onAddCommentClick: (comment: string) => void;
 }
 
-const Habit = ({ habitData, onDeleteClick }: IHabitProps): JSX.Element => {
+const Habit = ({
+  habitData,
+  onDeleteClick,
+  onAddCommentClick,
+}: IHabitProps): JSX.Element => {
   const { id, habit, habitInformation, target, iconCode, comments } = habitData;
 
-  const commentsArray = comments === "" ? 0 : comments?.split(",");
+  const commentsArray = comments === "" ? 0 : JSON.parse(comments as string);
   const habitProgress = useMemo(
     () => countProgress(commentsArray, target),
     [commentsArray, target]
@@ -36,6 +41,13 @@ const Habit = ({ habitData, onDeleteClick }: IHabitProps): JSX.Element => {
   const onCommentInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target) {
       setComment(e.target.value);
+    }
+  };
+
+  const onAddCommentButtonClick = (): void => {
+    if (comment) {
+      onAddCommentClick(comment);
+      setComment("");
     }
   };
 
@@ -106,16 +118,13 @@ const Habit = ({ habitData, onDeleteClick }: IHabitProps): JSX.Element => {
         <Card
           title={
             <span className={styles["card-comments-title"]}>
-              Daily comments:
+              Daily comments | Day {commentsArray && commentsArray.length} of{" "}
+              {target}:
             </span>
           }
           className={cn(styles.card, styles["card-comments"])}
         >
-          {/* {comments &&
-            comments !== "" &&
-            comments.split(",").map((comment, i) => {
-              return <div>{comment}</div>;
-            })} */}
+          {commentsArray !== 0 && <p>Comments</p>}
 
           <div className={styles.input}>
             <InputText
@@ -126,7 +135,11 @@ const Habit = ({ habitData, onDeleteClick }: IHabitProps): JSX.Element => {
               placeholder="Comment"
               name="comment"
             />
-            <Button disabled={!comment} className={styles["input-button"]}>
+            <Button
+              onClick={onAddCommentButtonClick}
+              disabled={!comment}
+              className={styles["input-button"]}
+            >
               Add
             </Button>
           </div>
