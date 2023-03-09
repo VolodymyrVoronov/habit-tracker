@@ -131,23 +131,25 @@ const Habit = ({
         >
           {commentsArray !== 0 && <p>Comments</p>}
 
-          <div className={styles.input}>
-            <InputText
-              onChange={onCommentInputChange}
-              className={styles["input-field"]}
-              value={comment}
-              aria-describedby="Comment"
-              placeholder="Comment"
-              name="comment"
-            />
-            <Button
-              onClick={onAddCommentButtonClick}
-              disabled={!comment || habitDone}
-              className={styles["input-button"]}
-            >
-              Add
-            </Button>
-          </div>
+          {!habitDone && (
+            <div className={styles.input}>
+              <InputText
+                onChange={onCommentInputChange}
+                className={styles["input-field"]}
+                value={comment}
+                aria-describedby="Comment"
+                placeholder="Comment"
+                name="comment"
+              />
+              <Button
+                onClick={onAddCommentButtonClick}
+                disabled={!comment}
+                className={styles["input-button"]}
+              >
+                Add
+              </Button>
+            </div>
+          )}
         </Card>
       </motion.div>
     </AnimatePresence>
