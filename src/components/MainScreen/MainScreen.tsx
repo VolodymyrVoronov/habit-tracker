@@ -158,7 +158,7 @@ const MainScreen = (): JSX.Element => {
     });
   };
 
-  const onDeleteClick = useMemo(
+  const onDeleteHabitClick = useMemo(
     () =>
       (id: number): void => {
         mutateDeleteHabit({ id });
@@ -194,6 +194,20 @@ const MainScreen = (): JSX.Element => {
       },
     [habit?.comments, mutateUpdateCommentsHabit, selectedHabit]
   );
+
+  const onDeleteHabitsCommentClick = (id: string): void => {
+    const newComments = JSON.parse(habit?.comments as string);
+
+    newComments.splice(
+      newComments.findIndex((comment: { id: string }) => comment.id === id),
+      1
+    );
+
+    mutateUpdateCommentsHabit({
+      id: selectedHabit,
+      comments: JSON.stringify(newComments),
+    });
+  };
 
   useEffect(() => {
     refetchHabits();
@@ -253,8 +267,9 @@ const MainScreen = (): JSX.Element => {
           {isSuccessFetchHabit && habit && (
             <Habit
               habitData={habit}
-              onDeleteClick={onDeleteClick}
+              onDeleteHabitClick={onDeleteHabitClick}
               onAddCommentClick={onAddCommentClick}
+              onDeleteHabitsCommentClick={onDeleteHabitsCommentClick}
             />
           )}
         </motion.div>

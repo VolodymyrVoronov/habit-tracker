@@ -12,18 +12,22 @@ import { Habit as HTypes } from "@prisma/client";
 import checkLimit from "@/helpers/checkLimit";
 import countProgress from "@/helpers/countProgress";
 
+import HabitComment from "../HabitComment/HabitComment";
+
 import styles from "./Habit.module.css";
 
 interface IHabitProps {
   habitData: HTypes;
-  onDeleteClick: (id: number) => void;
+  onDeleteHabitClick: (id: number) => void;
   onAddCommentClick: (comment: string) => void;
+  onDeleteHabitsCommentClick: (id: string) => void;
 }
 
 const Habit = ({
   habitData,
-  onDeleteClick,
+  onDeleteHabitClick,
   onAddCommentClick,
+  onDeleteHabitsCommentClick,
 }: IHabitProps): JSX.Element => {
   const { id, habit, habitInformation, target, iconCode, comments } = habitData;
 
@@ -39,8 +43,8 @@ const Habit = ({
 
   const [comment, setComment] = useState("");
 
-  const onDeleteButtonClick = (): void => {
-    onDeleteClick(id);
+  const onDeleteHabitButtonClick = (): void => {
+    onDeleteHabitClick(id);
   };
 
   const onCommentInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -56,103 +60,144 @@ const Habit = ({
     }
   };
 
+  const onDeleteCommentClick = (commentId: string): void => {
+    onDeleteHabitsCommentClick(commentId);
+  };
+
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        className={styles.root}
-        key={iconCode}
-        initial={{
-          scale: 0.95,
-          opacity: 0,
-        }}
-        animate={{
-          scale: 1,
-          opacity: 1,
-          transition: {
-            duration: 0.5,
-          },
-        }}
-      >
-        <Card
-          className={cn(styles.card)}
-          title={
-            <div className={styles.header}>
-              <h2 className={styles.title}>
-                {habit}
+    <motion.div
+      className={styles.root}
+      key={iconCode}
+      initial={{
+        scale: 0.95,
+        opacity: 0,
+      }}
+      animate={{
+        scale: 1,
+        opacity: 1,
+        transition: {
+          duration: 0.5,
+        },
+      }}
+    >
+      <Card
+        className={cn(styles.card)}
+        title={
+          <div className={styles.header}>
+            <h2 className={styles.title}>
+              {habit}
 
-                {iconCode && (
-                  <span className={styles["title-icon"]}>
-                    <Image
-                      src={`/images/habit-icons/${iconCode}.png`}
-                      width="25%"
-                      height="25%"
-                    />
-                  </span>
-                )}
-              </h2>
-              <div className={styles.progress}>
-                <span className={styles["progress-text"]}>Progress</span>
-                <span className={styles["progress-percent"]}>
-                  {habitProgress}%
+              {iconCode && (
+                <span className={styles["title-icon"]}>
+                  <Image
+                    src={`/images/habit-icons/${iconCode}.png`}
+                    width="25%"
+                    height="25%"
+                  />
                 </span>
+              )}
+            </h2>
+            <div className={styles.progress}>
+              <span className={styles["progress-text"]}>Progress</span>
+              <span className={styles["progress-percent"]}>
+                {habitProgress}%
+              </span>
+            </div>
+          </div>
+        }
+        footer={
+          <div className={styles.footer}>
+            <Button
+              onClick={onDeleteHabitButtonClick}
+              className={styles.button}
+              rounded
+              icon="pi pi-trash"
+              severity="danger"
+            />
+          </div>
+        }
+      >
+        <ProgressBar className={styles["progress-bar"]} value={habitProgress} />
+
+        {habitInformation && (
+          <p className={styles.information}>{habitInformation}</p>
+        )}
+      </Card>
+
+      <Card
+        title={
+          <span className={styles["card-comments-title"]}>
+            Daily comments | Day {commentsArray && commentsArray.length} of{" "}
+            {target}:
+          </span>
+        }
+        className={cn(styles["card-comments"], {
+          [styles["card-comments-with-radius"]]: habitDone,
+        })}
+      >
+        {commentsArray !== 0 && (
+          <AnimatePresence>
+            {commentsArray.map((c: { id: string; comment: string }) => {
+              const { id: commentId, comment: commentString } = c;
+
+              return (
+                <HabitComment
+                  key={commentId}
+                  id={commentId}
+                  comment={commentString}
+                  onDeleteClick={onDeleteCommentClick}
+                />
+              );
+            })}
+          </AnimatePresence>
+        )}
+
+        {(commentsArray === 0 || commentsArray.length === 0) && (
+          <span className={styles["card-no-comments"]}>No comments yet.</span>
+        )}
+      </Card>
+
+      <AnimatePresence mode="popLayout">
+        {!habitDone && (
+          <motion.div
+            initial={{
+              y: 50,
+              opacity: 0,
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+              transition: {
+                duration: 1,
+              },
+            }}
+            style={{
+              paddingBottom: 1.5,
+            }}
+          >
+            <Card className={styles["card-input"]}>
+              <div className={styles.input}>
+                <InputText
+                  onChange={onCommentInputChange}
+                  className={styles["input-field"]}
+                  value={comment}
+                  aria-describedby="Comment"
+                  placeholder="Comment"
+                  name="comment"
+                />
+                <Button
+                  onClick={onAddCommentButtonClick}
+                  disabled={!comment}
+                  className={styles["input-button"]}
+                >
+                  Add
+                </Button>
               </div>
-            </div>
-          }
-          footer={
-            <div className={styles.footer}>
-              <Button
-                onClick={onDeleteButtonClick}
-                className={styles.button}
-                rounded
-                icon="pi pi-trash"
-                severity="danger"
-              />
-            </div>
-          }
-        >
-          <ProgressBar
-            className={styles["progress-bar"]}
-            value={habitProgress}
-          />
-
-          {habitInformation && (
-            <p className={styles.information}>{habitInformation}</p>
-          )}
-        </Card>
-
-        <Card
-          title={
-            <span className={styles["card-comments-title"]}>
-              Daily comments | Day {commentsArray && commentsArray.length} of{" "}
-              {target}:
-            </span>
-          }
-          className={cn(styles.card, styles["card-comments"])}
-        >
-          {commentsArray !== 0 && <p>Comments</p>}
-
-          {!habitDone && (
-            <div className={styles.input}>
-              <InputText
-                onChange={onCommentInputChange}
-                className={styles["input-field"]}
-                value={comment}
-                aria-describedby="Comment"
-                placeholder="Comment"
-                name="comment"
-              />
-              <Button
-                onClick={onAddCommentButtonClick}
-                disabled={!comment}
-                className={styles["input-button"]}
-              >
-                Add
-              </Button>
-            </div>
-          )}
-        </Card>
-      </motion.div>
-    </AnimatePresence>
+            </Card>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
