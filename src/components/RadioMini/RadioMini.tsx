@@ -82,6 +82,7 @@ const RadioMini = (): JSX.Element => {
             onChange={(e) => onRadioButtonClick(e.value)}
             options={radioStreams}
             optionLabel="name"
+            title="Select a radio"
           />
         </div>
       </Card>
@@ -92,6 +93,7 @@ const RadioMini = (): JSX.Element => {
             className={styles.button}
             onClick={onPlayPauseButtonClick}
             type="button"
+            title={`${getPlaying() ? "Pause" : "Play"}`}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -131,6 +133,7 @@ const RadioMini = (): JSX.Element => {
             className={styles.button}
             onClick={onSoundButtonClick}
             type="button"
+            title={`${getMuted() ? "Unmute" : "Mute"}`}
           >
             <AnimatePresence mode="wait">
               <motion.div
