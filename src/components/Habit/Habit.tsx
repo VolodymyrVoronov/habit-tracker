@@ -152,6 +152,7 @@ const Habit = ({
         }
         footer={
           <div className={styles.footer}>
+            {habitDone && <span className={styles.text}>Target achieved!</span>}
             <Button
               onClick={onDeleteHabitButtonClick}
               className={styles.button}
@@ -178,7 +179,7 @@ const Habit = ({
         title={
           <span className={styles["card-comments-title"]}>
             Daily comments | Day {commentsArray && commentsArray.length} of{" "}
-            {target}:
+            {target}
           </span>
         }
         className={cn(styles["card-comments"], {

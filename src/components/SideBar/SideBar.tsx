@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { motion, LayoutGroup } from "framer-motion";
 
 import { Habit } from "@prisma/client";
@@ -27,6 +27,14 @@ const SideBar = ({
     onUserHabitClick(id);
     setSelectedIcon(id);
   };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const sH = localStorage.getItem("setSelectedHabit");
+
+      setSelectedIcon(Number(sH));
+    }
+  }, []);
 
   return (
     <motion.div

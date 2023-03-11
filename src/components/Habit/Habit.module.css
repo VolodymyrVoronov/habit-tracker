@@ -110,7 +110,19 @@
 
 .footer {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+}
+
+.text {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  line-height: 18px;
+  text-decoration: underline;
+}
+
+.button {
+  margin-left: auto;
 }
 
 .card-input {

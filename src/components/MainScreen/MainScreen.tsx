@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Variants, motion } from "framer-motion";
 import { Button } from "primereact/button";
 import cn from "classnames";
@@ -109,6 +109,10 @@ const MainScreen = (): JSX.Element => {
     () =>
       (id: number): void => {
         setSelectedHabit(id);
+
+        if (typeof window !== "undefined") {
+          localStorage.setItem("setSelectedHabit", String(id));
+        }
       },
     []
   );
@@ -195,23 +199,35 @@ const MainScreen = (): JSX.Element => {
     [habit?.comments, mutateUpdateCommentsHabit, selectedHabit]
   );
 
-  const onDeleteHabitsCommentClick = (id: string): void => {
-    const newComments = JSON.parse(habit?.comments as string);
+  const onDeleteHabitsCommentClick = useMemo(
+    () =>
+      (id: string): void => {
+        const newComments = JSON.parse(habit?.comments as string);
 
-    newComments.splice(
-      newComments.findIndex((comment: { id: string }) => comment.id === id),
-      1
-    );
+        newComments.splice(
+          newComments.findIndex((comment: { id: string }) => comment.id === id),
+          1
+        );
 
-    mutateUpdateCommentsHabit({
-      id: selectedHabit,
-      comments: JSON.stringify(newComments),
-    });
-  };
+        mutateUpdateCommentsHabit({
+          id: selectedHabit,
+          comments: JSON.stringify(newComments),
+        });
+      },
+    [habit?.comments, mutateUpdateCommentsHabit, selectedHabit]
+  );
 
   useEffect(() => {
     refetchHabits();
   }, [refetchHabits]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const sH = localStorage.getItem("setSelectedHabit");
+
+      setSelectedHabit(Number(sH));
+    }
+  }, []);
 
   return (
     <div className={styles.root}>

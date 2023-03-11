@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 import { confirmPopup } from "primereact/confirmpopup";
@@ -65,4 +65,4 @@ const HabitComment = ({
   );
 };
 
-export default HabitComment;
+export default memo(HabitComment);
