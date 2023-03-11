@@ -1,5 +1,7 @@
 import { withTRPC } from "@trpc/next";
 import { motion } from "framer-motion";
+import ReactHowler from "react-howler";
+
 import "@fontsource/poppins";
 import "@fontsource/advent-pro";
 
@@ -10,6 +12,8 @@ import {
 } from "next/dist/shared/lib/utils";
 
 import type { ServerRouter } from "@/server/index";
+
+import { useGlobalState } from "@/state";
 
 import Dock from "@/components/Dock/Dock";
 
@@ -26,6 +30,8 @@ const App: AppType = ({
   Component: NextComponentType<NextPageContext, any, object>;
   pageProps: any;
 }) => {
+  const { getRadio, getPlaying, getMuted } = useGlobalState();
+
   return (
     <>
       <Component {...pageProps} />
@@ -43,6 +49,16 @@ const App: AppType = ({
         }}
       >
         <Dock />
+
+        {getRadio().stream.length > 0 && (
+          <ReactHowler
+            src={getRadio().stream}
+            playing={getPlaying()}
+            mute={getMuted()}
+            html5
+            volume={1}
+          />
+        )}
       </motion.div>
     </>
   );

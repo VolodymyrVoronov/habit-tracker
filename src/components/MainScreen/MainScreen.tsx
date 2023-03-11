@@ -11,6 +11,7 @@ import Dialog from "../Dialog/Dialog";
 import HabitIcons from "../HabitIcons/HabitIcons";
 import Form from "../Form/Form";
 import Habit from "../Habit/Habit";
+import RadioMini from "../RadioMini/RadioMini";
 
 import styles from "./MainScreen.module.css";
 
@@ -64,6 +65,7 @@ const MainScreen = (): JSX.Element => {
     error: errorFetchHabit,
   } = trpc.useQuery(["findHabitById", { id: selectedHabit }], {
     enabled: !!selectedHabit,
+    refetchOnWindowFocus: false,
   });
 
   const {
@@ -305,7 +307,7 @@ const MainScreen = (): JSX.Element => {
           initial="initial"
           animate="animate"
         >
-          Radio
+          <RadioMini />
         </motion.div>
       </div>
     </div>
