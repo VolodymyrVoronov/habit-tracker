@@ -86,7 +86,15 @@ const SideBar = ({
             ))}
           </LayoutGroup>
         ) : (
-          "Nothing yet!"
+          <span className={styles.pointer}>
+            Start adding new habit!
+            <motion.i
+              className="pi pi-angle-double-down"
+              style={{ fontSize: "2rem" }}
+              animate={{ y: [0, 20, 0] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            />
+          </span>
         )}
       </UserHabitButtons>
 

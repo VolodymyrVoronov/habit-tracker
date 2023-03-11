@@ -19,3 +19,17 @@
 
   border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
+
+.pointer {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: auto;
+  margin-bottom: 50px;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+}
