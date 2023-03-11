@@ -4,6 +4,7 @@ import { Card } from "primereact/card";
 import { ProgressBar } from "primereact/progressbar";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
+import { ConfirmPopup, confirmPopup } from "primereact/confirmpopup";
 import { motion, AnimatePresence } from "framer-motion";
 import cn from "classnames";
 
@@ -43,8 +44,24 @@ const Habit = ({
 
   const [comment, setComment] = useState("");
 
-  const onDeleteHabitButtonClick = (): void => {
+  const accept = (): void => {
     onDeleteHabitClick(id);
+  };
+
+  const onDeleteHabitButtonClick = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ): void => {
+    confirmPopup({
+      target: e.currentTarget,
+      message: "Do you want to delete this habit?",
+      icon: "pi pi-info-circle",
+      acceptClassName: "p-button-danger",
+      style: {
+        boxShadow: "none",
+        border: "2px solid #a8b9fa",
+      },
+      accept,
+    });
   };
 
   const onCommentInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -80,6 +97,7 @@ const Habit = ({
         },
       }}
     >
+      <ConfirmPopup />
       <Card
         className={cn(styles.card)}
         title={
@@ -100,7 +118,34 @@ const Habit = ({
             <div className={styles.progress}>
               <span className={styles["progress-text"]}>Progress</span>
               <span className={styles["progress-percent"]}>
-                {habitProgress}%
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={habitProgress}
+                    initial={{
+                      y: -20,
+                      scale: 0.5,
+                      opacity: 0,
+                    }}
+                    animate={{
+                      y: 0,
+                      scale: [1, 1.1, 1],
+                      opacity: 1,
+                      transition: {
+                        duration: 0.5,
+                      },
+                    }}
+                    exit={{
+                      y: 20,
+                      scale: 0.5,
+                      opacity: 0,
+                      transition: {
+                        duration: 0.5,
+                      },
+                    }}
+                  >
+                    {habitProgress}%
+                  </motion.div>
+                </AnimatePresence>
               </span>
             </div>
           </div>
@@ -117,7 +162,12 @@ const Habit = ({
           </div>
         }
       >
-        <ProgressBar className={styles["progress-bar"]} value={habitProgress} />
+        <ProgressBar
+          className={cn(styles["progress-bar"], {
+            [styles["progress-bar-habit-achieved"]]: habitDone,
+          })}
+          value={habitProgress}
+        />
 
         {habitInformation && (
           <p className={styles.information}>{habitInformation}</p>
@@ -137,18 +187,20 @@ const Habit = ({
       >
         {commentsArray !== 0 && (
           <AnimatePresence>
-            {commentsArray.map((c: { id: string; comment: string }) => {
-              const { id: commentId, comment: commentString } = c;
+            {commentsArray
+              .reverse()
+              .map((c: { id: string; comment: string }) => {
+                const { id: commentId, comment: commentString } = c;
 
-              return (
-                <HabitComment
-                  key={commentId}
-                  id={commentId}
-                  comment={commentString}
-                  onDeleteClick={onDeleteCommentClick}
-                />
-              );
-            })}
+                return (
+                  <HabitComment
+                    key={commentId}
+                    id={commentId}
+                    comment={commentString}
+                    onDeleteClick={onDeleteCommentClick}
+                  />
+                );
+              })}
           </AnimatePresence>
         )}
 

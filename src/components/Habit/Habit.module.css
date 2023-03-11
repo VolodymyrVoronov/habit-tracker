@@ -98,6 +98,10 @@
   margin-bottom: 26px;
 }
 
+.root .progress-bar-habit-achieved div:first-of-type {
+  background: var(--green-600) !important;
+}
+
 .information {
   font-family: "Poppins", sans-serif;
   font-size: 18px;

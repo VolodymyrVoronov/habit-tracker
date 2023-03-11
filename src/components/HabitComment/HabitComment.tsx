@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
+import { confirmPopup } from "primereact/confirmpopup";
 import { motion } from "framer-motion";
 
 import styles from "./HabitComment.module.css";
@@ -16,8 +17,24 @@ const HabitComment = ({
   comment,
   onDeleteClick,
 }: IHabitCommentProps): JSX.Element => {
-  const onDeleteButtonClick = (): void => {
+  const accept = (): void => {
     onDeleteClick(id);
+  };
+
+  const onDeleteButtonClick = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ): void => {
+    confirmPopup({
+      target: e.currentTarget,
+      message: "Do you want to delete this comment?",
+      icon: "pi pi-info-circle",
+      acceptClassName: "p-button-danger",
+      style: {
+        boxShadow: "none",
+        border: "2px solid #a8b9fa",
+      },
+      accept,
+    });
   };
 
   return (
