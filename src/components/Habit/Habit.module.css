@@ -74,6 +74,9 @@
 
 .progress {
   display: flex;
+  justify-content: space-between;
+
+  min-width: 135px;
 
   margin-left: 10px;
 }
