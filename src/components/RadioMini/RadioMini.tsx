@@ -30,7 +30,7 @@ const RadioMini = (): JSX.Element => {
     setPlaying(!getPlaying());
   };
 
-  const onMuteButtonClick = (): void => {
+  const onSoundButtonClick = (): void => {
     setMuted(!getMuted());
   };
 
@@ -129,7 +129,7 @@ const RadioMini = (): JSX.Element => {
 
           <button
             className={styles.button}
-            onClick={onMuteButtonClick}
+            onClick={onSoundButtonClick}
             type="button"
           >
             <AnimatePresence mode="wait">
