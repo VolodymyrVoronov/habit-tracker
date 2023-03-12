@@ -54,6 +54,11 @@
   border-bottom-right-radius: 25px;
 }
 
+.root:hover::after,
+.root:hover::before {
+  display: none;
+}
+
 .buttons {
   display: flex;
   flex-direction: column;
