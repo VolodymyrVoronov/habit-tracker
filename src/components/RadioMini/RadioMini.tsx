@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import Image from "next/image";
 import { Dropdown } from "primereact/dropdown";
 import { Card } from "primereact/card";
 import { motion, AnimatePresence } from "framer-motion";
@@ -94,6 +95,7 @@ const RadioMini = (): JSX.Element => {
             onClick={onPlayPauseButtonClick}
             type="button"
             title={`${getPlaying() ? "Pause" : "Play"}`}
+            disabled={getRadio().stream.length === 0}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -121,9 +123,19 @@ const RadioMini = (): JSX.Element => {
                 }}
               >
                 {getPlaying() ? (
-                  <i className="pi pi-pause" />
+                  <Image
+                    src="/images/radio-icons/pause-button.png"
+                    width="100%"
+                    height="100%"
+                    alt="Pause button"
+                  />
                 ) : (
-                  <i className="pi pi-play" />
+                  <Image
+                    src="/images/radio-icons/play-button.png"
+                    width="100%"
+                    height="100%"
+                    alt="Play button"
+                  />
                 )}
               </motion.div>
             </AnimatePresence>
@@ -134,6 +146,7 @@ const RadioMini = (): JSX.Element => {
             onClick={onSoundButtonClick}
             type="button"
             title={`${getMuted() ? "Unmute" : "Mute"}`}
+            disabled={getRadio().stream.length === 0}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -161,9 +174,19 @@ const RadioMini = (): JSX.Element => {
                 }}
               >
                 {getMuted() ? (
-                  <i className="pi pi-volume-off" />
+                  <Image
+                    src="/images/radio-icons/sound-off.png"
+                    width="100%"
+                    height="100%"
+                    alt="Sound off"
+                  />
                 ) : (
-                  <i className="pi pi-volume-up" />
+                  <Image
+                    src="/images/radio-icons/sound-on.png"
+                    width="100%"
+                    height="100%"
+                    alt="Sound on"
+                  />
                 )}
               </motion.div>
             </AnimatePresence>
