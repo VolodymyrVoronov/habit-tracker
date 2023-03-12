@@ -16,6 +16,7 @@ import HabitIcons from "../HabitIcons/HabitIcons";
 import Form from "../Form/Form";
 import Habit from "../Habit/Habit";
 import RadioMini from "../RadioMini/RadioMini";
+import WeatherMini from "../WeatherMini/WeatherMini";
 
 import styles from "./MainScreen.module.css";
 
@@ -85,7 +86,6 @@ const MainScreen = (): JSX.Element => {
   const {
     mutate: mutateDeleteHabit,
     isLoading: isLoadingDeleteHabit,
-    isSuccess: isSuccessDeleteHabit,
     isError: isErrorDeleteHabit,
     error: errorDeleteHabit,
   } = trpc.useMutation(["deleteHabit"], {
@@ -434,7 +434,7 @@ const MainScreen = (): JSX.Element => {
             initial="initial"
             animate="animate"
           >
-            Weather
+            <WeatherMini />
           </motion.div>
 
           <motion.div

@@ -22,7 +22,7 @@ const initialState = hookstate({
   muted: false,
 });
 
-export const useGlobalState = () => {
+export const useRadioGlobalState = () => {
   const state = useHookstate<IRadioState>(initialState);
 
   return {

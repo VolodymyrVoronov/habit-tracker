@@ -16,3 +16,8 @@ model Habit {
   iconCode         String?
   comments         String?
 }
+
+model Weather {
+  id   Int    @id @default(autoincrement())
+  city String
+}

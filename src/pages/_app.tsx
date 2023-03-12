@@ -13,7 +13,7 @@ import {
 
 import type { ServerRouter } from "@/server/index";
 
-import { useGlobalState } from "@/state";
+import { useRadioGlobalState } from "@/state/radioGlobalState";
 
 import Dock from "@/components/Dock/Dock";
 
@@ -30,7 +30,7 @@ const App: AppType = ({
   Component: NextComponentType<NextPageContext, any, object>;
   pageProps: any;
 }) => {
-  const { getRadio, getPlaying, getMuted } = useGlobalState();
+  const { getRadio, getPlaying, getMuted } = useRadioGlobalState();
 
   return (
     <>

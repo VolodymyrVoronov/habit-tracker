@@ -5,7 +5,7 @@ import { Card } from "primereact/card";
 import { motion, AnimatePresence } from "framer-motion";
 import cn from "classnames";
 
-import { useGlobalState } from "@/state";
+import { useRadioGlobalState } from "@/state/radioGlobalState";
 
 import radioStreams from "@/constants/radioStreams";
 
@@ -13,7 +13,7 @@ import styles from "./RadioMini.module.css";
 
 const RadioMini = (): JSX.Element => {
   const { getRadio, getPlaying, getMuted, setRadio, setPlaying, setMuted } =
-    useGlobalState();
+    useRadioGlobalState();
 
   const onRadioButtonClick = (selectedRadio: {
     id: string;
