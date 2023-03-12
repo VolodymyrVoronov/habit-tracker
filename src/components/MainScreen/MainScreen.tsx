@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import Image from "next/image";
 import { AnimatePresence, Variants, motion } from "framer-motion";
 import { Button } from "primereact/button";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { ProgressBar } from "primereact/progressbar";
+import { Toast } from "primereact/toast";
 import cn from "classnames";
 import uniqid from "uniqid";
 
@@ -32,6 +33,8 @@ const boxAnimation: Variants = {
 };
 
 const MainScreen = (): JSX.Element => {
+  const toast = useRef<Toast>(null);
+
   const [selectedHabit, setSelectedHabit] = useState<number>(0);
 
   const [habitData, setHabitData] = useState({
@@ -51,7 +54,6 @@ const MainScreen = (): JSX.Element => {
     data: habits,
     refetch: refetchHabits,
     isLoading: isLoadingFetchHabits,
-    isSuccess: isSuccessFetchHabits,
     isError: isErrorFetchHabits,
     error: errorFetchHabits,
   } = trpc.useQuery(["findAllHabits"], { enabled: false });
@@ -71,7 +73,6 @@ const MainScreen = (): JSX.Element => {
   const {
     mutate: mutateCreateHabit,
     isLoading: isLoadingCreateHabit,
-    isSuccess: isSuccessCreateHabit,
     isError: isErrorCreateHabit,
     error: errorCreateHabit,
   } = trpc.useMutation(["crateHabit"], {
@@ -97,7 +98,6 @@ const MainScreen = (): JSX.Element => {
   const {
     mutate: mutateUpdateCommentsHabit,
     isLoading: isLoadingUpdateCommentsHabit,
-    isSuccess: isSuccessUpdateCommentsHabit,
     isError: isErrorUpdateCommentsHabit,
     error: errorUpdateCommentsHabit,
   } = trpc.useMutation(["updateComments"], {
@@ -231,8 +231,44 @@ const MainScreen = (): JSX.Element => {
     }
   }, []);
 
+  useEffect(() => {
+    if (
+      toast.current &&
+      (isErrorFetchHabits ||
+        isErrorFetchHabit ||
+        isErrorCreateHabit ||
+        isErrorDeleteHabit ||
+        isErrorUpdateCommentsHabit)
+    ) {
+      toast.current?.show({
+        severity: "error",
+        summary: "Error occurred",
+        detail:
+          errorFetchHabits?.message ||
+          errorFetchHabit?.message ||
+          errorCreateHabit?.message ||
+          errorDeleteHabit?.message ||
+          errorUpdateCommentsHabit?.message,
+        life: 5000,
+      });
+    }
+  }, [
+    isErrorFetchHabits,
+    isErrorFetchHabit,
+    isErrorCreateHabit,
+    isErrorDeleteHabit,
+    isErrorUpdateCommentsHabit,
+    errorFetchHabits?.message,
+    errorFetchHabit?.message,
+    errorCreateHabit?.message,
+    errorDeleteHabit?.message,
+    errorUpdateCommentsHabit?.message,
+  ]);
+
   return (
     <>
+      <Toast ref={toast} />
+
       {(isLoadingFetchHabits ||
         isLoadingFetchHabit ||
         isLoadingCreateHabit ||
