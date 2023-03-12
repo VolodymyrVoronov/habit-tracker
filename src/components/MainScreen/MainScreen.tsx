@@ -274,7 +274,7 @@ const MainScreen = (): JSX.Element => {
         isLoadingFetchHabit ||
         isLoadingCreateHabit ||
         isLoadingUpdateCommentsHabit ||
-        isSuccessDeleteHabit) && (
+        isLoadingDeleteHabit) && (
         <AnimatePresence mode="wait">
           <motion.div
             key={String(
@@ -282,7 +282,7 @@ const MainScreen = (): JSX.Element => {
                 isLoadingFetchHabit ||
                 isLoadingCreateHabit ||
                 isLoadingUpdateCommentsHabit ||
-                isSuccessDeleteHabit
+                isLoadingDeleteHabit
             )}
             initial={{
               opacity: 0,
@@ -380,20 +380,26 @@ const MainScreen = (): JSX.Element => {
                 />
               )}
 
-            {!habit && !isLoadingFetchHabit && (
-              <div className={styles["no-habit-selected"]}>
-                <div className={styles["no-habit-selected-text"]}>
-                  No habit selected!
+            {!habit &&
+              !isLoadingFetchHabit &&
+              !isErrorFetchHabits &&
+              !isErrorFetchHabit &&
+              !isErrorCreateHabit &&
+              !isErrorDeleteHabit &&
+              !isErrorUpdateCommentsHabit && (
+                <div className={styles["no-habit-selected"]}>
+                  <div className={styles["no-habit-selected-text"]}>
+                    No habit selected!
+                  </div>
+                  <div className={styles["no-habit-selected-icon"]}>
+                    <Image
+                      src="/images/ui-icons/no-results.png"
+                      width="100%"
+                      height="100%"
+                    />
+                  </div>
                 </div>
-                <div className={styles["no-habit-selected-icon"]}>
-                  <Image
-                    src="/images/ui-icons/no-results.png"
-                    width="100%"
-                    height="100%"
-                  />
-                </div>
-              </div>
-            )}
+              )}
 
             {isLoadingDeleteHabit ||
               (isLoadingFetchHabit && (
