@@ -248,7 +248,8 @@ const MainScreen = (): JSX.Element => {
           errorFetchHabit?.message ||
           errorCreateHabit?.message ||
           errorDeleteHabit?.message ||
-          errorUpdateCommentsHabit?.message,
+          errorUpdateCommentsHabit?.message ||
+          "Something went wrong, try again later",
         life: 5000,
       });
     }
