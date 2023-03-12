@@ -1,4 +1,5 @@
-import React, { ChangeEvent, memo, useState } from "react";
+import React, { ChangeEvent, memo, useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, LayoutGroup } from "framer-motion";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
@@ -11,15 +12,19 @@ import HabitIcon from "../HabitIcon/HabitIcon";
 import styles from "./HabitIcons.module.css";
 
 interface IHabitIconsProps {
+  iC: string;
   onHabitIconClick: (iconCode: string, iconName: string) => void;
 }
 
-const HabitIcons = ({ onHabitIconClick }: IHabitIconsProps): JSX.Element => {
+const HabitIcons = ({
+  iC,
+  onHabitIconClick,
+}: IHabitIconsProps): JSX.Element => {
   const [selectedHabitIcon, setSelectedHabitIcon] = useState("");
   const [searchText, setSearchText] = useState("");
 
-  const onHabitIconButtonClick = (iconCode: string): void => {
-    setSelectedHabitIcon(iconCode);
+  const onHabitIconButtonClick = (selectedIconCode: string): void => {
+    setSelectedHabitIcon(selectedIconCode);
   };
 
   const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -29,6 +34,12 @@ const HabitIcons = ({ onHabitIconClick }: IHabitIconsProps): JSX.Element => {
   const onClearSearchInputButtonClick = (): void => {
     setSearchText("");
   };
+
+  useEffect(() => {
+    if (iC === "") {
+      setSelectedHabitIcon("");
+    }
+  }, [iC]);
 
   return (
     <div className={styles.root}>
@@ -42,8 +53,17 @@ const HabitIcons = ({ onHabitIconClick }: IHabitIconsProps): JSX.Element => {
 
         <Button
           onClick={onClearSearchInputButtonClick}
-          icon="pi pi-trash"
           className="p-button-danger"
+          severity="danger"
+          title="Clear field"
+          outlined
+          icon={
+            <Image
+              src="/images/ui-icons/backspace.png"
+              width="25%"
+              height="25%"
+            />
+          }
         />
       </div>
 

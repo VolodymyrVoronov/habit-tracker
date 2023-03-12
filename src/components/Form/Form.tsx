@@ -174,11 +174,18 @@ const Form = ({
           <Button
             onClick={onDeleteIconButtonClick}
             className={styles.button}
+            severity="danger"
+            title="Delete icon"
+            disabled={!iconCode}
             rounded
             text
-            icon="pi pi-trash"
-            severity="danger"
-            disabled={!iconCode}
+            icon={
+              <Image
+                src="/images/ui-icons/trash.png"
+                width="25%"
+                height="25%"
+              />
+            }
           />
         </div>
       </div>

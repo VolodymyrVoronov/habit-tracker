@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import Image from "next/image";
 import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 import { confirmPopup } from "primereact/confirmpopup";
@@ -56,9 +57,13 @@ const HabitComment = ({
       <div className={styles.button}>
         <Button
           onClick={onDeleteButtonClick}
-          rounded
-          icon="pi pi-trash"
           severity="danger"
+          title="Delete comment"
+          rounded
+          text
+          icon={
+            <Image src="/images/ui-icons/trash.png" width="25%" height="25%" />
+          }
         />
       </div>
     </motion.div>

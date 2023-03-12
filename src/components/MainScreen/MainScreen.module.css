@@ -40,6 +40,36 @@
   overflow: auto;
 }
 
+.no-habit-selected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 50%;
+
+  transform: translate(0, -50%);
+}
+
+.no-habit-selected-text {
+  font-family: "Advent Pro", sans-serif;
+  font-size: 36px;
+  line-height: 36px;
+}
+
+.no-habit-selected-icon {
+  margin-top: 25px;
+}
+
+.progress-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 50%;
+
+  transform: translate(0, -50%);
+}
+
 .weather {
   grid-area: w;
 }

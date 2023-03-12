@@ -156,9 +156,17 @@ const Habit = ({
             <Button
               onClick={onDeleteHabitButtonClick}
               className={styles.button}
-              rounded
-              icon="pi pi-trash"
               severity="danger"
+              title="Delete habit"
+              rounded
+              text
+              icon={
+                <Image
+                  src="/images/ui-icons/trash.png"
+                  width="25%"
+                  height="25%"
+                />
+              }
             />
           </div>
         }

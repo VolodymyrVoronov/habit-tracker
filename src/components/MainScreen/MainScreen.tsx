@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Variants, motion } from "framer-motion";
+import Image from "next/image";
+import { AnimatePresence, Variants, motion } from "framer-motion";
 import { Button } from "primereact/button";
+import { ProgressSpinner } from "primereact/progressspinner";
 import cn from "classnames";
 import uniqid from "uniqid";
 
@@ -265,7 +267,10 @@ const MainScreen = (): JSX.Element => {
           </>
         }
       >
-        <HabitIcons onHabitIconClick={onHabitIconClick} />
+        <HabitIcons
+          iC={selectedIcon.iconCode}
+          onHabitIconClick={onHabitIconClick}
+        />
 
         <Form
           iconCode={selectedIcon.iconCode}
@@ -282,14 +287,58 @@ const MainScreen = (): JSX.Element => {
           initial="initial"
           animate="animate"
         >
-          {isSuccessFetchHabit && habit && (
-            <Habit
-              habitData={habit}
-              onDeleteHabitClick={onDeleteHabitClick}
-              onAddCommentClick={onAddCommentClick}
-              onDeleteHabitsCommentClick={onDeleteHabitsCommentClick}
-            />
+          {!isLoadingDeleteHabit &&
+            !isLoadingFetchHabit &&
+            isSuccessFetchHabit &&
+            habit && (
+              <Habit
+                habitData={habit}
+                onDeleteHabitClick={onDeleteHabitClick}
+                onAddCommentClick={onAddCommentClick}
+                onDeleteHabitsCommentClick={onDeleteHabitsCommentClick}
+              />
+            )}
+
+          {!habit && !isLoadingFetchHabit && (
+            <div className={styles["no-habit-selected"]}>
+              <div className={styles["no-habit-selected-text"]}>
+                No habit selected!
+              </div>
+              <div className={styles["no-habit-selected-icon"]}>
+                <Image
+                  src="/images/ui-icons/no-results.png"
+                  width="100%"
+                  height="100%"
+                />
+              </div>
+            </div>
           )}
+
+          {isLoadingDeleteHabit ||
+            (isLoadingFetchHabit && (
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={String(isLoadingDeleteHabit || isLoadingFetchHabit)}
+                  initial={{
+                    opacity: 0,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    transition: {
+                      duration: 1,
+                      delay: 1,
+                    },
+                  }}
+                >
+                  <ProgressSpinner
+                    className={styles["progress-spinner"]}
+                    style={{ width: "100px", height: "100px" }}
+                    strokeWidth="5"
+                    animationDuration=".5s"
+                  />
+                </motion.div>
+              </AnimatePresence>
+            ))}
         </motion.div>
 
         <motion.div
