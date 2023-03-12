@@ -1,7 +1,15 @@
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
 .root {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  padding: 5px;
 }
 
 .card {
@@ -49,6 +57,31 @@
   width: 100%;
 
   margin-top: 25px;
+}
+
+.select-playing {
+  --border-size: 3px;
+  --border-angle: 0turn;
+
+  background-image: conic-gradient(
+      from var(--border-angle),
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 1)
+    ),
+    conic-gradient(from var(--border-angle), transparent 20%, #08f, #f03);
+  background-size: calc(100% - (var(--border-size) * 2))
+      calc(100% - (var(--border-size) * 2)),
+    cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  animation: bg-spin 3s linear infinite;
+}
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
 }
 
 .controls {

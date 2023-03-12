@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Dropdown } from "primereact/dropdown";
 import { Card } from "primereact/card";
 import { motion, AnimatePresence } from "framer-motion";
+import cn from "classnames";
 
 import { useGlobalState } from "@/state";
 
@@ -78,7 +79,9 @@ const RadioMini = (): JSX.Element => {
           </AnimatePresence>
 
           <Dropdown
-            className={styles.select}
+            className={cn(styles.select, {
+              [styles["select-playing"]]: getPlaying(),
+            })}
             value={getRadio()}
             onChange={(e) => onRadioButtonClick(e.value)}
             options={radioStreams}
