@@ -3,6 +3,7 @@ import Image from "next/image";
 import { AnimatePresence, Variants, motion } from "framer-motion";
 import { Button } from "primereact/button";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { ProgressBar } from "primereact/progressbar";
 import cn from "classnames";
 import uniqid from "uniqid";
 
@@ -19,14 +20,11 @@ import styles from "./MainScreen.module.css";
 
 const boxAnimation: Variants = {
   initial: {
-    scale: 0,
     opacity: 0,
   },
   animate: {
-    scale: 1,
     opacity: 1,
     transition: {
-      delay: 1,
       duration: 0.5,
       ease: "easeIn",
     },
@@ -234,132 +232,179 @@ const MainScreen = (): JSX.Element => {
   }, []);
 
   return (
-    <div className={styles.root}>
-      <SideBar
-        habits={habits}
-        onUserHabitClick={onUserHabitClick}
-        onAddHabitClick={onAddHabitClick}
-      />
-
-      <Dialog
-        headerTitle="New habit"
-        isVisible={dialogOpen}
-        onHideClick={onCloseDialogButtonClick}
-        footerContent={
-          <>
-            <Button
-              label="Cancel"
-              severity="secondary"
-              icon="pi pi-times"
-              onClick={() => {
-                setSelectedIcon({ iconCode: "", iconName: "" });
-                setDialogOpen(false);
+    <>
+      {(isLoadingFetchHabits ||
+        isLoadingFetchHabit ||
+        isLoadingCreateHabit ||
+        isLoadingUpdateCommentsHabit ||
+        isSuccessDeleteHabit) && (
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={String(
+              isLoadingFetchHabits ||
+                isLoadingFetchHabit ||
+                isLoadingCreateHabit ||
+                isLoadingUpdateCommentsHabit ||
+                isSuccessDeleteHabit
+            )}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+              transition: {
+                duration: 1,
+                delay: 0.5,
+              },
+            }}
+          >
+            <ProgressBar
+              mode="indeterminate"
+              style={{
+                position: "absolute",
+                zIndex: 999,
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "7px",
+                borderRadius: 0,
               }}
-              outlined
+              color="#059bb4"
             />
-            <Button
-              label="Save"
-              icon="pi pi-save"
-              onClick={onSaveNewHabitButtonClick}
-              autoFocus
-              disabled={!habitData.habit || !habitData.target}
-            />
-          </>
-        }
-      >
-        <HabitIcons
-          iC={selectedIcon.iconCode}
-          onHabitIconClick={onHabitIconClick}
+          </motion.div>
+        </AnimatePresence>
+      )}
+
+      <div className={styles.root}>
+        <SideBar
+          habits={habits}
+          onUserHabitClick={onUserHabitClick}
+          onAddHabitClick={onAddHabitClick}
         />
 
-        <Form
-          iconCode={selectedIcon.iconCode}
-          iconName={selectedIcon.iconName}
-          onFormChange={onFormChange}
-          onDeleteIconClick={onDeleteIconClick}
-        />
-      </Dialog>
-
-      <div className={styles.content}>
-        <motion.div
-          className={cn(styles.habit, styles["content-box"])}
-          variants={boxAnimation}
-          initial="initial"
-          animate="animate"
-        >
-          {!isLoadingDeleteHabit &&
-            !isLoadingFetchHabit &&
-            isSuccessFetchHabit &&
-            habit && (
-              <Habit
-                habitData={habit}
-                onDeleteHabitClick={onDeleteHabitClick}
-                onAddCommentClick={onAddCommentClick}
-                onDeleteHabitsCommentClick={onDeleteHabitsCommentClick}
+        <Dialog
+          headerTitle="New habit"
+          isVisible={dialogOpen}
+          onHideClick={onCloseDialogButtonClick}
+          footerContent={
+            <>
+              <Button
+                label="Cancel"
+                severity="secondary"
+                icon="pi pi-times"
+                onClick={() => {
+                  setSelectedIcon({ iconCode: "", iconName: "" });
+                  setDialogOpen(false);
+                }}
+                outlined
               />
+              <Button
+                label="Save"
+                icon="pi pi-save"
+                onClick={onSaveNewHabitButtonClick}
+                autoFocus
+                disabled={
+                  !habitData.habit || !habitData.target || isLoadingCreateHabit
+                }
+                loading={isLoadingCreateHabit}
+              />
+            </>
+          }
+        >
+          <HabitIcons
+            iC={selectedIcon.iconCode}
+            onHabitIconClick={onHabitIconClick}
+          />
+
+          <Form
+            iconCode={selectedIcon.iconCode}
+            iconName={selectedIcon.iconName}
+            onFormChange={onFormChange}
+            onDeleteIconClick={onDeleteIconClick}
+          />
+        </Dialog>
+
+        <div className={styles.content}>
+          <motion.div
+            className={cn(styles.habit, styles["content-box"])}
+            variants={boxAnimation}
+            initial="initial"
+            animate="animate"
+          >
+            {!isLoadingDeleteHabit &&
+              !isLoadingFetchHabit &&
+              isSuccessFetchHabit &&
+              habit && (
+                <Habit
+                  habitData={habit}
+                  onDeleteHabitClick={onDeleteHabitClick}
+                  onAddCommentClick={onAddCommentClick}
+                  onDeleteHabitsCommentClick={onDeleteHabitsCommentClick}
+                />
+              )}
+
+            {!habit && !isLoadingFetchHabit && (
+              <div className={styles["no-habit-selected"]}>
+                <div className={styles["no-habit-selected-text"]}>
+                  No habit selected!
+                </div>
+                <div className={styles["no-habit-selected-icon"]}>
+                  <Image
+                    src="/images/ui-icons/no-results.png"
+                    width="100%"
+                    height="100%"
+                  />
+                </div>
+              </div>
             )}
 
-          {!habit && !isLoadingFetchHabit && (
-            <div className={styles["no-habit-selected"]}>
-              <div className={styles["no-habit-selected-text"]}>
-                No habit selected!
-              </div>
-              <div className={styles["no-habit-selected-icon"]}>
-                <Image
-                  src="/images/ui-icons/no-results.png"
-                  width="100%"
-                  height="100%"
-                />
-              </div>
-            </div>
-          )}
+            {isLoadingDeleteHabit ||
+              (isLoadingFetchHabit && (
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={String(isLoadingDeleteHabit || isLoadingFetchHabit)}
+                    initial={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      transition: {
+                        duration: 1,
+                        delay: 1,
+                      },
+                    }}
+                  >
+                    <ProgressSpinner
+                      className={styles["progress-spinner"]}
+                      style={{ width: "100px", height: "100px" }}
+                      strokeWidth="5"
+                      animationDuration=".5s"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              ))}
+          </motion.div>
 
-          {isLoadingDeleteHabit ||
-            (isLoadingFetchHabit && (
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={String(isLoadingDeleteHabit || isLoadingFetchHabit)}
-                  initial={{
-                    opacity: 0,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    transition: {
-                      duration: 1,
-                      delay: 1,
-                    },
-                  }}
-                >
-                  <ProgressSpinner
-                    className={styles["progress-spinner"]}
-                    style={{ width: "100px", height: "100px" }}
-                    strokeWidth="5"
-                    animationDuration=".5s"
-                  />
-                </motion.div>
-              </AnimatePresence>
-            ))}
-        </motion.div>
+          <motion.div
+            className={cn(styles.weather, styles["content-box"])}
+            variants={boxAnimation}
+            initial="initial"
+            animate="animate"
+          >
+            Weather
+          </motion.div>
 
-        <motion.div
-          className={cn(styles.weather, styles["content-box"])}
-          variants={boxAnimation}
-          initial="initial"
-          animate="animate"
-        >
-          Weather
-        </motion.div>
-
-        <motion.div
-          className={cn(styles.radio, styles["content-box"])}
-          variants={boxAnimation}
-          initial="initial"
-          animate="animate"
-        >
-          <RadioMini />
-        </motion.div>
+          <motion.div
+            className={cn(styles.radio, styles["content-box"])}
+            variants={boxAnimation}
+            initial="initial"
+            animate="animate"
+          >
+            <RadioMini />
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

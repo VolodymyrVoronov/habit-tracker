@@ -45,9 +45,7 @@
   flex-direction: column;
   align-items: center;
 
-  margin-top: 50%;
-
-  transform: translate(0, -50%);
+  margin-top: 25%;
 }
 
 .no-habit-selected-text {
@@ -65,9 +63,7 @@
   flex-direction: column;
   align-items: center;
 
-  margin-top: 50%;
-
-  transform: translate(0, -50%);
+  margin-top: 25%;
 }
 
 .weather {

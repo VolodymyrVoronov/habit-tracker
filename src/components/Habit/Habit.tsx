@@ -86,11 +86,9 @@ const Habit = ({
       className={styles.root}
       key={iconCode}
       initial={{
-        scale: 0.95,
         opacity: 0,
       }}
       animate={{
-        scale: 1,
         opacity: 1,
         transition: {
           duration: 0.5,
@@ -222,13 +220,12 @@ const Habit = ({
         {!habitDone && (
           <motion.div
             initial={{
-              y: 50,
               opacity: 0,
             }}
             animate={{
-              y: 0,
               opacity: 1,
               transition: {
+                delay: 0.5,
                 duration: 1,
               },
             }}
