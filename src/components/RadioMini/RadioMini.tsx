@@ -131,6 +131,7 @@ const RadioMini = (): JSX.Element => {
                     width="100%"
                     height="100%"
                     alt="Pause button"
+                    priority
                   />
                 ) : (
                   <Image
@@ -138,6 +139,7 @@ const RadioMini = (): JSX.Element => {
                     width="100%"
                     height="100%"
                     alt="Play button"
+                    priority
                   />
                 )}
               </motion.div>
@@ -182,6 +184,7 @@ const RadioMini = (): JSX.Element => {
                     width="100%"
                     height="100%"
                     alt="Sound off"
+                    priority
                   />
                 ) : (
                   <Image
@@ -189,6 +192,7 @@ const RadioMini = (): JSX.Element => {
                     width="100%"
                     height="100%"
                     alt="Sound on"
+                    priority
                   />
                 )}
               </motion.div>

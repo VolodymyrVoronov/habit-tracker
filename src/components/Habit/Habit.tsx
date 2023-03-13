@@ -163,6 +163,7 @@ const Habit = ({
                   src="/images/ui-icons/trash.png"
                   width="25%"
                   height="25%"
+                  priority
                 />
               }
             />

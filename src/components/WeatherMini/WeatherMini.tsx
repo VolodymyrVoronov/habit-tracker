@@ -1,9 +1,16 @@
-import React, { ChangeEvent, memo, useState } from "react";
+import React, {
+  ChangeEvent,
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import Image from "next/image";
 import { useQuery } from "react-query";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
+import { ProgressSpinner } from "primereact/progressspinner";
 import cn from "classnames";
 
 import getWeatherForecast from "@/services/weatherApi";
@@ -15,7 +22,7 @@ const WeatherMini = (): JSX.Element => {
 
   const { refetch, data, error, isLoading } = useQuery(
     "weatherForecast",
-    () => getWeatherForecast("London"),
+    () => getWeatherForecast(city),
     {
       enabled: false,
       refetchOnWindowFocus: false,
@@ -28,7 +35,34 @@ const WeatherMini = (): JSX.Element => {
 
   const onSearchButtonClick = (): void => {
     setCity("");
+    refetch();
+
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cityWeatherForeCast", city);
+    }
   };
+
+  const refetchWeatherForecast = useCallback((): void => {
+    refetch();
+  }, [refetch]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const c = localStorage.getItem("cityWeatherForeCast");
+
+      if (c) {
+        setCity(c);
+
+        const tID = setTimeout(() => {
+          refetchWeatherForecast();
+
+          clearTimeout(tID);
+        }, 500);
+      }
+    }
+  }, [refetchWeatherForecast]);
+
+  console.log(data);
 
   return (
     <div className={styles.root}>
@@ -54,6 +88,7 @@ const WeatherMini = (): JSX.Element => {
                   src="/images/ui-icons/search.png"
                   width="25%"
                   height="25%"
+                  priority
                 />
               }
               disabled={city.length === 0}
@@ -65,7 +100,15 @@ const WeatherMini = (): JSX.Element => {
         </div>
       </Card>
 
-      <Card className={styles.card}>Test</Card>
+      <Card className={styles.card}>
+        {isLoading ? (
+          <div className="card flex justify-content-center">
+            <ProgressSpinner />
+          </div>
+        ) : (
+          <div className={styles.weather}>{data?.location.name}</div>
+        )}
+      </Card>
     </div>
   );
 };

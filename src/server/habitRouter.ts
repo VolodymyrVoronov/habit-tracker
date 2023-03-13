@@ -12,10 +12,6 @@ const Habit = z.object({
   comments: z.string().optional(),
 });
 
-const HabitWithId = Habit.extend({
-  id: z.number(),
-});
-
 export const habitRouter = trpc
   .router<Context>()
   .query("findAllHabits", {

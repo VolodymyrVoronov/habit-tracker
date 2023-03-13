@@ -62,7 +62,12 @@ const HabitComment = ({
           rounded
           text
           icon={
-            <Image src="/images/ui-icons/trash.png" width="25%" height="25%" />
+            <Image
+              src="/images/ui-icons/trash.png"
+              width="25%"
+              height="25%"
+              priority
+            />
           }
         />
       </div>
