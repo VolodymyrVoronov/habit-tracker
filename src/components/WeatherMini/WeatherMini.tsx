@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { AxiosError } from "axios";
 import Image from "next/image";
 import { useQuery } from "react-query";
 import { Card } from "primereact/card";
@@ -15,12 +16,14 @@ import cn from "classnames";
 
 import getWeatherForecast from "@/services/weatherApi";
 
+import WeatherMiniWidget from "../WeatherMiniWidget/WeatherMiniWidget";
+
 import styles from "./WeatherMini.module.css";
 
 const WeatherMini = (): JSX.Element => {
   const [city, setCity] = useState("");
 
-  const { refetch, data, error, isLoading } = useQuery(
+  const { refetch, data, error, isError, isLoading } = useQuery(
     "weatherForecast",
     () => getWeatherForecast(city),
     {
@@ -38,7 +41,7 @@ const WeatherMini = (): JSX.Element => {
     refetch();
 
     if (typeof window !== "undefined") {
-      localStorage.setItem("cityWeatherForeCast", city);
+      localStorage.setItem("cityWeatherForeCast", city.trim());
     }
   };
 
@@ -51,18 +54,16 @@ const WeatherMini = (): JSX.Element => {
       const c = localStorage.getItem("cityWeatherForeCast");
 
       if (c) {
-        setCity(c);
+        setCity(c.trim());
 
-        const tID = setTimeout(() => {
+        const tId = setTimeout(() => {
           refetchWeatherForecast();
 
-          clearTimeout(tID);
+          clearTimeout(tId);
         }, 500);
       }
     }
   }, [refetchWeatherForecast]);
-
-  console.log(data);
 
   return (
     <div className={styles.root}>
@@ -92,6 +93,7 @@ const WeatherMini = (): JSX.Element => {
                 />
               }
               disabled={city.length === 0}
+              loading={isLoading}
             />
           </div>
           <small className={styles.tip}>
@@ -102,11 +104,17 @@ const WeatherMini = (): JSX.Element => {
 
       <Card className={styles.card}>
         {isLoading ? (
-          <div className="card flex justify-content-center">
-            <ProgressSpinner />
-          </div>
+          <ProgressSpinner />
         ) : (
-          <div className={styles.weather}>{data?.location.name}</div>
+          <div>
+            {isError && error instanceof AxiosError ? (
+              <div>{error?.response?.data.error.message}</div>
+            ) : (
+              <div className={styles.weather}>
+                <WeatherMiniWidget data={data?.data} />
+              </div>
+            )}
+          </div>
         )}
       </Card>
     </div>

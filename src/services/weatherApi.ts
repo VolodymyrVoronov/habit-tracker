@@ -1,3 +1,5 @@
+import axios, { AxiosError, AxiosResponse } from "axios";
+
 const API_KEY = "7b49eae9ef3d4a31bfa171753231203&q";
 const API_URL = "https://api.weatherapi.com/v1/";
 
@@ -126,12 +128,12 @@ export interface IWeatherDataResponse {
 
 const getWeatherForecast = async (
   city: string
-): Promise<IWeatherDataResponse> => {
-  const res = await fetch(
+): Promise<AxiosResponse<IWeatherDataResponse, AxiosError>> => {
+  const data = await axios.get(
     `${API_URL}forecast.json?key=${API_KEY}=${city}&days=3`
   );
 
-  return res.json();
+  return data;
 };
 
 export default getWeatherForecast;
