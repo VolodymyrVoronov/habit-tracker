@@ -30,7 +30,7 @@
 }
 
 .card-no-comments {
-  font-family: "Advent Pro", sans-serif;
+  font-family: var(--advent-pro);
   font-size: 18px;
   line-height: 18px;
   font-style: italic;
@@ -54,7 +54,7 @@
 }
 
 .card-comments-title {
-  font-family: "Advent Pro", sans-serif;
+  font-family: var(--advent-pro);
   font-size: 24px;
   line-height: 24px;
 }
@@ -70,7 +70,7 @@
   display: flex;
   align-items: center;
 
-  font-family: "Advent Pro", sans-serif;
+  font-family: var(--advent-pro);
   font-size: 36px;
   line-height: 36px;
 }
@@ -92,13 +92,13 @@
 .progress-text {
   margin-right: 5px;
 
-  font-family: "Advent Pro", sans-serif;
+  font-family: var(--advent-pro);
   font-size: 24px;
   line-height: 24px;
 }
 
 .progress-percent {
-  font-family: "Advent Pro", sans-serif;
+  font-family: var(--advent-pro);
   font-size: 24px;
   line-height: 24px;
 }
@@ -114,7 +114,7 @@
 }
 
 .information {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--poppins);
   font-size: 18px;
   line-height: 18px;
 }
@@ -126,7 +126,7 @@
 }
 
 .text {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--poppins);
   font-size: 18px;
   line-height: 18px;
   text-decoration: underline;

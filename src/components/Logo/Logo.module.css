@@ -12,7 +12,7 @@
 .title {
   margin-top: 10px;
 
-  font-family: "Advent Pro", sans-serif;
+  font-family: var(--advent-pro);
   font-size: 26px;
   line-height: 26px;
   text-align: center;

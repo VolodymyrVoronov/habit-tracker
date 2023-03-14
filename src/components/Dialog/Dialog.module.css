@@ -10,7 +10,7 @@
 }
 
 div.header div {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--poppins);
   font-size: 32px !important;
   line-height: 32px !important;
   font-weight: 500 !important;

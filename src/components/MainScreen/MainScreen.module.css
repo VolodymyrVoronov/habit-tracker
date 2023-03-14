@@ -49,7 +49,7 @@
 }
 
 .no-habit-selected-text {
-  font-family: "Advent Pro", sans-serif;
+  font-family: var(--advent-pro);
   font-size: 36px;
   line-height: 36px;
 }

@@ -21,7 +21,7 @@
   display: flex;
   width: 100%;
 
-  font-family: "Poppins", sans-serif;
+  font-family: var(--poppins);
   font-size: 18px;
   line-height: 26px;
 }

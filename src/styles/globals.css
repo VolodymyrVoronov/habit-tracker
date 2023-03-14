@@ -23,4 +23,7 @@ body {
 :root {
   --white: #ffffff;
   --black: #000000;
+
+  --poppins: "Poppins", sans-serif;
+  --advent-pro: "Advent Pro", sans-serif;
 }
