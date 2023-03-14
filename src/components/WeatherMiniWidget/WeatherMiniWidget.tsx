@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Divider } from "primereact/divider";
@@ -112,4 +112,4 @@ const WeatherMiniWidget = ({ data }: IWeatherMiniWidgetProps): JSX.Element => {
   );
 };
 
-export default WeatherMiniWidget;
+export default memo(WeatherMiniWidget);
