@@ -1,15 +1,15 @@
-import React, { ReactNode } from "react";
+import React, { PropsWithChildren } from "react";
 import { Dialog as D } from "primereact/dialog";
 
 import styles from "./Dialog.module.css";
 
-interface IDialogProps {
-  headerTitle: string;
-  isVisible: boolean;
-  onHideClick: (flag: boolean) => void;
-  footerContent: JSX.Element;
-  children: ReactNode;
-}
+interface IDialogProps
+  extends PropsWithChildren<{
+    headerTitle: string;
+    isVisible: boolean;
+    onHideClick: (flag: boolean) => void;
+    footerContent: JSX.Element;
+  }> {}
 
 const Dialog = ({
   headerTitle = "Header",

@@ -1,11 +1,10 @@
-import { ReactNode } from "react";
+import { PropsWithChildren } from "react";
 import { motion } from "framer-motion";
 
 import styles from "./UserHabitButtons.module.css";
 
-interface IUserHabitButtonsProps {
-  children: ReactNode;
-}
+// eslint-disable-next-line @typescript-eslint/ban-types
+interface IUserHabitButtonsProps extends PropsWithChildren<{}> {}
 
 const UserHabitButtons = ({
   children,

@@ -43,8 +43,12 @@ const WeatherMiniWidget = ({ data }: IWeatherMiniWidgetProps): JSX.Element => {
                 <span className={styles.city}>{data?.location.name}</span>
                 <span className={styles.country}>{data?.location.country}</span>
               </div>
-              <span className={styles.time}>
-                {data?.location.localtime.slice(10)}
+              <span className={styles.date}>
+                {data?.location.localtime
+                  .slice(0, 10)
+                  .split("-")
+                  .reverse()
+                  .join("-")}
               </span>
             </div>
 

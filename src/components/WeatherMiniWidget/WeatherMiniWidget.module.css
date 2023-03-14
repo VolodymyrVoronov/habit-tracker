@@ -25,11 +25,14 @@
   line-height: 20px;
 }
 
-.time {
+.date {
+  min-width: 105px;
+
   font-family: "Advent Pro", sans-serif;
-  font-size: 40px;
-  line-height: 40px;
+  font-size: 22px;
+  line-height: 22px;
   font-weight: 700;
+  text-align: right;
 }
 
 .body {

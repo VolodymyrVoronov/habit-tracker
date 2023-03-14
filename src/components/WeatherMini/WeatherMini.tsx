@@ -23,7 +23,7 @@ import styles from "./WeatherMini.module.css";
 const WeatherMini = (): JSX.Element => {
   const [city, setCity] = useState("");
 
-  const { refetch, data, error, isError, isLoading } = useQuery(
+  const { refetch, data, error, isError, isLoading, isFetching } = useQuery(
     "weatherForecast",
     () => getWeatherForecast(city),
     {
@@ -103,7 +103,7 @@ const WeatherMini = (): JSX.Element => {
       </Card>
 
       <Card className={styles.card}>
-        {isLoading ? (
+        {isLoading || isFetching ? (
           <ProgressSpinner />
         ) : (
           <div>
