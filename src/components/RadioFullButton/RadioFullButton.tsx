@@ -29,7 +29,7 @@ const RadioFullButton = ({
     <motion.button
       onClick={onRadioButtonClick}
       className={cn(styles.root, {
-        [styles["root-active"]]: selectedRadioId === radio.id,
+        [styles["root-active"]]: isPlaying && selectedRadioId === radio.id,
       })}
       type="button"
       initial={{
