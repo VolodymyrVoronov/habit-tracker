@@ -71,7 +71,7 @@
   line-height: 20px;
 }
 
-.humidity {
+.temp {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -79,15 +79,10 @@
   margin-top: 25px;
 }
 
-.temp {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  margin-top: 10px;
-}
-
-.feelslike {
+.humidity,
+.feelslike,
+.wind,
+.wind-direction {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

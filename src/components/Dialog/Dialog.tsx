@@ -3,21 +3,19 @@ import { Dialog as D } from "primereact/dialog";
 
 import styles from "./Dialog.module.css";
 
-interface IDialogProps
-  extends PropsWithChildren<{
-    headerTitle: string;
-    isVisible: boolean;
-    onHideClick: (flag: boolean) => void;
-    footerContent: JSX.Element;
-  }> {}
-
+interface IDialogProps {
+  headerTitle: string;
+  isVisible: boolean;
+  onHideClick: (flag: boolean) => void;
+  footerContent: JSX.Element;
+}
 const Dialog = ({
   headerTitle = "Header",
   isVisible,
   onHideClick,
   footerContent,
   children,
-}: IDialogProps): JSX.Element => {
+}: PropsWithChildren<IDialogProps>): JSX.Element => {
   const onHideButtonClick = () => {
     onHideClick(false);
   };

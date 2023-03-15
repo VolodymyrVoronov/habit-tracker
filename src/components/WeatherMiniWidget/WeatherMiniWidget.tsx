@@ -75,17 +75,6 @@ const WeatherMiniWidget = ({ data }: IWeatherMiniWidgetProps): JSX.Element => {
               <Divider layout="vertical" style={{ marginLeft: 0 }} />
 
               <div className={styles.forecast}>
-                {data?.current.humidity !== undefined && (
-                  <span className={styles.humidity}>
-                    <span>Humidity:</span>
-                    <strong>
-                      <strong>
-                        <span>{data?.current.humidity} %</span>
-                      </strong>
-                    </strong>
-                  </span>
-                )}
-
                 {data?.current.temp_c !== undefined && (
                   <span className={styles.temp}>
                     <span>Temp:</span>
@@ -100,6 +89,35 @@ const WeatherMiniWidget = ({ data }: IWeatherMiniWidgetProps): JSX.Element => {
                     <span>Feels like:</span>
                     <strong>
                       <span>{data?.current.feelslike_c} °C</span>
+                    </strong>
+                  </span>
+                )}
+
+                {data?.current.humidity !== undefined && (
+                  <span className={styles.humidity}>
+                    <span>Humidity:</span>
+                    <strong>
+                      <strong>
+                        <span>{data?.current.humidity} %</span>
+                      </strong>
+                    </strong>
+                  </span>
+                )}
+
+                {data?.current.wind_kph !== undefined && (
+                  <span className={styles.wind}>
+                    <span>Wind:</span>
+                    <strong>
+                      <span>{data?.current.wind_kph} km/h</span>
+                    </strong>
+                  </span>
+                )}
+
+                {data?.current.wind_dir !== undefined && (
+                  <span className={styles["wind-direction"]}>
+                    <span>Wind direction:</span>
+                    <strong>
+                      <span>{data?.current.wind_dir}</span>
                     </strong>
                   </span>
                 )}

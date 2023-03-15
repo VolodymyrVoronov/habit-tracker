@@ -3,12 +3,11 @@ import { motion } from "framer-motion";
 
 import styles from "./UserHabitButtons.module.css";
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-interface IUserHabitButtonsProps extends PropsWithChildren<{}> {}
+interface IUserHabitButtonsProps {}
 
 const UserHabitButtons = ({
   children,
-}: IUserHabitButtonsProps): JSX.Element => {
+}: PropsWithChildren<IUserHabitButtonsProps>): JSX.Element => {
   return (
     <motion.div
       className={styles.root}
