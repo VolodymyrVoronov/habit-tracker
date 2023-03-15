@@ -33,10 +33,12 @@ const Habit = ({
   const { id, habit, habitInformation, target, iconCode, comments } = habitData;
 
   const commentsArray = comments === "" ? 0 : JSON.parse(comments as string);
+
   const habitProgress = useMemo(
     () => countProgress(commentsArray, target),
     [commentsArray, target]
   );
+
   const habitDone = useMemo(
     () => checkLimit(commentsArray, target),
     [commentsArray, target]

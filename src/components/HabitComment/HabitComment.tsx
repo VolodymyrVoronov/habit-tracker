@@ -53,7 +53,9 @@ const HabitComment = ({
       }}
     >
       <p className={styles.comment}>{comment}</p>
+
       <Divider layout="vertical" />
+
       <div className={styles.button}>
         <Button
           onClick={onDeleteButtonClick}
