@@ -1,0 +1,42 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+
+  margin: 3px;
+  padding: 12px 20px;
+
+  border-radius: 25px;
+
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+
+  transition: all 250ms ease-in-out;
+
+  color: var(--black);
+}
+
+.root:hover {
+  background: rgba(255, 255, 255, 0.9);
+
+  cursor: pointer;
+}
+
+.root-active {
+  background: rgba(0, 0, 0, 0.9);
+
+  color: var(--white);
+}
+
+.root-active:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.name {
+  font-family: var(--advent-pro);
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: 2px;
+}

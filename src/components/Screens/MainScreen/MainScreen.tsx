@@ -10,17 +10,17 @@ import uniqid from "uniqid";
 
 import trpc from "@/utils/trpc";
 
-import SideBar from "../SideBar/SideBar";
-import Dialog from "../Dialog/Dialog";
-import HabitIcons from "../HabitIcons/HabitIcons";
-import Form from "../Form/Form";
-import Habit from "../Habit/Habit";
-import RadioMini from "../RadioMini/RadioMini";
-import WeatherMini from "../WeatherMini/WeatherMini";
+import SideBar from "../../SideBar/SideBar";
+import Dialog from "../../Dialog/Dialog";
+import HabitIcons from "../../HabitIcons/HabitIcons";
+import Form from "../../Form/Form";
+import Habit from "../../Habit/Habit";
+import RadioMini from "../../RadioMini/RadioMini";
+import WeatherMini from "../../WeatherMini/WeatherMini";
 
 import styles from "./MainScreen.module.css";
 
-const boxAnimation: Variants = {
+const animationVariants: Variants = {
   initial: {
     opacity: 0,
   },
@@ -364,7 +364,7 @@ const MainScreen = (): JSX.Element => {
         <div className={styles.content}>
           <motion.div
             className={cn(styles.habit, styles["content-box"])}
-            variants={boxAnimation}
+            variants={animationVariants}
             initial="initial"
             animate="animate"
           >
@@ -430,7 +430,7 @@ const MainScreen = (): JSX.Element => {
 
           <motion.div
             className={cn(styles.weather, styles["content-box"])}
-            variants={boxAnimation}
+            variants={animationVariants}
             initial="initial"
             animate="animate"
           >
@@ -439,7 +439,7 @@ const MainScreen = (): JSX.Element => {
 
           <motion.div
             className={cn(styles.radio, styles["content-box"])}
-            variants={boxAnimation}
+            variants={animationVariants}
             initial="initial"
             animate="animate"
           >
