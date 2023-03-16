@@ -2,9 +2,9 @@ import React from "react";
 import cn from "classnames";
 import { motion } from "framer-motion";
 
-import styles from "./RadioFullButton.module.css";
+import styles from "./RadioFullStation.module.css";
 
-interface IRadioFullButtonProps {
+interface IRadioFullStationProps {
   radio: {
     id: string;
     name: string;
@@ -15,12 +15,12 @@ interface IRadioFullButtonProps {
   onRadioClick: (radio: { id: string; name: string; stream: string }) => void;
 }
 
-const RadioFullButton = ({
+const RadioFullStation = ({
   radio,
   selectedRadioId,
   isPlaying,
   onRadioClick,
-}: IRadioFullButtonProps): JSX.Element => {
+}: IRadioFullStationProps): JSX.Element => {
   const onRadioButtonClick = (): void => {
     onRadioClick(radio);
   };
@@ -50,7 +50,10 @@ const RadioFullButton = ({
       {isPlaying && selectedRadioId === radio.id && (
         <motion.i
           className="pi pi-circle-fill"
-          style={{ fontSize: "1.25rem", color: "tomato" }}
+          style={{
+            fontSize: "1.25rem",
+            color: "crimson",
+          }}
           animate={{ opacity: [0, 1, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         />
@@ -59,4 +62,4 @@ const RadioFullButton = ({
   );
 };
 
-export default RadioFullButton;
+export default RadioFullStation;

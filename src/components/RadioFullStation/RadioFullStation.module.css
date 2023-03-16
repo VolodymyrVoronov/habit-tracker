@@ -11,7 +11,7 @@
   border-radius: 25px;
 
   border: none;
-  background: rgba(255, 255, 255, 0.5);
+  background: #c7d2febb;
 
   transition: all 250ms ease-in-out;
 
@@ -19,19 +19,19 @@
 }
 
 .root:hover {
-  background: rgba(255, 255, 255, 0.9);
+  background: #c7d2fe;
 
   cursor: pointer;
 }
 
 .root-active {
-  background: rgba(0, 0, 0, 0.9);
+  background: #748ffc;
 
   color: var(--white);
 }
 
 .root-active:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: #8da3fc;
 }
 
 .name {

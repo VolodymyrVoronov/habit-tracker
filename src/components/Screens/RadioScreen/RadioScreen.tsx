@@ -1,7 +1,9 @@
-import React from "react";
-import { AnimatePresence, Variants, motion } from "framer-motion";
+import React, { useState } from "react";
+import { ToggleButton } from "primereact/togglebutton";
+import { Variants, motion } from "framer-motion";
 import cn from "classnames";
 
+import RadioFullStations from "@/components/RadioFullStations/RadioFullStations";
 import RadioFullButtons from "@/components/RadioFullButtons/RadioFullButtons";
 
 import styles from "./RadioScreen.module.css";
@@ -20,23 +22,39 @@ const animationVariants: Variants = {
 };
 
 const RadioScreen = (): JSX.Element => {
+  const [cool, setCool] = useState(false);
+
+  const onCoolButtonClick = (): void => {
+    setCool(!cool);
+  };
+
   return (
-    <motion.div
-      className={styles.root}
-      variants={animationVariants}
-      initial="initial"
-      animate="animate"
-    >
-      <div className={cn(styles.box, styles.buttons)}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et neque
-        dignissimos, at obcaecati culpa libero voluptate. Amet, ut dicta facere
-        nulla quaerat cupiditate sunt, ab et incidunt consequatur, eligendi
-        culpa?
+    <>
+      <motion.div
+        className={cn(styles.root, {
+          [styles["root-cool"]]: cool,
+        })}
+        variants={animationVariants}
+        initial="initial"
+        animate="animate"
+      >
+        <div className={cn(styles.box, styles.buttons)}>
+          <RadioFullButtons />
+        </div>
+        <div className={cn(styles.box, styles.stations)}>
+          <RadioFullStations />
+        </div>
+      </motion.div>
+
+      <div className={styles["cool-button"]}>
+        <ToggleButton
+          checked={cool}
+          onChange={onCoolButtonClick}
+          offLabel="Cool"
+          onLabel="Not cool"
+        />
       </div>
-      <div className={cn(styles.box, styles.radios)}>
-        <RadioFullButtons />
-      </div>
-    </motion.div>
+    </>
   );
 };
 
