@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { ToggleButton } from "primereact/togglebutton";
-import { Variants, motion } from "framer-motion";
+import { Variants, motion, AnimatePresence } from "framer-motion";
 import cn from "classnames";
+
+import { useRadioGlobalState } from "@/state/radioGlobalState";
 
 import RadioFullStations from "@/components/RadioFullStations/RadioFullStations";
 import RadioFullButtons from "@/components/RadioFullButtons/RadioFullButtons";
@@ -22,38 +24,100 @@ const animationVariants: Variants = {
 };
 
 const RadioScreen = (): JSX.Element => {
-  const [cool, setCool] = useState(false);
+  const { getPlaying, getCoolMode, setCoolMode } = useRadioGlobalState();
 
   const onCoolButtonClick = (): void => {
-    setCool(!cool);
+    setCoolMode(!getCoolMode());
   };
 
   return (
     <>
       <motion.div
-        className={cn(styles.root, {
-          [styles["root-cool"]]: cool,
-        })}
+        className={styles.root}
         variants={animationVariants}
         initial="initial"
         animate="animate"
       >
-        <div className={cn(styles.box, styles.buttons)}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={String(getPlaying()) + String(getCoolMode())}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+              transition: {
+                duration: 0.25,
+              },
+            }}
+            exit={{
+              opacity: 0,
+              transition: {
+                duration: 0.5,
+              },
+            }}
+          >
+            {getCoolMode() && getPlaying() && (
+              <div
+                className={cn({
+                  [styles["root-cool"]]: getCoolMode() && getPlaying(),
+                })}
+              >
+                <div className={styles.wave} />
+                <div className={styles.wave} />
+                <div className={styles.wave} />
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        <div
+          className={cn(styles.box, styles.buttons, {
+            [styles["buttons-cool"]]: getCoolMode() && getPlaying(),
+          })}
+        >
           <RadioFullButtons />
         </div>
-        <div className={cn(styles.box, styles.stations)}>
+        <div
+          className={cn(styles.box, styles.stations, {
+            [styles["stations-cool"]]: getCoolMode() && getPlaying(),
+          })}
+        >
           <RadioFullStations />
         </div>
       </motion.div>
 
-      <div className={styles["cool-button"]}>
-        <ToggleButton
-          checked={cool}
-          onChange={onCoolButtonClick}
-          offLabel="Cool"
-          onLabel="Not cool"
-        />
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={String(getPlaying())}
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+            transition: {
+              duration: 0.25,
+            },
+          }}
+          exit={{
+            opacity: 0,
+            transition: {
+              duration: 0.5,
+            },
+          }}
+        >
+          {getPlaying() && (
+            <div className={styles["cool-button"]}>
+              <ToggleButton
+                checked={getCoolMode()}
+                onChange={onCoolButtonClick}
+                offLabel="Cool"
+                onLabel="Not cool"
+              />
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 };

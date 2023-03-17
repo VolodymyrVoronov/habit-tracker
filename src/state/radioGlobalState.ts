@@ -10,6 +10,7 @@ export interface IRadioState {
   radio: IRadio;
   playing: boolean;
   muted: boolean;
+  coolMode: boolean;
 }
 
 const initialState = hookstate({
@@ -20,6 +21,7 @@ const initialState = hookstate({
   },
   playing: false,
   muted: false,
+  coolMode: false,
 });
 
 export const useRadioGlobalState = () => {
@@ -29,6 +31,7 @@ export const useRadioGlobalState = () => {
     getRadio: () => state.radio.value,
     getPlaying: () => state.playing.value,
     getMuted: () => state.muted.value,
+    getCoolMode: () => state.coolMode.value,
     setRadio: (radio: IRadio) => {
       state.radio.set({
         id: radio.id,
@@ -41,6 +44,9 @@ export const useRadioGlobalState = () => {
     },
     setMuted: (flag: boolean) => {
       state.muted.set(flag);
+    },
+    setCoolMode: (flag: boolean) => {
+      state.coolMode.set(flag);
     },
   };
 };
