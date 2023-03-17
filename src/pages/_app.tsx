@@ -66,7 +66,7 @@ const App: AppType = ({
 };
 
 export default withTRPC<ServerRouter>({
-  config({ ctx }) {
+  config({ ctx }: { ctx?: NextPageContext }) {
     const url = "http://localhost:3000/api/trpc";
 
     return { url };
