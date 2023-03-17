@@ -1,3 +1,4 @@
+import { AppProps } from "next/app";
 import { withTRPC } from "@trpc/next";
 import { motion } from "framer-motion";
 import ReactHowler from "react-howler";
@@ -27,8 +28,8 @@ const App: AppType = ({
   Component,
   pageProps,
 }: {
-  Component: NextComponentType<NextPageContext, any, object>;
-  pageProps: any;
+  Component: NextComponentType<NextPageContext, object, object>;
+  pageProps: AppProps;
 }) => {
   const { getRadio, getPlaying, getMuted } = useRadioGlobalState();
 
