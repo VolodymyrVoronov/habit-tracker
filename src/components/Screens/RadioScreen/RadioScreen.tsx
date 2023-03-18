@@ -112,7 +112,7 @@ const RadioScreen = (): JSX.Element => {
                 checked={getCoolMode()}
                 onChange={onCoolButtonClick}
                 offLabel="Cool"
-                onLabel="Not cool"
+                onLabel="Usual"
               />
             </div>
           )}
