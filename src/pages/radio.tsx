@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { NextPage } from "next";
 
-import RadioScreen from "@/components/screens/RadioScreen/RadioScreen";
+import RadioScreen from "@/screens/RadioScreen/RadioScreen";
 
 const Radio: NextPage = (): JSX.Element => {
   return (

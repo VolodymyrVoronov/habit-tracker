@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { NextPage } from "next";
 
-import WeatherScreen from "@/components/screens/WeatherScreen/WeatherScreen";
+import WeatherScreen from "@/screens/WeatherScreen/WeatherScreen";
 
 const Weather: NextPage = (): JSX.Element => {
   return (

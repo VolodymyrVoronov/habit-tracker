@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
 
-import MainScreen from "@/components/screens/MainScreen/MainScreen";
+import MainScreen from "@/screens/MainScreen/MainScreen";
 
 const Home: NextPage = (): JSX.Element => {
   return (
