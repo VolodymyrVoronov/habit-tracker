@@ -1,7 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import Image from "next/image";
 
 import { IForecastDay } from "@/services/weatherApi";
+
+import WeatherForecastParameter from "../WeatherForecastParameter/WeatherForecastParameter";
 
 import styles from "./WeatherWidgetFull.module.css";
 
@@ -39,47 +41,39 @@ const WeatherWidgetFull = ({ data }: IWeatherWidgetFullProps): JSX.Element => {
         <div className={styles.forecast}>
           <div className={styles.temp}>
             {data?.day.mintemp_c !== undefined && (
-              <span>
-                <span>Min temp:</span>
-
-                <strong>
-                  <span> {data?.day.mintemp_c} °C</span>
-                </strong>
-              </span>
+              <WeatherForecastParameter
+                parValue={data?.day.mintemp_c}
+                parTitle="Min temp:"
+                parType="°C"
+              />
             )}
 
             {data?.day.maxtemp_f !== undefined && (
-              <span>
-                <span>Max temp:</span>
-
-                <strong>
-                  <span> {data?.day.maxtemp_c} °C</span>
-                </strong>
-              </span>
+              <WeatherForecastParameter
+                parValue={data?.day.maxtemp_c}
+                parTitle="Max temp:"
+                parType="°C"
+              />
             )}
           </div>
 
           <div className={styles.wind}>
             {data?.day.maxtemp_f !== undefined && (
-              <span>
-                <span>Max wind:</span>
-
-                <strong>
-                  <span> {data?.day.maxwind_kph} km/h</span>
-                </strong>
-              </span>
+              <WeatherForecastParameter
+                parValue={data?.day.maxwind_kph}
+                parTitle="Max wind:"
+                parType="km/h"
+              />
             )}
           </div>
 
           <div className={styles.humidity}>
             {data?.day.avghumidity !== undefined && (
-              <span>
-                <span>Humidity:</span>
-
-                <strong>
-                  <span> {data?.day.avghumidity} %</span>
-                </strong>
-              </span>
+              <WeatherForecastParameter
+                parValue={data?.day.avghumidity}
+                parTitle="Humidity:"
+                parType="%"
+              />
             )}
           </div>
         </div>
@@ -88,4 +82,4 @@ const WeatherWidgetFull = ({ data }: IWeatherWidgetFullProps): JSX.Element => {
   );
 };
 
-export default WeatherWidgetFull;
+export default memo(WeatherWidgetFull);

@@ -5,6 +5,8 @@ import { Divider } from "primereact/divider";
 
 import { IWeatherDataResponse } from "@/services/weatherApi";
 
+import WeatherForecastParameter from "../WeatherForecastParameter/WeatherForecastParameter";
+
 import styles from "./WeatherWidgetMini.module.css";
 
 interface IWeatherWidgetMiniProps {
@@ -76,50 +78,47 @@ const WeatherWidgetMini = ({ data }: IWeatherWidgetMiniProps): JSX.Element => {
 
               <div className={styles.forecast}>
                 {data?.current.temp_c !== undefined && (
-                  <span className={styles.temp}>
-                    <span>Temp:</span>
-                    <strong>
-                      <span>{data?.current.temp_c} °C</span>
-                    </strong>
-                  </span>
+                  <WeatherForecastParameter
+                    className={styles.temp}
+                    parValue={data?.current.temp_c}
+                    parTitle="Temp:"
+                    parType="°C"
+                  />
                 )}
 
                 {data?.current.feelslike_c !== undefined && (
-                  <span className={styles.feelslike}>
-                    <span>Feels like:</span>
-                    <strong>
-                      <span>{data?.current.feelslike_c} °C</span>
-                    </strong>
-                  </span>
+                  <WeatherForecastParameter
+                    className={styles.feelslike}
+                    parValue={data?.current.feelslike_c}
+                    parTitle="Feels like:"
+                    parType="°C"
+                  />
                 )}
 
                 {data?.current.humidity !== undefined && (
-                  <span className={styles.humidity}>
-                    <span>Humidity:</span>
-                    <strong>
-                      <strong>
-                        <span>{data?.current.humidity} %</span>
-                      </strong>
-                    </strong>
-                  </span>
+                  <WeatherForecastParameter
+                    className={styles.humidity}
+                    parValue={data?.current.humidity}
+                    parTitle="Humidity:"
+                    parType="%"
+                  />
                 )}
 
                 {data?.current.wind_kph !== undefined && (
-                  <span className={styles.wind}>
-                    <span>Wind:</span>
-                    <strong>
-                      <span>{data?.current.wind_kph} km/h</span>
-                    </strong>
-                  </span>
+                  <WeatherForecastParameter
+                    className={styles.wind}
+                    parValue={data?.current.wind_kph}
+                    parTitle="Wind:"
+                    parType="km/h"
+                  />
                 )}
 
                 {data?.current.wind_dir !== undefined && (
-                  <span className={styles["wind-direction"]}>
-                    <span>Wind direction:</span>
-                    <strong>
-                      <span>{data?.current.wind_dir}</span>
-                    </strong>
-                  </span>
+                  <WeatherForecastParameter
+                    className={styles["wind-direction"]}
+                    parValue={data?.current.wind_dir}
+                    parTitle="Wind direction:"
+                  />
                 )}
               </div>
             </div>
