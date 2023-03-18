@@ -5,13 +5,13 @@ import { Divider } from "primereact/divider";
 
 import { IWeatherDataResponse } from "@/services/weatherApi";
 
-import styles from "./WeatherMiniWidget.module.css";
+import styles from "./WeatherWidgetMini.module.css";
 
-interface IWeatherMiniWidgetProps {
+interface IWeatherWidgetMiniProps {
   data?: IWeatherDataResponse;
 }
 
-const WeatherMiniWidget = ({ data }: IWeatherMiniWidgetProps): JSX.Element => {
+const WeatherWidgetMini = ({ data }: IWeatherWidgetMiniProps): JSX.Element => {
   const myImageLoader = (): string => {
     return `https://${data?.current.condition.icon.slice(2)}`;
   };
@@ -130,4 +130,4 @@ const WeatherMiniWidget = ({ data }: IWeatherMiniWidgetProps): JSX.Element => {
   );
 };
 
-export default memo(WeatherMiniWidget);
+export default memo(WeatherWidgetMini);

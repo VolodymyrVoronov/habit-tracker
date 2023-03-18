@@ -1,0 +1,25 @@
+.root {
+  z-index: 100;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 1200px;
+  height: calc(100vh - 100px);
+
+  margin: 0 auto;
+  padding: 100px 0;
+
+  overflow: hidden;
+}
+
+.forecast {
+  display: flex;
+  flex-direction: row;
+  /* flex-grow: 1; */
+
+  border-radius: 25px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}

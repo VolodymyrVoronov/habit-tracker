@@ -1,23 +1,31 @@
-import React, {
-  ChangeEvent,
-  memo,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { Card } from "primereact/card";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { Variants, motion, AnimatePresence } from "framer-motion";
+import cn from "classnames";
 
 import getWeatherForecast from "@/services/weatherApi";
 
-import WeatherWidgetMini from "@/components/WeatherWidgetMini/WeatherWidgetMini";
 import WeatherSearch from "@/components/WeatherSearch/WeatherSearch";
 
-import styles from "./WeatherMini.module.css";
+import styles from "./WeatherScreen.module.css";
 
-const WeatherMini = (): JSX.Element => {
+const animationVariants: Variants = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeIn",
+    },
+  },
+};
+
+const WeatherScreen = (): JSX.Element => {
   const [city, setCity] = useState("");
 
   const { refetch, data, error, isError, isLoading, isFetching } = useQuery(
@@ -63,7 +71,12 @@ const WeatherMini = (): JSX.Element => {
   }, [refetchWeatherForecast]);
 
   return (
-    <div className={styles.root}>
+    <motion.div
+      className={styles.root}
+      variants={animationVariants}
+      initial="initial"
+      animate="animate"
+    >
       <WeatherSearch
         city={city}
         isLoading={isLoading || isFetching}
@@ -71,7 +84,7 @@ const WeatherMini = (): JSX.Element => {
         onSearchClick={onSearchButtonClick}
       />
 
-      <Card className={styles.card}>
+      <Card className={styles.forecast}>
         {isLoading || isFetching ? (
           <ProgressSpinner />
         ) : (
@@ -79,15 +92,13 @@ const WeatherMini = (): JSX.Element => {
             {isError && error instanceof AxiosError ? (
               <div>{error?.response?.data.error.message}</div>
             ) : (
-              <div className={styles.weather}>
-                <WeatherWidgetMini data={data?.data} />
-              </div>
+              <div className={styles.weather}>{data?.data.current.cloud}</div>
             )}
           </div>
         )}
       </Card>
-    </div>
+    </motion.div>
   );
 };
 
-export default memo(WeatherMini);
+export default WeatherScreen;
