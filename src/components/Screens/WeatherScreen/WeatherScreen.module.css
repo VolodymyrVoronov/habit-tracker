@@ -17,7 +17,7 @@
 .forecast {
   display: flex;
   flex-direction: row;
-  /* flex-grow: 1; */
+  flex-grow: 1;
 
   border-radius: 25px;
   border-top-left-radius: 0px;

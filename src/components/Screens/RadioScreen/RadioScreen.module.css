@@ -6,11 +6,12 @@
   gap: 10px;
 
   width: 1200px;
+  height: 100vh;
 
   margin: 0 auto;
-  padding: 150px 0;
+  padding: 150px 0 200px 0;
 
-  overflow: hidden;
+  overflow: auto;
 }
 
 .root-cool {
