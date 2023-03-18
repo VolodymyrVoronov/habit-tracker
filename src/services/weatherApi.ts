@@ -113,7 +113,9 @@ export interface IWeatherDataResponse {
     wind_kph: number;
     wind_mph: number;
   };
-  forecast: IForecastDay[];
+  forecast: {
+    forecastday: IForecastDay[];
+  };
   location: {
     country: string;
     lat: number;

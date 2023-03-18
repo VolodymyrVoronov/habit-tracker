@@ -1,0 +1,63 @@
+.root {
+  display: flex;
+  flex-direction: column;
+
+  border-right: 1px solid #dee2e6;
+}
+
+.root:last-child {
+  border-right: none;
+}
+
+.date {
+  font-family: var(--advent-pro);
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.condition {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  margin-top: 10px;
+}
+
+.condition-text {
+  display: flex;
+
+  font-family: var(--poppins);
+  font-size: 14px;
+  line-height: 14px;
+  font-style: italic;
+}
+
+.forecast {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  padding: 0 30px;
+
+  font-family: var(--poppins);
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.temp,
+.wind,
+.humidity {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-top: 35px;
+}
+
+.wind,
+.humidity {
+  justify-content: center;
+}

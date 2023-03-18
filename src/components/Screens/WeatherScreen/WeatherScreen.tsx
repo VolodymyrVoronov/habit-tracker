@@ -3,14 +3,15 @@ import { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { Card } from "primereact/card";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { Divider } from "primereact/divider";
 import { Variants, motion, AnimatePresence } from "framer-motion";
-import cn from "classnames";
 
 import getWeatherForecast from "@/services/weatherApi";
 
 import WeatherSearch from "@/components/WeatherSearch/WeatherSearch";
 
 import styles from "./WeatherScreen.module.css";
+import WeatherWidgetFull from "@/components/WeatherWidgetFull/WeatherWidgetFull";
 
 const animationVariants: Variants = {
   initial: {
@@ -84,19 +85,76 @@ const WeatherScreen = (): JSX.Element => {
         onSearchClick={onSearchButtonClick}
       />
 
-      <Card className={styles.forecast}>
-        {isLoading || isFetching ? (
-          <ProgressSpinner />
-        ) : (
-          <div>
-            {isError && error instanceof AxiosError ? (
-              <div>{error?.response?.data.error.message}</div>
-            ) : (
-              <div className={styles.weather}>{data?.data.current.cloud}</div>
-            )}
-          </div>
+      <AnimatePresence mode="wait">
+        {data && (
+          <motion.div
+            key={
+              data?.data.location.name || data?.data.location.localtime_epoch
+            }
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+              transition: {
+                delay: 0.75,
+                duration: 1,
+              },
+            }}
+            exit={{
+              opacity: 0,
+              transition: {
+                duration: 1,
+              },
+            }}
+          >
+            <Card className={styles.forecast}>
+              {isLoading || isFetching ? (
+                <ProgressSpinner style={{ display: "inherit" }} />
+              ) : (
+                <div>
+                  {isError && error instanceof AxiosError ? (
+                    <div>{error?.response?.data.error.message}</div>
+                  ) : (
+                    <>
+                      <div className={styles.place}>
+                        <div className={styles.location}>
+                          <span className={styles.city}>
+                            {data?.data.location.name}
+                          </span>
+                          <span className={styles.country}>
+                            {data?.data.location.country}
+                          </span>
+                        </div>
+                        <div className={styles.location}>
+                          <span className={styles.date}>
+                            {data?.data.location.localtime
+                              .slice(0, 10)
+                              .split("-")
+                              .reverse()
+                              .join("-")}
+                          </span>
+                          <span className={styles.region}>
+                            {data?.data.location.region}
+                          </span>
+                        </div>
+                      </div>
+
+                      <Divider />
+
+                      <div className={styles.days}>
+                        {data?.data.forecast.forecastday.map((d) => {
+                          return <WeatherWidgetFull key={d.date} data={d} />;
+                        })}
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+            </Card>
+          </motion.div>
         )}
-      </Card>
+      </AnimatePresence>
     </motion.div>
   );
 };
