@@ -10,13 +10,13 @@ import uniqid from "uniqid";
 
 import trpc from "@/utils/trpc";
 
-import SideBar from "../../SideBar/SideBar";
-import Dialog from "../../Dialog/Dialog";
-import HabitIcons from "../../HabitIcons/HabitIcons";
-import Form from "../../Form/Form";
-import Habit from "../../Habit/Habit";
-import RadioMini from "../../RadioMini/RadioMini";
-import WeatherMini from "../../WeatherMini/WeatherMini";
+import SideBar from "@/components/SideBar/SideBar";
+import Dialog from "@/components/Dialog/Dialog";
+import HabitIcons from "@/components/HabitIcons/HabitIcons";
+import Form from "@/components/Form/Form";
+import Habit from "@/components/Habit/Habit";
+import RadioMini from "@/components/RadioMini/RadioMini";
+import WeatherMini from "@/components/WeatherMini/WeatherMini";
 
 import styles from "./MainScreen.module.css";
 

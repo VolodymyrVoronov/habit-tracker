@@ -16,7 +16,7 @@ import cn from "classnames";
 
 import getWeatherForecast from "@/services/weatherApi";
 
-import WeatherMiniWidget from "../WeatherMiniWidget/WeatherMiniWidget";
+import WeatherMiniWidget from "@/components/WeatherMiniWidget/WeatherMiniWidget";
 
 import styles from "./WeatherMini.module.css";
 

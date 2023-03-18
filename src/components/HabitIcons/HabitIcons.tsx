@@ -7,7 +7,7 @@ import cn from "classnames";
 
 import habitIcons from "@/constants/habitIcons";
 
-import HabitIcon from "../HabitIcon/HabitIcon";
+import HabitIcon from "@/components/HabitIcon/HabitIcon";
 
 import styles from "./HabitIcons.module.css";
 
