@@ -4,7 +4,7 @@ import { Dialog as D } from "primereact/dialog";
 import styles from "./Dialog.module.css";
 
 interface IDialogProps {
-  headerTitle: string;
+  headerTitle: string | JSX.Element;
   isVisible: boolean;
   onHideClick: (flag: boolean) => void;
   footerContent: JSX.Element;

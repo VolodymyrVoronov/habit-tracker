@@ -1,10 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Variants, motion, LayoutGroup } from "framer-motion";
+import Image from "next/image";
+import { Variants, motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { Dialog } from "primereact/dialog";
+import { ProgressBar } from "primereact/progressbar";
+import { Button } from "primereact/button";
+
 import trpc from "@/utils/trpc";
 
 import HabitCardMini from "@/components/HabitCardMini/HabitCardMini";
+import HabitModal from "@/components/HabitModal/HabitModal";
 
 import styles from "./HabitsScreen.module.css";
 
@@ -22,6 +26,7 @@ const animationVariants: Variants = {
 };
 
 const HabitsScreen = (): JSX.Element => {
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedHabit, setSelectedHabit] = useState<number>(0);
 
   const {
@@ -79,55 +84,108 @@ const HabitsScreen = (): JSX.Element => {
     () =>
       (id: number): void => {
         setSelectedHabit(id);
+        setDialogOpen(true);
       },
     [setSelectedHabit]
   );
 
+  const onCloseDialogButtonClick = (flag: boolean): void => {
+    setDialogOpen(flag);
+  };
+
   console.log(habitData);
 
   return (
-    <motion.div
-      className={styles.root}
-      variants={animationVariants}
-      initial="initial"
-      animate="animate"
-    >
-      <ConfirmDialog />
+    <>
+      {(isLoadingFetchHabits ||
+        isLoadingFetchHabit ||
+        isLoadingDeleteHabit) && (
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={String(
+              isLoadingFetchHabits ||
+                isLoadingFetchHabit ||
+                isLoadingDeleteHabit
+            )}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+              transition: {
+                duration: 1,
+                delay: 0.5,
+              },
+            }}
+          >
+            <ProgressBar
+              mode="indeterminate"
+              style={{
+                position: "absolute",
+                zIndex: 999,
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "7px",
+                borderRadius: 0,
+              }}
+              color="#059bb4"
+            />
+          </motion.div>
+        </AnimatePresence>
+      )}
 
-      <div className={styles.cards}>
-        <LayoutGroup>
-          {!isLoadingFetchHabits &&
-            !isErrorFetchHabits &&
-            habits &&
-            habits.map((habit, i) => {
-              return (
-                <motion.div
-                  layout
-                  key={habit.id}
-                  initial={{
-                    y: -100,
-                    opacity: 0,
-                  }}
-                  animate={{
-                    y: 0,
-                    opacity: 1,
-                    transition: {
-                      duration: 0.5,
-                      delay: i * 0.2,
-                    },
-                  }}
-                >
-                  <HabitCardMini
-                    habitData={habit}
-                    onCardClick={onCardClick}
-                    onDeleteClick={onDeleteHabitButtonClick}
-                  />
-                </motion.div>
-              );
-            })}
-        </LayoutGroup>
-      </div>
-    </motion.div>
+      {!isLoadingFetchHabit && habitData && (
+        <HabitModal
+          habitData={habitData}
+          dialogOpen={dialogOpen}
+          onCloseClick={onCloseDialogButtonClick}
+        />
+      )}
+
+      <motion.div
+        className={styles.root}
+        variants={animationVariants}
+        initial="initial"
+        animate="animate"
+      >
+        <ConfirmDialog />
+
+        <div className={styles.cards}>
+          <LayoutGroup>
+            {!isLoadingFetchHabits &&
+              !isErrorFetchHabits &&
+              habits &&
+              habits.map((habit, i) => {
+                return (
+                  <motion.div
+                    layout
+                    key={habit.id}
+                    initial={{
+                      y: -100,
+                      opacity: 0,
+                    }}
+                    animate={{
+                      y: 0,
+                      opacity: 1,
+                      transition: {
+                        duration: 0.5,
+                        delay: i * 0.2,
+                      },
+                    }}
+                  >
+                    <HabitCardMini
+                      habitData={habit}
+                      onCardClick={onCardClick}
+                      onDeleteClick={onDeleteHabitButtonClick}
+                    />
+                  </motion.div>
+                );
+              })}
+          </LayoutGroup>
+        </div>
+      </motion.div>
+    </>
   );
 };
 
