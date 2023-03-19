@@ -1,0 +1,35 @@
+.root {
+  z-index: 100;
+  overflow: hidden;
+
+  display: flex;
+  gap: 10px;
+
+  width: 1200px;
+  height: calc(100vh - 100px);
+
+  margin: 0 auto;
+  padding: 100px 0;
+}
+
+.cards {
+  overflow: auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-content: flex-start;
+  gap: 10px;
+
+  width: 100%;
+}
+
+.cards::-webkit-scrollbar {
+  width: 16px;
+}
+
+.cards::-webkit-scrollbar-thumb {
+  background-color: #8e94eedc;
+  border: 4px solid transparent;
+  background-clip: padding-box;
+  border-radius: 8px;
+}
