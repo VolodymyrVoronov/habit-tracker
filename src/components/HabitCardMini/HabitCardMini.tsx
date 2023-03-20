@@ -8,6 +8,7 @@ import { Button } from "primereact/button";
 import { Habit as HTypes } from "@prisma/client";
 
 import countProgress from "@/helpers/countProgress";
+import checkLimit from "@/helpers/checkLimit";
 
 import styles from "./HabitCardMini.module.css";
 
@@ -28,6 +29,11 @@ const HabitCardMini = ({
 
   const habitProgress = useMemo(
     () => countProgress(commentsArray, target),
+    [commentsArray, target]
+  );
+
+  const habitDone = useMemo(
+    () => checkLimit(commentsArray, target),
     [commentsArray, target]
   );
 
@@ -65,6 +71,7 @@ const HabitCardMini = ({
 
           <span className={styles.target}>
             Day {commentsArray && commentsArray.length} of {target}
+            {habitDone && <span>{habitDone && "Achieved 🔥🎉"}</span>}
           </span>
 
           <div className={styles["progress-bar"]}>

@@ -75,6 +75,7 @@
 
 .target {
   display: flex;
+  justify-content: space-between;
 
   font-family: var(--poppins);
   font-size: 18px;
