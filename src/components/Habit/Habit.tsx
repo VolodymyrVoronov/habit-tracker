@@ -154,6 +154,7 @@ const Habit = ({
         footer={
           <div className={styles.footer}>
             {habitDone && <span className={styles.text}>Target achieved!</span>}
+
             <Button
               onClick={onDeleteHabitButtonClick}
               className={styles.button}

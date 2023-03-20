@@ -1,14 +1,14 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
+import { LayoutGroup, motion } from "framer-motion";
 import { ProgressBar } from "primereact/progressbar";
 import { Button } from "primereact/button";
 import { Habit } from "@prisma/client";
 import { Divider } from "primereact/divider";
+import { Dialog } from "primereact/dialog";
 
 import checkLimit from "@/helpers/checkLimit";
 import countProgress from "@/helpers/countProgress";
-
-import Dialog from "@/components/Dialog/Dialog";
 
 import styles from "./HabitModal.module.css";
 
@@ -23,7 +23,7 @@ const HabitModal = ({
   dialogOpen,
   onCloseClick,
 }: IHabitModalProps): JSX.Element => {
-  const { id, habit, habitInformation, target, iconCode, comments } = habitData;
+  const { target, comments } = habitData;
 
   const commentsArray = comments === "" ? 0 : JSON.parse(comments as string);
 
@@ -37,15 +37,13 @@ const HabitModal = ({
     [commentsArray, target]
   );
 
-  const [comment, setComment] = useState("");
-
   return (
     <Dialog
-      headerTitle={
+      className={styles.modal}
+      header={
         <div className={styles["modal-header"]}>
           <h2 className={styles["modal-title"]}>
             {habitData.habit}
-
             {habitData.iconCode && (
               <span className={styles["modal-icon"]}>
                 <Image
@@ -62,6 +60,11 @@ const HabitModal = ({
           <div className={styles["header-progress"]}>
             <span className={styles["header-target"]}>
               Day {commentsArray && commentsArray.length} of {habitData.target}
+              {habitDone && (
+                <span className={styles["header-target-done"]}>
+                  {habitDone && "Achieved 🔥🎉"}
+                </span>
+              )}
             </span>
 
             <Divider layout="vertical" />
@@ -74,9 +77,9 @@ const HabitModal = ({
           <Divider />
         </div>
       }
-      isVisible={dialogOpen}
-      onHideClick={() => onCloseClick(false)}
-      footerContent={
+      visible={dialogOpen}
+      onHide={() => onCloseClick(false)}
+      footer={
         <Button
           label="Cancel"
           severity="secondary"
@@ -88,7 +91,42 @@ const HabitModal = ({
         />
       }
     >
-      Dialog
+      <div className={styles.comments}>
+        {commentsArray !== 0 && (
+          <LayoutGroup>
+            {commentsArray
+              .reverse()
+              .map((c: { id: string; comment: string }, i: number) => {
+                const { id: commentId, comment: commentString } = c;
+                return (
+                  <motion.div
+                    key={commentId}
+                    layout
+                    initial={{
+                      x: -100,
+                      opacity: 0,
+                    }}
+                    animate={{
+                      x: 0,
+                      opacity: 1,
+                      transition: {
+                        duration: 0.5,
+                        delay: i * 0.2,
+                      },
+                    }}
+                    className={styles.comment}
+                  >
+                    {commentString}
+                  </motion.div>
+                );
+              })}
+          </LayoutGroup>
+        )}
+
+        {(commentsArray === 0 || commentsArray.length === 0) && (
+          <span className={styles["no-comments"]}>No comments yet.</span>
+        )}
+      </div>
     </Dialog>
   );
 };

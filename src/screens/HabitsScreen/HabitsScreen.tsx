@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Variants, motion, LayoutGroup, AnimatePresence } from "framer-motion";
+import { Toast } from "primereact/toast";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { ProgressBar } from "primereact/progressbar";
-import { Button } from "primereact/button";
 
 import trpc from "@/utils/trpc";
 
@@ -26,6 +25,8 @@ const animationVariants: Variants = {
 };
 
 const HabitsScreen = (): JSX.Element => {
+  const toast = useRef<Toast>(null);
+
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedHabit, setSelectedHabit] = useState<number>(0);
 
@@ -50,9 +51,7 @@ const HabitsScreen = (): JSX.Element => {
 
   const {
     data: habitData,
-    refetch: refetchHabit,
     isLoading: isLoadingFetchHabit,
-    isSuccess: isSuccessFetchHabit,
     isError: isErrorFetchHabit,
     error: errorFetchHabit,
   } = trpc.useQuery(["findHabitById", { id: selectedHabit }], {
@@ -93,10 +92,35 @@ const HabitsScreen = (): JSX.Element => {
     setDialogOpen(flag);
   };
 
-  console.log(habitData);
+  useEffect(() => {
+    if (
+      toast.current &&
+      (isErrorFetchHabits || isErrorFetchHabit || isErrorDeleteHabit)
+    ) {
+      toast.current?.show({
+        severity: "error",
+        summary: "Error occurred",
+        detail:
+          errorFetchHabits?.message ||
+          errorFetchHabit?.message ||
+          errorDeleteHabit?.message ||
+          "Something went wrong, try again later",
+        life: 5000,
+      });
+    }
+  }, [
+    errorDeleteHabit?.message,
+    errorFetchHabit?.message,
+    errorFetchHabits?.message,
+    isErrorDeleteHabit,
+    isErrorFetchHabit,
+    isErrorFetchHabits,
+  ]);
 
   return (
     <>
+      <Toast ref={toast} />
+
       {(isLoadingFetchHabits ||
         isLoadingFetchHabit ||
         isLoadingDeleteHabit) && (

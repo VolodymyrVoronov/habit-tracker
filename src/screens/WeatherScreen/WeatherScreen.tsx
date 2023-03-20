@@ -9,9 +9,9 @@ import { Variants, motion, AnimatePresence } from "framer-motion";
 import getWeatherForecast from "@/services/weatherApi";
 
 import WeatherSearch from "@/components/WeatherSearch/WeatherSearch";
+import WeatherWidgetFull from "@/components/WeatherWidgetFull/WeatherWidgetFull";
 
 import styles from "./WeatherScreen.module.css";
-import WeatherWidgetFull from "@/components/WeatherWidgetFull/WeatherWidgetFull";
 
 const animationVariants: Variants = {
   initial: {
