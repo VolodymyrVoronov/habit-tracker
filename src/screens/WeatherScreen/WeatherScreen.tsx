@@ -8,6 +8,8 @@ import { Variants, motion, AnimatePresence } from "framer-motion";
 
 import getWeatherForecast from "@/services/weatherApi";
 
+import processString from "@/helpers/processString";
+
 import WeatherSearch from "@/components/WeatherSearch/WeatherSearch";
 import WeatherWidgetFull from "@/components/WeatherWidgetFull/WeatherWidgetFull";
 
@@ -128,11 +130,14 @@ const WeatherScreen = (): JSX.Element => {
                         </div>
                         <div className={styles.location}>
                           <span className={styles.date}>
-                            {data?.data.location.localtime
-                              .slice(0, 10)
-                              .split("-")
-                              .reverse()
-                              .join("-")}
+                            {processString(
+                              data?.data.location.localtime,
+                              0,
+                              10,
+                              "-",
+                              true,
+                              "-"
+                            )}
                           </span>
                           <span className={styles.region}>
                             {data?.data.location.region}

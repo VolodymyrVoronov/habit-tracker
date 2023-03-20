@@ -5,6 +5,8 @@ import { Divider } from "primereact/divider";
 
 import { IWeatherDataResponse } from "@/services/weatherApi";
 
+import processString from "@/helpers/processString";
+
 import WeatherForecastParameter from "../WeatherForecastParameter/WeatherForecastParameter";
 
 import styles from "./WeatherWidgetMini.module.css";
@@ -46,11 +48,7 @@ const WeatherWidgetMini = ({ data }: IWeatherWidgetMiniProps): JSX.Element => {
                 <span className={styles.country}>{data?.location.country}</span>
               </div>
               <span className={styles.date}>
-                {data?.location.localtime
-                  .slice(0, 10)
-                  .split("-")
-                  .reverse()
-                  .join("-")}
+                {processString(data?.location.localtime, 0, 10, "-", true, "-")}
               </span>
             </div>
 

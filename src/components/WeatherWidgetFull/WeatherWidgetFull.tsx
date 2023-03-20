@@ -3,6 +3,8 @@ import Image from "next/image";
 
 import { IForecastDay } from "@/services/weatherApi";
 
+import processString from "@/helpers/processString";
+
 import WeatherForecastParameter from "../WeatherForecastParameter/WeatherForecastParameter";
 
 import styles from "./WeatherWidgetFull.module.css";
@@ -19,7 +21,7 @@ const WeatherWidgetFull = ({ data }: IWeatherWidgetFullProps): JSX.Element => {
   return (
     <div className={styles.root}>
       <span className={styles.date}>
-        {data?.date.slice(0, 10).split("-").reverse().join("-")}
+        {processString(data?.date, 0, 10, "-", true, "-")}
       </span>
 
       <div className={styles.condition}>
