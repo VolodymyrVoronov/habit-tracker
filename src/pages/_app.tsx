@@ -1,6 +1,6 @@
 import { AppProps } from "next/app";
 import { withTRPC } from "@trpc/next";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ReactHowler from "react-howler";
 
 import "@fontsource/poppins";
@@ -16,6 +16,7 @@ import type { ServerRouter } from "@/server/index";
 
 import { useRadioGlobalState } from "@/state/radioGlobalState";
 
+import Transition from "@/components/TransitionLayout/TransitionLayout";
 import Dock from "@/components/Dock/Dock";
 
 import "primereact/resources/themes/lara-light-indigo/theme.css";
@@ -35,7 +36,9 @@ const App: AppType = ({
 
   return (
     <>
-      <Component {...pageProps} />
+      <Transition>
+        <Component {...pageProps} />
+      </Transition>
 
       <motion.div
         initial={{
