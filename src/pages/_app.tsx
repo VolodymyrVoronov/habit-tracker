@@ -16,7 +16,7 @@ import type { ServerRouter } from "@/server/index";
 
 import { useRadioGlobalState } from "@/state/radioGlobalState";
 
-import Transition from "@/components/TransitionLayout/TransitionLayout";
+import TransitionLayout from "@/components/TransitionLayout/TransitionLayout";
 import Dock from "@/components/Dock/Dock";
 
 import "primereact/resources/themes/lara-light-indigo/theme.css";
@@ -36,9 +36,9 @@ const App: AppType = ({
 
   return (
     <>
-      <Transition>
+      <TransitionLayout>
         <Component {...pageProps} />
-      </Transition>
+      </TransitionLayout>
 
       <motion.div
         initial={{

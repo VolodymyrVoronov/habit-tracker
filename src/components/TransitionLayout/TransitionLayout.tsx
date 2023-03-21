@@ -2,9 +2,11 @@ import React, { PropsWithChildren } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 
-interface ITransitionProps {}
+interface ITransitionLayoutProps {}
 
-const Transition = ({ children }: PropsWithChildren<ITransitionProps>) => {
+const TransitionLayout = ({
+  children,
+}: PropsWithChildren<ITransitionLayoutProps>) => {
   const { asPath } = useRouter();
 
   return (
@@ -25,4 +27,4 @@ const Transition = ({ children }: PropsWithChildren<ITransitionProps>) => {
   );
 };
 
-export default Transition;
+export default TransitionLayout;
