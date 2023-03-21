@@ -1,6 +1,6 @@
 import { AppProps } from "next/app";
 import { withTRPC } from "@trpc/next";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import ReactHowler from "react-howler";
 
 import "@fontsource/poppins";
