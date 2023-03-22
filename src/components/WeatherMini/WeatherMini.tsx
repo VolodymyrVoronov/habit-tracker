@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import Image from "next/image";
 import { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { Card } from "primereact/card";
@@ -72,6 +73,18 @@ const WeatherMini = (): JSX.Element => {
       />
 
       <Card className={styles.card}>
+        {!data && (
+          <div className={styles["search-no-city"]}>
+            <Image
+              src="/images/ui-icons/search-map.png"
+              alt="Search icon map"
+              width="100%"
+              height="100%"
+              unoptimized
+            />
+          </div>
+        )}
+
         {isLoading || isFetching ? (
           <ProgressSpinner />
         ) : (

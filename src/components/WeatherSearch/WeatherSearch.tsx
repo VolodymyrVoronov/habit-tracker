@@ -12,6 +12,8 @@ interface IWeatherSearchProps {
   isLoading: boolean;
   onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSearchClick: () => void;
+
+  className?: string;
 }
 
 const WeatherSearch = ({
@@ -19,9 +21,11 @@ const WeatherSearch = ({
   isLoading,
   onSearchChange,
   onSearchClick,
+
+  className,
 }: IWeatherSearchProps): JSX.Element => {
   return (
-    <Card className={styles.card}>
+    <Card className={cn(styles.card, className)}>
       <div className={styles.search}>
         <span className={styles.city}>City</span>
         <div className="p-inputgroup">
