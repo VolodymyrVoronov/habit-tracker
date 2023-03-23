@@ -26,6 +26,7 @@ const Logo = (): JSX.Element => {
         src="/images/logo.png"
         width="100%"
         height="100%"
+        alt="Logo icon"
       />
       <h1 className={styles.title}>Habit Tracker</h1>
     </motion.div>

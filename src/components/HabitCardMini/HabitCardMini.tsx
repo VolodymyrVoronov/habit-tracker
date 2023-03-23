@@ -55,6 +55,7 @@ const HabitCardMini = ({
                 src={`/images/habit-icons/${iconCode}.png`}
                 width="50%"
                 height="50%"
+                alt="Habit icon"
               />
             </span>
           )}
@@ -93,6 +94,7 @@ const HabitCardMini = ({
                 width="25%"
                 height="25%"
                 priority
+                alt="Delete habit icon"
               />
             }
           />
@@ -110,6 +112,7 @@ const HabitCardMini = ({
                 width="40%"
                 height="40%"
                 priority
+                alt="Read more icon"
               />
             }
           />

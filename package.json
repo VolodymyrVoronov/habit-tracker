@@ -8,12 +8,16 @@
     "start": "next start",
     "check-types": "tsc --noEmit",
     "eslint": "eslint \"src/**/*.{ts,tsx}\" --quiet",
-    "lint": "npm run eslint"
+    "lint": "npm run eslint",
+    "analyze": "cross-env ANALYZE=true next build",
+    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
   "dependencies": {
     "@fontsource/advent-pro": "^4.5.11",
     "@fontsource/poppins": "^4.5.10",
     "@hookstate/core": "^4.0.0",
+    "@next/bundle-analyzer": "^13.2.4",
     "@prisma/client": "^3.14.0",
     "@trpc/client": "^9.24.0",
     "@trpc/next": "^9.24.0",

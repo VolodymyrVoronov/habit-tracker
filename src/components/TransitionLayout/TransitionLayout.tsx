@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ITransitionLayoutProps {}
 
 const TransitionLayout = ({

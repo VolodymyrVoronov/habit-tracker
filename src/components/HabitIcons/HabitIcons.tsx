@@ -62,6 +62,7 @@ const HabitIcons = ({
               src="/images/ui-icons/backspace.png"
               width="25%"
               height="25%"
+              alt="Clear field icon"
             />
           }
         />

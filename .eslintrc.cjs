@@ -10,6 +10,7 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
+    "next/core-web-vitals",
   ],
   overrides: [],
   parser: "@typescript-eslint/parser",

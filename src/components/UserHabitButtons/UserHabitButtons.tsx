@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 import styles from "./UserHabitButtons.module.css";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IUserHabitButtonsProps {}
 
 const UserHabitButtons = ({

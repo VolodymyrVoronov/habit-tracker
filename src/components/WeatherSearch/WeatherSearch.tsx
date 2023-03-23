@@ -48,6 +48,7 @@ const WeatherSearch = ({
                 width="25%"
                 height="25%"
                 priority
+                alt="Search city icon"
               />
             }
             disabled={city.length === 0}

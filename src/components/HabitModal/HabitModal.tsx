@@ -50,6 +50,7 @@ const HabitModal = ({
                   src={`/images/habit-icons/${habitData.iconCode}.png`}
                   width="50%"
                   height="50%"
+                  alt={habitData.iconName || "Habit icon"}
                 />
               </span>
             )}

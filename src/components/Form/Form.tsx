@@ -148,7 +148,7 @@ const Form = ({
                   src={`/images/habit-icons/${iconCode}.png`}
                   width="100%"
                   height="100%"
-                  alt={iconName}
+                  alt={iconName || "icon"}
                 />
               </motion.div>
             ) : (
@@ -185,6 +185,7 @@ const Form = ({
                 width="25%"
                 height="25%"
                 priority
+                alt="Delete icon"
               />
             }
           />

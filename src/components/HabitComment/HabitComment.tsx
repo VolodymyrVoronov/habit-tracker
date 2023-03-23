@@ -69,6 +69,7 @@ const HabitComment = ({
               width="25%"
               height="25%"
               priority
+              alt="Delete habit icon"
             />
           }
         />

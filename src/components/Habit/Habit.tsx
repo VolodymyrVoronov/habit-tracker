@@ -112,6 +112,7 @@ const Habit = ({
                     src={`/images/habit-icons/${iconCode}.png`}
                     width="25%"
                     height="25%"
+                    alt={iconCode || "icon"}
                   />
                 </span>
               )}
@@ -168,6 +169,7 @@ const Habit = ({
                   width="25%"
                   height="25%"
                   priority
+                  alt="Delete habit icon"
                 />
               }
             />

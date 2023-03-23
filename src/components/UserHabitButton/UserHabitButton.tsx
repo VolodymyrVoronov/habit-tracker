@@ -39,6 +39,7 @@ const UserHabitButton = ({
           src={`/images/habit-icons/${iconCode}.png`}
           width="100%"
           height="100%"
+          alt={iconCode || "Habit icon"}
         />
       ) : (
         <Avatar className={styles.icon} icon="pi pi-image" />
