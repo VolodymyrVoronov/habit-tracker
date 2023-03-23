@@ -52,7 +52,7 @@ const HabitComment = ({
         },
       }}
     >
-      <p className={styles.comment}>{comment}</p>
+      <span className={styles.comment}>{comment}</span>
 
       <Divider layout="vertical" />
 

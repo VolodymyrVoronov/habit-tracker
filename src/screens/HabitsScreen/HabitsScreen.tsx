@@ -1,28 +1,17 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Variants, motion, LayoutGroup, AnimatePresence } from "framer-motion";
+import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { Toast } from "primereact/toast";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { ProgressBar } from "primereact/progressbar";
 
 import trpc from "@/utils/trpc";
 
+import animationVariants from "@/constants/animationVariants";
+
 import HabitCardMini from "@/components/HabitCardMini/HabitCardMini";
 import HabitModal from "@/components/HabitModal/HabitModal";
 
 import styles from "./HabitsScreen.module.css";
-
-const animationVariants: Variants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeIn",
-    },
-  },
-};
 
 const HabitsScreen = (): JSX.Element => {
   const toast = useRef<Toast>(null);

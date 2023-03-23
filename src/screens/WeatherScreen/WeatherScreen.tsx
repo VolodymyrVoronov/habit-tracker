@@ -4,30 +4,19 @@ import { useQuery } from "react-query";
 import { Card } from "primereact/card";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Divider } from "primereact/divider";
-import { Variants, motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import cn from "classnames";
 
 import getWeatherForecast from "@/services/weatherApi";
 
 import processString from "@/helpers/processString";
 
+import animationVariants from "@/constants/animationVariants";
+
 import WeatherSearch from "@/components/WeatherSearch/WeatherSearch";
 import WeatherWidgetFull from "@/components/WeatherWidgetFull/WeatherWidgetFull";
 
 import styles from "./WeatherScreen.module.css";
-
-const animationVariants: Variants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeIn",
-    },
-  },
-};
 
 const WeatherScreen = (): JSX.Element => {
   const [city, setCity] = useState("");

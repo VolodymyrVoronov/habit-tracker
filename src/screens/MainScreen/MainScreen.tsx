@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import Image from "next/image";
-import { AnimatePresence, Variants, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "primereact/button";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { ProgressBar } from "primereact/progressbar";
@@ -9,6 +9,8 @@ import cn from "classnames";
 import uniqid from "uniqid";
 
 import trpc from "@/utils/trpc";
+
+import animationVariants from "@/constants/animationVariants";
 
 import SideBar from "@/components/SideBar/SideBar";
 import Dialog from "@/components/Dialog/Dialog";
@@ -19,19 +21,6 @@ import RadioMini from "@/components/RadioMini/RadioMini";
 import WeatherMini from "@/components/WeatherMini/WeatherMini";
 
 import styles from "./MainScreen.module.css";
-
-const animationVariants: Variants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeIn",
-    },
-  },
-};
 
 const MainScreen = (): JSX.Element => {
   const toast = useRef<Toast>(null);

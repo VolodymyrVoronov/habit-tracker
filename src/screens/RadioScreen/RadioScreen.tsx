@@ -1,27 +1,16 @@
 import React from "react";
 import { ToggleButton } from "primereact/togglebutton";
-import { Variants, motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import cn from "classnames";
 
 import { useRadioGlobalState } from "@/state/radioGlobalState";
+
+import animationVariants from "@/constants/animationVariants";
 
 import RadioFullStations from "@/components/RadioFullStations/RadioFullStations";
 import RadioFullButtons from "@/components/RadioFullButtons/RadioFullButtons";
 
 import styles from "./RadioScreen.module.css";
-
-const animationVariants: Variants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeIn",
-    },
-  },
-};
 
 const RadioScreen = (): JSX.Element => {
   const { getPlaying, getCoolMode, setCoolMode } = useRadioGlobalState();
