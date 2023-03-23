@@ -12,6 +12,10 @@ import getWeatherForecast from "@/services/weatherApi";
 import processString from "@/helpers/processString";
 
 import animationVariants from "@/constants/animationVariants";
+import {
+  LOCAL_STORAGE_CITY_ITEM,
+  REFETCH_TIMEOUT,
+} from "@/constants/constants";
 
 import WeatherSearch from "@/components/WeatherSearch/WeatherSearch";
 import WeatherWidgetFull from "@/components/WeatherWidgetFull/WeatherWidgetFull";
@@ -39,7 +43,7 @@ const WeatherScreen = (): JSX.Element => {
     refetch();
 
     if (typeof window !== "undefined") {
-      localStorage.setItem("cityWeatherForeCast", city.trim());
+      localStorage.setItem(LOCAL_STORAGE_CITY_ITEM, city.trim());
     }
   };
 
@@ -49,7 +53,7 @@ const WeatherScreen = (): JSX.Element => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const c = localStorage.getItem("cityWeatherForeCast");
+      const c = localStorage.getItem(LOCAL_STORAGE_CITY_ITEM);
 
       if (c) {
         setCity(c.trim());
@@ -58,7 +62,7 @@ const WeatherScreen = (): JSX.Element => {
           refetchWeatherForecast();
 
           clearTimeout(tId);
-        }, 500);
+        }, REFETCH_TIMEOUT);
       }
     }
   }, [refetchWeatherForecast]);

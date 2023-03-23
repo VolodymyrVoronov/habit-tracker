@@ -13,6 +13,11 @@ import { ProgressSpinner } from "primereact/progressspinner";
 
 import getWeatherForecast from "@/services/weatherApi";
 
+import {
+  LOCAL_STORAGE_CITY_ITEM,
+  REFETCH_TIMEOUT,
+} from "@/constants/constants";
+
 import WeatherWidgetMini from "@/components/WeatherWidgetMini/WeatherWidgetMini";
 import WeatherSearch from "@/components/WeatherSearch/WeatherSearch";
 
@@ -39,7 +44,7 @@ const WeatherMini = (): JSX.Element => {
     refetch();
 
     if (typeof window !== "undefined") {
-      localStorage.setItem("cityWeatherForeCast", city.trim());
+      localStorage.setItem(LOCAL_STORAGE_CITY_ITEM, city.trim());
     }
   };
 
@@ -49,7 +54,7 @@ const WeatherMini = (): JSX.Element => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const c = localStorage.getItem("cityWeatherForeCast");
+      const c = localStorage.getItem(LOCAL_STORAGE_CITY_ITEM);
 
       if (c) {
         setCity(c.trim());
@@ -58,7 +63,7 @@ const WeatherMini = (): JSX.Element => {
           refetchWeatherForecast();
 
           clearTimeout(tId);
-        }, 500);
+        }, REFETCH_TIMEOUT);
       }
     }
   }, [refetchWeatherForecast]);

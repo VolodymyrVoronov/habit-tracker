@@ -1,0 +1,4 @@
+const REFETCH_TIMEOUT = 500;
+const LOCAL_STORAGE_CITY_ITEM = "cityWeatherForeCast";
+
+export { REFETCH_TIMEOUT, LOCAL_STORAGE_CITY_ITEM };
