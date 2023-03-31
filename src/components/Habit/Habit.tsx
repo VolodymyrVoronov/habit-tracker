@@ -1,4 +1,11 @@
-import React, { ChangeEvent, memo, useMemo, useState } from "react";
+import React, {
+  ChangeEvent,
+  Fragment,
+  memo,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import Image from "next/image";
 import { Card } from "primereact/card";
 import { ProgressBar } from "primereact/progressbar";
@@ -45,6 +52,7 @@ const Habit = ({
   );
 
   const [comment, setComment] = useState("");
+  const [sliceCommentsAmount, setSliceCommentsAmount] = useState(10);
 
   const accept = (): void => {
     onDeleteHabitClick(id);
@@ -82,6 +90,14 @@ const Habit = ({
   const onDeleteCommentClick = (commentId: string): void => {
     onDeleteHabitsCommentClick(commentId);
   };
+
+  const onLoadMoreCommentsButtonClick = (): void => {
+    setSliceCommentsAmount(sliceCommentsAmount + 5);
+  };
+
+  useEffect(() => {
+    setSliceCommentsAmount(10);
+  }, [comments]);
 
   return (
     <motion.div
@@ -202,19 +218,30 @@ const Habit = ({
         {commentsArray !== 0 && (
           <AnimatePresence>
             {commentsArray
-              .reverse()
+              .slice(0, sliceCommentsAmount)
               .map((c: { id: string; comment: string }) => {
                 const { id: commentId, comment: commentString } = c;
 
                 return (
-                  <HabitComment
-                    key={commentId}
-                    id={commentId}
-                    comment={commentString}
-                    onDeleteClick={onDeleteCommentClick}
-                  />
+                  <Fragment key={commentId}>
+                    <HabitComment
+                      id={commentId}
+                      comment={commentString}
+                      onDeleteClick={onDeleteCommentClick}
+                    />
+                  </Fragment>
                 );
               })}
+
+            {sliceCommentsAmount < commentsArray.length && (
+              <Button
+                onClick={onLoadMoreCommentsButtonClick}
+                link
+                style={{ display: "flex", margin: "0 auto" }}
+              >
+                Load more comments...
+              </Button>
+            )}
           </AnimatePresence>
         )}
 
