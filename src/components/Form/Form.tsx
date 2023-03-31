@@ -118,6 +118,7 @@ const Form = ({
             aria-describedby="Habit target"
             placeholder="10"
             name="target"
+            useGrouping={false}
           />
           <small className={styles.help}>Required</small>
         </div>
