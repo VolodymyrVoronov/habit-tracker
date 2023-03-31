@@ -1,9 +1,9 @@
 import React, {
   ChangeEvent,
-  Fragment,
   memo,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import Image from "next/image";
@@ -51,6 +51,8 @@ const Habit = ({
     [commentsArray, target]
   );
 
+  const commentsBlockRef = useRef<null | HTMLDivElement>(null);
+
   const [comment, setComment] = useState("");
   const [sliceCommentsAmount, setSliceCommentsAmount] = useState(10);
 
@@ -91,8 +93,20 @@ const Habit = ({
     onDeleteHabitsCommentClick(commentId);
   };
 
+  const scrollToBottom = () => {
+    if (commentsBlockRef && commentsBlockRef.current) {
+      commentsBlockRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const onLoadMoreCommentsButtonClick = (): void => {
     setSliceCommentsAmount(sliceCommentsAmount + 5);
+
+    const timeoutId = setTimeout(() => {
+      scrollToBottom();
+
+      clearTimeout(timeoutId);
+    }, 250);
   };
 
   useEffect(() => {
@@ -223,15 +237,16 @@ const Habit = ({
                 const { id: commentId, comment: commentString } = c;
 
                 return (
-                  <Fragment key={commentId}>
-                    <HabitComment
-                      id={commentId}
-                      comment={commentString}
-                      onDeleteClick={onDeleteCommentClick}
-                    />
-                  </Fragment>
+                  <HabitComment
+                    key={commentId}
+                    id={commentId}
+                    comment={commentString}
+                    onDeleteClick={onDeleteCommentClick}
+                  />
                 );
               })}
+
+            <div key="uniq" ref={commentsBlockRef} />
 
             {sliceCommentsAmount < commentsArray.length && (
               <Button
