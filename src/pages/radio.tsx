@@ -1,8 +1,12 @@
 import React from "react";
 import Head from "next/head";
 import { NextPage } from "next";
+import dynamic from "next/dynamic";
+import { ErrorBoundary } from "react-error-boundary";
 
-import RadioScreen from "@/screens/RadioScreen/RadioScreen";
+import ErrorBox from "@/components/ErrorBox/ErrorBox";
+
+const RadioScreen = dynamic(() => import("@/screens/RadioScreen/RadioScreen"));
 
 const Radio: NextPage = (): JSX.Element => {
   return (
@@ -14,7 +18,9 @@ const Radio: NextPage = (): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <RadioScreen />
+      <ErrorBoundary fallback={<ErrorBox />}>
+        <RadioScreen />
+      </ErrorBoundary>
     </>
   );
 };

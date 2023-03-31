@@ -1,8 +1,14 @@
 import React from "react";
 import Head from "next/head";
 import { NextPage } from "next";
+import dynamic from "next/dynamic";
+import { ErrorBoundary } from "react-error-boundary";
 
-import WeatherScreen from "@/screens/WeatherScreen/WeatherScreen";
+import ErrorBox from "@/components/ErrorBox/ErrorBox";
+
+const WeatherScreen = dynamic(
+  () => import("@/screens/WeatherScreen/WeatherScreen")
+);
 
 const Weather: NextPage = (): JSX.Element => {
   return (
@@ -14,7 +20,9 @@ const Weather: NextPage = (): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <WeatherScreen />
+      <ErrorBoundary fallback={<ErrorBox />}>
+        <WeatherScreen />
+      </ErrorBoundary>
     </>
   );
 };

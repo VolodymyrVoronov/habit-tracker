@@ -1,7 +1,9 @@
 import { NextPage } from "next";
 import Head from "next/head";
+import { ErrorBoundary } from "react-error-boundary";
 
 import MainScreen from "@/screens/MainScreen/MainScreen";
+import ErrorBox from "@/components/ErrorBox/ErrorBox";
 
 const Home: NextPage = (): JSX.Element => {
   return (
@@ -13,7 +15,9 @@ const Home: NextPage = (): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MainScreen />
+      <ErrorBoundary fallback={<ErrorBox />}>
+        <MainScreen />
+      </ErrorBoundary>
     </>
   );
 };

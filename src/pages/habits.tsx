@@ -1,8 +1,14 @@
 import React from "react";
 import Head from "next/head";
 import { NextPage } from "next";
+import dynamic from "next/dynamic";
+import { ErrorBoundary } from "react-error-boundary";
 
-import HabitsScreen from "@/screens/HabitsScreen/HabitsScreen";
+import ErrorBox from "@/components/ErrorBox/ErrorBox";
+
+const HabitsScreen = dynamic(
+  () => import("@/screens/HabitsScreen/HabitsScreen")
+);
 
 const Habits: NextPage = (): JSX.Element => {
   return (
@@ -14,7 +20,9 @@ const Habits: NextPage = (): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HabitsScreen />
+      <ErrorBoundary fallback={<ErrorBox />}>
+        <HabitsScreen />
+      </ErrorBoundary>
     </>
   );
 };
