@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "primereact/button";
@@ -19,6 +20,7 @@ import Form from "@/components/Form/Form";
 import Habit from "@/components/Habit/Habit";
 import RadioMini from "@/components/RadioMini/RadioMini";
 import WeatherMini from "@/components/WeatherMini/WeatherMini";
+import ErrorBox from "@/components/ErrorBox/ErrorBox";
 
 import styles from "./MainScreen.module.css";
 
@@ -357,17 +359,19 @@ const MainScreen = (): JSX.Element => {
             initial="initial"
             animate="animate"
           >
-            {!isLoadingDeleteHabit &&
-              !isLoadingFetchHabit &&
-              isSuccessFetchHabit &&
-              habit && (
-                <Habit
-                  habitData={habit}
-                  onDeleteHabitClick={onDeleteHabitClick}
-                  onAddCommentClick={onAddCommentClick}
-                  onDeleteHabitsCommentClick={onDeleteHabitsCommentClick}
-                />
-              )}
+            <ErrorBoundary fallback={<ErrorBox />}>
+              {!isLoadingDeleteHabit &&
+                !isLoadingFetchHabit &&
+                isSuccessFetchHabit &&
+                habit && (
+                  <Habit
+                    habitData={habit}
+                    onDeleteHabitClick={onDeleteHabitClick}
+                    onAddCommentClick={onAddCommentClick}
+                    onDeleteHabitsCommentClick={onDeleteHabitsCommentClick}
+                  />
+                )}
+            </ErrorBoundary>
 
             {!habit &&
               !isLoadingFetchHabit &&
@@ -385,6 +389,7 @@ const MainScreen = (): JSX.Element => {
                       src="/images/ui-icons/no-results.png"
                       width="100%"
                       height="100%"
+                      alt="No habit selected"
                     />
                   </div>
                 </div>
@@ -423,7 +428,9 @@ const MainScreen = (): JSX.Element => {
             initial="initial"
             animate="animate"
           >
-            <WeatherMini />
+            <ErrorBoundary fallback={<ErrorBox />}>
+              <WeatherMini />
+            </ErrorBoundary>
           </motion.div>
 
           <motion.div
@@ -432,7 +439,9 @@ const MainScreen = (): JSX.Element => {
             initial="initial"
             animate="animate"
           >
-            <RadioMini />
+            <ErrorBoundary fallback={<ErrorBox />}>
+              <RadioMini />
+            </ErrorBoundary>
           </motion.div>
         </div>
       </div>

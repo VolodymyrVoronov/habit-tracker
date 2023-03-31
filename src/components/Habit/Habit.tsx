@@ -97,7 +97,7 @@ const Habit = ({
 
   useEffect(() => {
     setSliceCommentsAmount(10);
-  }, [comments]);
+  }, [id]);
 
   return (
     <motion.div
