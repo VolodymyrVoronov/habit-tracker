@@ -3,10 +3,18 @@ import Head from "next/head";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { ErrorBoundary } from "react-error-boundary";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 import ErrorBox from "@/components/ErrorBox/ErrorBox";
+import CentredWrapper from "@/components/CentredWrapper/CentredWrapper";
 
-const RadioScreen = dynamic(() => import("@/screens/RadioScreen/RadioScreen"));
+const RadioScreen = dynamic(() => import("@/screens/RadioScreen/RadioScreen"), {
+  loading: () => (
+    <CentredWrapper>
+      <ProgressSpinner aria-label="Loading..." />
+    </CentredWrapper>
+  ),
+});
 
 const Radio: NextPage = (): JSX.Element => {
   return (

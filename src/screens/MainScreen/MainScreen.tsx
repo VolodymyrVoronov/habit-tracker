@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "primereact/button";
 import { ProgressSpinner } from "primereact/progressspinner";
@@ -15,14 +16,19 @@ import animationVariants from "@/constants/animationVariants";
 
 import SideBar from "@/components/SideBar/SideBar";
 import Dialog from "@/components/Dialog/Dialog";
-import HabitIcons from "@/components/HabitIcons/HabitIcons";
-import Form from "@/components/Form/Form";
 import Habit from "@/components/Habit/Habit";
 import RadioMini from "@/components/RadioMini/RadioMini";
 import WeatherMini from "@/components/WeatherMini/WeatherMini";
 import ErrorBox from "@/components/ErrorBox/ErrorBox";
 
 import styles from "./MainScreen.module.css";
+
+const HabitIcons = dynamic(() => import("@/components/HabitIcons/HabitIcons"), {
+  loading: () => <ProgressSpinner aria-label="Loading..." />,
+});
+const Form = dynamic(() => import("@/components/Form/Form"), {
+  loading: () => <ProgressSpinner aria-label="Loading..." />,
+});
 
 const MainScreen = (): JSX.Element => {
   const toast = useRef<Toast>(null);
