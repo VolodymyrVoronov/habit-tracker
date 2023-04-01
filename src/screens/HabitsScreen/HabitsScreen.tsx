@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { Toast } from "primereact/toast";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
@@ -9,9 +10,10 @@ import trpc from "@/utils/trpc";
 import animationVariants from "@/constants/animationVariants";
 
 import HabitCardMini from "@/components/HabitCardMini/HabitCardMini";
-import HabitModal from "@/components/HabitModal/HabitModal";
 
 import styles from "./HabitsScreen.module.css";
+
+const HabitModal = dynamic(() => import("@/components/HabitModal/HabitModal"));
 
 const HabitsScreen = (): JSX.Element => {
   const toast = useRef<Toast>(null);
