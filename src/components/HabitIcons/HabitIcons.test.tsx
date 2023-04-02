@@ -52,8 +52,6 @@ it("filters correct icon/s", async () => {
 
   await userEvent.type(input, "acasdasdasdasd");
 
-  screen.debug();
-
   expect(within(habitIconsContainer).queryAllByRole("button")).toHaveLength(0);
 });
 
