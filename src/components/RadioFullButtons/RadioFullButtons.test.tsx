@@ -8,8 +8,6 @@ import RadioFullButtons from "./RadioFullButtons";
 it("renders correctly", () => {
   render(<RadioFullButtons />);
 
-  screen.debug();
-
   const playButton = screen.getByRole("button", {
     name: /play button/i,
   });
