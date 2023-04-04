@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { useRadioGlobalState } from "@/state/radioGlobalState";
+import { useRadioGlobalState } from "../../state/radioGlobalState";
 
 import styles from "./RadioFullButtons.module.css";
 
@@ -39,6 +39,7 @@ const RadioFullButtons = (): JSX.Element => {
         type="button"
         title={`${getPlaying() ? "Pause" : "Play"}`}
         disabled={getRadio().stream.length === 0}
+        data-testid="play-button"
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -92,6 +93,7 @@ const RadioFullButtons = (): JSX.Element => {
         type="button"
         title={`${getMuted() ? "Unmute" : "Mute"}`}
         disabled={getRadio().stream.length === 0}
+        data-testid="sound-button"
       >
         <AnimatePresence mode="wait">
           <motion.div
