@@ -36,6 +36,7 @@ const WeatherSearch = ({
             className={cn("p-inputtext-xs", styles.input)}
             type="text"
             name="city"
+            title="Search city"
           />
           <Button
             onClick={onSearchClick}
