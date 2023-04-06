@@ -5,9 +5,9 @@ import { Card } from "primereact/card";
 import { motion, AnimatePresence } from "framer-motion";
 import cn from "classnames";
 
-import { useRadioGlobalState } from "@/state/radioGlobalState";
+import { useRadioGlobalState } from "../../state/radioGlobalState";
 
-import radioStreams from "@/constants/radioStreams";
+import radioStreams from "../../constants/radioStreams";
 
 import styles from "./RadioMini.module.css";
 
@@ -69,6 +69,7 @@ const RadioMini = (): JSX.Element => {
                       style={{ fontSize: "0.5rem", color: "red" }}
                       animate={{ opacity: [0, 1, 0] }}
                       transition={{ repeat: Infinity, duration: 2 }}
+                      data-testid="radio-is-playing"
                     />
                   )}
                 </span>
@@ -87,6 +88,7 @@ const RadioMini = (): JSX.Element => {
             options={radioStreams}
             optionLabel="name"
             title="Select a radio"
+            data-testid="dropdown"
           />
         </div>
       </Card>
