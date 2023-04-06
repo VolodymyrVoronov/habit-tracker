@@ -16,7 +16,7 @@ it("renders correctly", () => {
   expect(radios).toHaveLength(radioStreams.length);
 });
 
-it("calls and passes correct into state by click on radio button", async () => {
+it("calls and passes correct values into state by click on radio button", async () => {
   const { result } = renderHook(() => useRadioGlobalState());
 
   render(<RadioFullStations />);
