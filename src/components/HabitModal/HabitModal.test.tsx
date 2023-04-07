@@ -37,6 +37,22 @@ it("renders correctly", async () => {
   expect(buttons).toHaveLength(2);
 });
 
+it("renders correctly if habit achieved", async () => {
+  render(
+    <HabitModal
+      habitData={{
+        ...mockHabit,
+        target: 15,
+      }}
+      dialogOpen
+      onCloseClick={() => {}}
+    />
+  );
+
+  expect(screen.getByText(/achieved/i)).toBeInTheDocument();
+  expect(screen.getByText(/100%/i)).toBeInTheDocument();
+});
+
 it("renders correctly with no comments", async () => {
   render(
     <HabitModal
