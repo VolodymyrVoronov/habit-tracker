@@ -7,8 +7,8 @@ import { Button } from "primereact/button";
 
 import { Habit as HTypes } from "@prisma/client";
 
-import countProgress from "@/helpers/countProgress";
-import checkLimit from "@/helpers/checkLimit";
+import countProgress from "../../helpers/countProgress";
+import checkLimit from "../../helpers/checkLimit";
 
 import styles from "./HabitCardMini.module.css";
 
