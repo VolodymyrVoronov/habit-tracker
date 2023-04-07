@@ -62,7 +62,7 @@ it("renders correctly if habit achieved", async () => {
   expect(screen.getByText(/100%/i)).toBeInTheDocument();
 });
 
-it("calls onCardClick with correct props/args ", async () => {
+it("calls onCardClick with correct props/args", async () => {
   const mock = jest.fn().mockImplementation(({ id }: { id: number }) => {
     return {
       id,
@@ -87,7 +87,7 @@ it("calls onCardClick with correct props/args ", async () => {
   expect(mock).toHaveBeenCalledWith(mockHabit.id);
 });
 
-it("calls onDeleteClick with correct props/args ", async () => {
+it("calls onDeleteClick with correct props/args", async () => {
   const mock = jest.fn().mockImplementation(({ id }: { id: number }) => {
     return {
       id,
