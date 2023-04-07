@@ -3,9 +3,9 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Divider } from "primereact/divider";
 
-import { IWeatherDataResponse } from "@/services/weatherApi";
+import { IWeatherDataResponse } from "../../services/weatherApi";
 
-import processString from "@/helpers/processString";
+import processString from "../../helpers/processString";
 
 import WeatherForecastParameter from "../WeatherForecastParameter/WeatherForecastParameter";
 
