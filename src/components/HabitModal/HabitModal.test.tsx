@@ -53,7 +53,7 @@ it("renders correctly if habit achieved", async () => {
   expect(screen.getByText(/100%/i)).toBeInTheDocument();
 });
 
-it("renders correctly with no comments", async () => {
+it("renders correctly if no comments", async () => {
   render(
     <HabitModal
       habitData={{
