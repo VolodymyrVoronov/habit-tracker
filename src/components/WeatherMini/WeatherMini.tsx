@@ -11,15 +11,15 @@ import { useQuery } from "react-query";
 import { Card } from "primereact/card";
 import { ProgressSpinner } from "primereact/progressspinner";
 
-import getWeatherForecast from "@/services/weatherApi";
+import getWeatherForecast from "../../services/weatherApi";
 
 import {
   LOCAL_STORAGE_CITY_ITEM,
   REFETCH_TIMEOUT,
-} from "@/constants/constants";
+} from "../../constants/constants";
 
-import WeatherWidgetMini from "@/components/WeatherWidgetMini/WeatherWidgetMini";
-import WeatherSearch from "@/components/WeatherSearch/WeatherSearch";
+import WeatherWidgetMini from "../WeatherWidgetMini/WeatherWidgetMini";
+import WeatherSearch from "../WeatherSearch/WeatherSearch";
 
 import styles from "./WeatherMini.module.css";
 
