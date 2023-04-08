@@ -86,6 +86,7 @@ const Form = ({
           aria-describedby="New habit"
           placeholder="Quit smoking"
           name="habit"
+          data-testid="habit-input"
         />
         <small className={styles.help}>Required</small>
       </div>
@@ -103,6 +104,7 @@ const Form = ({
           name="habitInformation"
           rows={5}
           cols={20}
+          data-testid="habit-information"
         />
       </div>
 
@@ -119,6 +121,7 @@ const Form = ({
             placeholder="10"
             name="target"
             useGrouping={false}
+            data-testid="habit-target"
           />
           <small className={styles.help}>Required</small>
         </div>
@@ -150,6 +153,7 @@ const Form = ({
                   width="100%"
                   height="100%"
                   alt={iconName || "icon"}
+                  data-testid="habit-icon"
                 />
               </motion.div>
             ) : (
@@ -167,7 +171,11 @@ const Form = ({
                   },
                 }}
               >
-                <Avatar className={styles.icon} icon="pi pi-image" />
+                <Avatar
+                  className={styles.icon}
+                  icon="pi pi-image"
+                  data-testid="no-habit-icon"
+                />
               </motion.div>
             )}
           </AnimatePresence>
