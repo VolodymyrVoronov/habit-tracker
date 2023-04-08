@@ -51,6 +51,7 @@ const HabitComment = ({
           duration: 0.5,
         },
       }}
+      data-testid="habit-comment"
     >
       <span className={styles.comment}>{comment}</span>
 

@@ -17,8 +17,8 @@ import cn from "classnames";
 
 import { Habit as HTypes } from "@prisma/client";
 
-import checkLimit from "@/helpers/checkLimit";
-import countProgress from "@/helpers/countProgress";
+import checkLimit from "../../helpers/checkLimit";
+import countProgress from "../../helpers/countProgress";
 
 import HabitComment from "../HabitComment/HabitComment";
 
@@ -193,6 +193,7 @@ const Habit = ({
               title="Delete habit"
               rounded
               text
+              data-testid="delete-habit-button"
               icon={
                 <Image
                   src="/images/ui-icons/trash.png"
