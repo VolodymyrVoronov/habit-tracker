@@ -33,6 +33,7 @@ const UserHabitButton = ({
       type="button"
       title={habit}
       aria-label={habit}
+      data-testid="user-habit-button"
     >
       {iconCode ? (
         <Image

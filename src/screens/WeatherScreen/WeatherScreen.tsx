@@ -77,7 +77,7 @@ const WeatherScreen = (): JSX.Element => {
       <div className={styles.wrapper}>
         <WeatherSearch
           className={cn({
-            [styles["search-no-city"]]: city.length === 0,
+            [styles["search-no-city"]]: city.length === 0 && !data,
           })}
           city={city}
           isLoading={isLoading || isFetching}

@@ -56,6 +56,7 @@ const RadioFullStation = ({
           }}
           animate={{ opacity: [0, 1, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
+          data-testid="radio-is-playing"
         />
       )}
     </motion.button>

@@ -1,10 +1,10 @@
 import React from "react";
 
-import { useRadioGlobalState } from "@/state/radioGlobalState";
+import { useRadioGlobalState } from "../../state/radioGlobalState";
 
-import radioStreams from "@/constants/radioStreams";
+import radioStreams from "../../constants/radioStreams";
 
-import RadioFullStation from "@/components/RadioFullStation/RadioFullStation";
+import RadioFullStation from "../RadioFullStation/RadioFullStation";
 
 import styles from "./RadioFullStations.module.css";
 

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Dock as D } from "primereact/dock";
 
-import Path from "@/constants/paths";
+import Path from "../../constants/paths";
 
 import styles from "./Dock.module.css";
 

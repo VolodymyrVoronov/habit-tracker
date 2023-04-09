@@ -3,10 +3,10 @@ import { motion, LayoutGroup } from "framer-motion";
 
 import { Habit } from "@prisma/client";
 
-import Logo from "@/components/Logo/Logo";
-import AddHabitButton from "@/components/AddHabitButton/AddHabitButton";
-import UserHabitButtons from "@/components/UserHabitButtons/UserHabitButtons";
-import UserHabitButton from "@/components/UserHabitButton/UserHabitButton";
+import Logo from "../Logo/Logo";
+import AddHabitButton from "../AddHabitButton/AddHabitButton";
+import UserHabitButtons from "../UserHabitButtons/UserHabitButtons";
+import UserHabitButton from "../UserHabitButton/UserHabitButton";
 
 import styles from "./SideBar.module.css";
 

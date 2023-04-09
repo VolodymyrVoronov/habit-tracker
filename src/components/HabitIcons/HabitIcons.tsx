@@ -5,9 +5,9 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import cn from "classnames";
 
-import habitIcons from "@/constants/habitIcons";
+import habitIcons from "../../constants/habitIcons";
 
-import HabitIcon from "@/components/HabitIcon/HabitIcon";
+import HabitIcon from "../HabitIcon/HabitIcon";
 
 import styles from "./HabitIcons.module.css";
 
@@ -68,7 +68,7 @@ const HabitIcons = ({
         />
       </div>
 
-      <div className={styles.icons}>
+      <div className={styles.icons} data-testid="habit-icons-container">
         <LayoutGroup>
           {habitIcons
             .filter((hi) => hi.iconName.toLowerCase().includes(searchText))

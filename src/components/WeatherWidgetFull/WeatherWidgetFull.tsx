@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 import Image from "next/image";
 
-import { IForecastDay } from "@/services/weatherApi";
+import { IForecastDay } from "../../services/weatherApi";
 
-import processString from "@/helpers/processString";
+import processString from "../../helpers/processString";
 
 import WeatherForecastParameter from "../WeatherForecastParameter/WeatherForecastParameter";
 
@@ -50,7 +50,7 @@ const WeatherWidgetFull = ({ data }: IWeatherWidgetFullProps): JSX.Element => {
               />
             )}
 
-            {data?.day.maxtemp_f !== undefined && (
+            {data?.day.maxtemp_c !== undefined && (
               <WeatherForecastParameter
                 parValue={data?.day.maxtemp_c}
                 parTitle="Max temp:"
@@ -60,7 +60,7 @@ const WeatherWidgetFull = ({ data }: IWeatherWidgetFullProps): JSX.Element => {
           </div>
 
           <div className={styles.wind}>
-            {data?.day.maxtemp_f !== undefined && (
+            {data?.day.maxwind_kph !== undefined && (
               <WeatherForecastParameter
                 parValue={data?.day.maxwind_kph}
                 parTitle="Max wind:"

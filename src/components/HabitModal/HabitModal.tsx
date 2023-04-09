@@ -7,8 +7,8 @@ import { Habit } from "@prisma/client";
 import { Divider } from "primereact/divider";
 import { Dialog } from "primereact/dialog";
 
-import checkLimit from "@/helpers/checkLimit";
-import countProgress from "@/helpers/countProgress";
+import checkLimit from "../../helpers/checkLimit";
+import countProgress from "../../helpers/countProgress";
 
 import styles from "./HabitModal.module.css";
 
@@ -116,6 +116,7 @@ const HabitModal = ({
                       },
                     }}
                     className={styles.comment}
+                    data-testid="comment-test-id"
                   >
                     {commentString}
                   </motion.div>
